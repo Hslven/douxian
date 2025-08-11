@@ -1,0 +1,18 @@
+.game-entry {
+    width: 100%;
+    height: 100%;
+    background: url(../public/images/GameEntry.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    padding-bottom: 100px;
+    gap: 300px;
+}
+
+.game-entry-btn {
+    cursor: pointer;
+    width: 240px;
+}

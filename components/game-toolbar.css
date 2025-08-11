@@ -1,0 +1,33 @@
+.game-toolbar {
+    width: 240px;
+    text-align: center;
+    background: #34260f;
+    border: 2px solid #513c1d;
+    padding: 20px 10px;
+    box-sizing: border-box;
+}
+.game-toolbar-down {
+    /* width: 240px; */
+    cursor: pointer;
+    background: #b08129;
+    margin-bottom: 2px;
+}
+.game-toolbar-box {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px;
+}
+.game-toolbar-btn {
+    width: calc(50% - 1px);
+    text-align: center;
+    cursor: pointer;
+    height: 45px;
+    line-height: 45px;
+    color: #ead1ac;
+    /* color: transparent; */
+    border: 2px solid #b08129;
+    border-radius: 2px;
+    background: linear-gradient( to bottom ,#966734 0% , #b08129 90%);
+    /* background: linear-gradient(to bottom, #ff9966, #ff5e62); */
+}

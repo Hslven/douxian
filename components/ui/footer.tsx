@@ -8,10 +8,14 @@ import "./Footer.css"; // 引入 CSS 文件
 export default function Footer() {
   return (
     <footer className="footer-container">
+      <div className="footer-icon-box">
+        <img src='/images/icon1.png' className="footer-icon"  />
+        <img src='/images/icon2.png' className="footer-icon" />
+      </div>
       <div className="footer-content">
-        <div className="logo-container">
+        {/* <div className="logo-container">
           <Logo />
-        </div>
+        </div> */}
 
         <div className="footer-text">
           <p>本游戏适合18岁及以上的实名玩家进入。</p>

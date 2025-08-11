@@ -1,0 +1,38 @@
+.game-active {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-left: 200px;
+}
+
+.game-active-box {
+
+    border: 2px solid #665132;
+    background: #31220c;
+    padding: 20px;
+}
+
+.game-active-img {
+    width: 300px;
+    height: 180px;
+    line-height: 180px;
+    border: 2px solid #868686;
+}
+
+.game-active-tabs {
+    border-top: 1px solid #c69253;
+    display: flex;
+}
+
+.game-active-tab {
+    flex:1;
+    background: #a77634;
+    color: #eeddc1;
+    
+}
+.game-active-tab-active {
+    background: #823c16;
+    
+}

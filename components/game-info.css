@@ -1,0 +1,60 @@
+.game-info {
+    display: flex;
+    gap: 20px
+}
+
+.game-info-role {
+    display: flex;
+    background: rgba(0, 0, 0, .3);
+}
+
+.game-info-role-img {
+    width: 100px;
+    background: aliceblue;
+    height: 100%;
+}
+
+.game-info-tabs {
+    display: flex;
+}
+
+.game-info-tab {
+    background: #b7882a;
+    color: #ebd1ad;
+}
+
+.game-info-tab-inner {
+    background: #976734
+}
+
+.game-info-tab-active {
+    background: #b85b2b;
+
+}
+
+.game-info-tab-active .game-info-tab-inner {
+    background: #85341c
+}
+
+.game-info-news {
+    background: rgba(0, 0, 0, .3);
+    padding: 20px;
+}
+
+.game-info-news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #5b4720;
+}
+
+.game-info-news-header-title {
+    font-size: 20px;
+    color: #ebd2ad;
+}
+
+.game-info-news-more {
+    border-radius: 50%;
+    background: #39311e;
+    color: #ebd2ad;
+}

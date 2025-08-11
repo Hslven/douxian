@@ -1,0 +1,16 @@
+.news-box-warp {
+    flex:1;
+    height: 1200px;
+
+}
+.news-box {
+    /* width: ; */
+    border: 2px solid #513c1d;
+    background: rgba(235,210,174,.1);
+}
+.news-box-header {
+    min-height: 50px;
+    margin:20px 30px;
+    text-align: center;
+    border-bottom: 1px solid #513c1d;
+}

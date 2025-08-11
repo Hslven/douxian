@@ -1,0 +1,55 @@
+.detail-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin: 30px 20px;
+    gap: 10px
+}
+
+.detail-title {
+            text-align: left;
+    font-size: 24px;
+    line-height: 46px;
+    color: #ebd2ae;
+}
+
+.detail-header {
+    font-size: 28px;
+color: #db1f02;
+}
+
+.detail-time {
+
+    font-size: 14px;
+color: #544c42;
+}
+
+.detail-content {
+    height: 900px;
+    padding: 0 10px;
+    margin: 0 20px;
+    line-height: 1.8;
+    color: #d3bc9b;
+    overflow-y: auto;
+}
+
+/* WebKit 浏览器滚动条样式（精细控制） */
+.detail-content::-webkit-scrollbar {
+  width: 8px; 
+}
+.detail-content::-webkit-scrollbar-track {
+  background: #363636; /* 滚动条轨道颜色 */
+  border-radius: 4px;
+
+}
+.detail-content::-webkit-scrollbar-thumb {
+  background: #bc8630; /* 滚动条滑块颜色 */
+            width: 8px; /* 滑块宽度 */
+            border-radius: 4px; /* 圆角（宽度的一半） */
+            margin: 0 4px; /* 左右各4px间距，实现居中 */
+            border: 4px solid #bc8630; /* 透明边框辅助居中 */
+            background-clip: content-box; /* 确保背景只在内容区域显示 */
+}
+.detail-content::-webkit-scrollbar-thumb:hover {
+  background: #bc8630; /* 滑块 hover 颜色 */
+}

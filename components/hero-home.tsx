@@ -9,6 +9,10 @@ import Testimonials from "@/components/testimonials";
 import Cta from "@/components/cta";
 import Footer from "@/components/ui/footer";
 import './home.css'; // 引入样式文件
+import GameActive from "./game-active";
+import GameInfo from "./game-info";
+import GameCarousel from "./game-carousel";
+import GameEntry from "./game-entry";
 
 export default function HeroHome() {
   const scrollContainerRef = useRef(null);
@@ -64,30 +68,36 @@ export default function HeroHome() {
       <div className="scroll-content">
         {/* 第一部分 */}
         <HeroSection />
-        
+
         {/* 第二部分 */}
         <div className="page-section">
-
-          <Workflows />
-       {/* <Workflows />
+          <GameActive />
+          {/* <Workflows /> */}
+          {/* <Workflows />
       <Features />
       <Testimonials />
       <Cta /> */}
         </div>
-        
+
         {/* 第三部分 */}
         <div className="page-section">
-     <Features />
+          {/* <Features /> */}
+          <GameInfo />
         </div>
 
         <div className="page-section">
-     <Testimonials />
+          {/* <Testimonials /> */}
+          <GameCarousel />
+        </div>
+        <div className="page-section">
+          <GameEntry />
         </div>
         {/* <div className="page-section">
      <Cta />
         </div> */}
+
         <div className="page-section footer-section">
-        <Footer />
+          <Footer />
         </div>
       </div>
     </section>

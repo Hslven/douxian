@@ -54,6 +54,7 @@ body {
   padding-bottom: 20px; /* 添加底部内边距 */
   background-color: #f8f9fa; /* 设置背景颜色 */
   color: #343a40; /* 设置文字颜色 */
+  background: #1d2734;
 }
 
 .page-section h2 {
