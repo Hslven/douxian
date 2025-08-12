@@ -1,33 +1,65 @@
 .game-toolbar {
-    width: 240px;
-    text-align: center;
-    background: #34260f;
-    border: 2px solid #513c1d;
-    padding: 20px 10px;
-    box-sizing: border-box;
+  width: 240px;
+  text-align: center;
+  background: #34260f;
+  border: 2px solid #513c1d;
+  padding: 20px 10px;
+  box-sizing: border-box;
 }
 .game-toolbar-down {
-    /* width: 240px; */
-    cursor: pointer;
-    background: #b08129;
-    margin-bottom: 2px;
+  /* width: 240px; */
+  cursor: pointer;
+  background: #b08129;
+  margin-bottom: 2px;
 }
 .game-toolbar-box {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
 }
 .game-toolbar-btn {
-    width: calc(50% - 1px);
-    text-align: center;
-    cursor: pointer;
-    height: 45px;
-    line-height: 45px;
-    color: #ead1ac;
-    /* color: transparent; */
-    border: 2px solid #b08129;
-    border-radius: 2px;
-    background: linear-gradient( to bottom ,#966734 0% , #b08129 90%);
-    /* background: linear-gradient(to bottom, #ff9966, #ff5e62); */
+  width: calc(50% - 1px);
+  text-align: center;
+  cursor: pointer;
+  height: 45px;
+  line-height: 45px;
+  color: #ead1ac;
+  /* color: transparent; */
+  border: 2px solid #b08129;
+  border-radius: 2px;
+  background: linear-gradient(to bottom, #966734 0%, #b08129 90%);
+  /* background: linear-gradient(to bottom, #ff9966, #ff5e62); */
+}
+
+.gift-modal-content {
+  color: #34260f;
+}
+.gift-modal-title {
+  font-size: 20px;
+  text-align: center;
+}
+
+.gift-modal-detail {
+  text-align: center;
+  background: #ead1ac;
+  border: 1px solid #513c1d;
+  padding: 30px;
+  position: relative;
+  margin-top: 20px;
+}
+
+.gift-modal-code {
+  margin: 0 auto;
+  margin-top: -20px;
+  background: #34260f;
+  color: #ead1ac;
+  width: 200px;
+  position: relative;
+  top: -20px;
+}
+
+.gift-list {
+  display: flex;
+  gap: 10px;
 }

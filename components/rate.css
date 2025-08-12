@@ -1,0 +1,9 @@
+.game-rate {
+    display: inline-flex;
+    /* display: flex; */
+    gap: 5px
+}
+
+.game-rate-item {
+    width: 10px;
+}

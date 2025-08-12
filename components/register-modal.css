@@ -1,0 +1,94 @@
+.register-type {
+    color: #fff;
+    background: #000;
+}
+
+.register-type-active {
+    background: red;
+}   
+
+.form-container {
+  /* max-width: 400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px; */
+  color: #000;
+}
+
+.form-item {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+input.invalid {
+  border-color: #ff4d4f;
+}
+
+.error-message {
+  display: block;
+  color: #ff4d4f;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #1677ff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #0f62d9;
+}
+
+/* 新增：协议项样式 */
+.agreement-item {
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.agreement-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-weight: normal;
+  font-size: 0.9rem;
+}
+
+.agreement-label input {
+  width: auto;
+  margin-top: 3px;
+}
+
+.invalid-checkbox {
+  outline: 1px solid #ff4d4f;
+}
+
+.agreement-link {
+  color: #1677ff;
+  text-decoration: none;
+}
+
+.agreement-link:hover {
+  text-decoration: underline;
+}

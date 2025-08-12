@@ -10,7 +10,7 @@
 
 .game-info-role-img {
     width: 100px;
-    background: aliceblue;
+    background: #3475ad;
     height: 100%;
 }
 
@@ -57,4 +57,31 @@
     border-radius: 50%;
     background: #39311e;
     color: #ebd2ad;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    cursor: pointer;
+}
+
+.game-info-news-item {
+    display: flex;
+        justify-content: space-between;
+    align-items: center;
+    margin: 0 30px;
+    padding: 10px 0;
+    cursor: pointer;
+    color:#dbc1a0;
+    gap:10px
+}
+
+.game-info-news-type {
+    color: #936c1c;
+    margin-right: 5px;
+}
+
+.game-info-news-content {
+    flex:1;
+  white-space: nowrap; /* 强制文本单行显示 */
+  overflow: hidden; /* 隐藏超出部分 */
+  text-overflow: ellipsis; /* 显示省略号 */
 }

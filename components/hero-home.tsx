@@ -13,10 +13,13 @@ import GameActive from "./game-active";
 import GameInfo from "./game-info";
 import GameCarousel from "./game-carousel";
 import GameEntry from "./game-entry";
+import RegisterModal from "./register-modal";
 
 export default function HeroHome() {
   const scrollContainerRef = useRef(null);
   const prevScrollPositionRef = useRef(0);
+  const [registerModalOpen, setRegisterModalOpen] = useState(false);
+  
 
   const handleScroll = (e) => {
     const scrollContainer = e.target;
@@ -67,11 +70,11 @@ export default function HeroHome() {
     <section className="scroll-container" ref={scrollContainerRef} onScroll={handleScroll}>
       <div className="scroll-content">
         {/* 第一部分 */}
-        <HeroSection />
+        <HeroSection openRegisterModal={()=>setRegisterModalOpen(true)} />
 
         {/* 第二部分 */}
         <div className="page-section">
-          <GameActive />
+          <GameActive openRegisterModal={()=>setRegisterModalOpen(true)} />
           {/* <Workflows /> */}
           {/* <Workflows />
       <Features />
@@ -82,7 +85,7 @@ export default function HeroHome() {
         {/* 第三部分 */}
         <div className="page-section">
           {/* <Features /> */}
-          <GameInfo />
+          <GameInfo  />
         </div>
 
         <div className="page-section">
@@ -90,7 +93,7 @@ export default function HeroHome() {
           <GameCarousel />
         </div>
         <div className="page-section">
-          <GameEntry />
+          <GameEntry openRegisterModal={()=>setRegisterModalOpen(true)} />
         </div>
         {/* <div className="page-section">
      <Cta />
@@ -100,6 +103,10 @@ export default function HeroHome() {
           <Footer />
         </div>
       </div>
+            <RegisterModal
+        visible={registerModalOpen}
+        onClose={() => setRegisterModalOpen(false)}
+      />
     </section>
   );
 }

@@ -8,7 +8,7 @@ const Pagination = ({
   totalPages = 21, 
   onPageChange,
   pageRangeDisplayed = 11 // 显示的页码范围
-}) => {
+}: any) => {
   // 处理页码变更
   const handlePageClick = (page) => {
     if (page < 1 || page > totalPages) return;
