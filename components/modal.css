@@ -21,31 +21,27 @@
 }
 
 .modal-content {
-  background: url(../public/images/modal.png);
-  background-size: cover;
-  background-position: center; /* 图片居中 */
-  background-repeat: no-repeat; /* 避免图片重复 */
+  background: url(../public/images/modal_bg.png) center center no-repeat;
+    background-size: cover;
   position: relative;
-  /* background-color: #fff; */
-
   border-radius: 8px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   overflow: hidden;
   animation: scaleIn 0.3s ease;
-  max-width: 90vw;
-  max-height: 90vh;
   display: flex;
   flex-direction: column;
-  width: 720px;
+  width: 792px;
   height: 470px;
   padding: 50px;
 }
 
 .modal-close-button {
+    background: url(../public/images/modal_close.png) center center no-repeat;
+    background-size: cover;
   position: absolute;
   right: -0;
   top: 30px;
-  background: red;
+  /* background: red; */
   border: none;
   font-size: 24px;
   cursor: pointer;
@@ -53,10 +49,13 @@
   padding: 4px;
   line-height: 1;
   transition: color 0.2s;
+  width: 24px;
+  height: 24px;
 }
 
 .modal-close-button:hover {
-  color: #333;
+  /* color: #333; */
+  opacity: .8;
 }
 
 .modal-body {

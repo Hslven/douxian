@@ -1,37 +1,43 @@
 import { useEffect, useState } from "react";
 import GameToolbar from "./game-toolbar";
 import "./game-active.css";
+import game_active from '../public/images/game_active.png'
+import Image from "next/image";
 
 export default function GameActive({openRegisterModal}: any) {
   const [activeList, setActiveList] = useState<any[]>([]);
-  const [activeUrl, setActiveUrl] = useState("534543");
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeUrl, setActiveUrl] = useState<any>("");
 
   useEffect(() => {
     setActiveList([
       {
         name: "活动页面1",
+        url: game_active
       },
       {
         name: "活动页面2",
+        url: game_active
       },
       {
         name: "活动页面3",
+        url: game_active
       },
     ]);
-
-    setActiveUrl("活动页面1");
   }, []);
   return (
     <div className="game-active">
       <GameToolbar openRegisterModal={openRegisterModal} />
       <div className="game-active-box">
-        <div className="game-active-img">{activeUrl}</div>
+        <div className="game-active-img">
+          <Image src={activeList[activeIndex]?.url || game_active} alt='' />
+        </div>
         <div className="game-active-tabs">
-          {activeList.map((item) => (
+          {activeList.map((item, index) => (
             <div
-              onMouseEnter={() => setActiveUrl(item.name)}
+              onMouseEnter={() => setActiveIndex(index)}
               className={`game-active-tab ${
-                item.name === activeUrl ? "game-active-tab-active" : ""
+                activeIndex === index ? "game-active-tab-active" : ""
               }`}
               key={item.name}
             >

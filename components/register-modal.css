@@ -1,10 +1,16 @@
 .register-type {
     color: #fff;
-    background: #000;
+        background: url(../public/images/register_type1.png) center center no-repeat;
+    background-size: cover;
+    width: 102px;
+    height: 29px;
+    /* background: #000; */
 }
 
 .register-type-active {
-    background: red;
+    /* background: red; */
+        background: url(../public/images/register_type2.png) center center no-repeat;
+    background-size: cover;
 }   
 
 .form-container {
@@ -46,19 +52,24 @@ input.invalid {
 }
 
 .submit-btn {
+
+        background: url(../public/images/form_submit.png) center center no-repeat;
+    background-size: cover;
   width: 100%;
   padding: 0.75rem;
-  background-color: #1677ff;
   color: white;
   border: none;
   border-radius: 4px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s;
+  /* transition: background-color 0.3s; */
+  width: 221px;
+  height: 69px;
 }
 
 .submit-btn:hover {
-  background-color: #0f62d9;
+  /* background-color: #0f62d9; */
+  opacity: .9;
 }
 
 /* 新增：协议项样式 */

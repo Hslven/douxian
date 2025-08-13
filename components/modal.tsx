@@ -96,7 +96,7 @@ const Modal = ({
           className="modal-close-button"
           aria-label="Close"
         >
-          &times;
+          {/* &times; */}
         </button>
 
         {/* 内容区域 */}

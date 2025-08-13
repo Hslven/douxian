@@ -2,7 +2,11 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import "./game-info.css";
 import Rate from "./rate";
-
+import role_image from '../public/images/role_image.png'
+import role_name from '../public/images/role_name.png'
+import more from '../public/images/more.png'
+import Image from "next/image";
+ 
 const feachData = (current: number) => {
   return Promise.resolve({
     current,
@@ -67,8 +71,11 @@ export default function GameInfo() {
   return (
     <div className="game-info">
       <div className="game-info-role">
-        <div className="game-info-role-img">{role.name}</div>
+        <div className="game-info-role-img">
+            <Image src={role_image} alt='' />
+        </div>
         <div className="game-info-role-info">
+            <Image className="game-info-role-info-bg" src={role_name} alt='' />
           <div className="game-info-tabs">
             {roleList.map((item) => (
               <div
@@ -103,7 +110,7 @@ export default function GameInfo() {
               window.open("/news");
             }}
           >
-            +
+            <Image src={more} alt='' />
           </div>
         </div>
         <div className="game-info-news-top-title"></div>

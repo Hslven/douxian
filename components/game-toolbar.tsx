@@ -1,7 +1,9 @@
 import Image from "next/image";
 import "./game-toolbar.css";
 import Modal from "./modal";
-import nvwashi from '../public/images/nvwashi.png'
+import gift from '../public/images/gift.png'
+import gift_line from '../public/images/gift_line.png'
+import group_code from '../public/images/group_code.png'
 import { useState } from "react";
 
 export default function GameToolbar({ openRegisterModal }: any) {
@@ -15,7 +17,7 @@ export default function GameToolbar({ openRegisterModal }: any) {
   return (
     <div className="game-toolbar normal">
       <div className="game-toolbar-down">
-        <img src="/images/down_new.png" />
+        游戏下载
       </div>
       <div className="game-toolbar-box">
         <div className="game-toolbar-btn" onClick={openRegisterModal}>
@@ -44,7 +46,7 @@ export default function GameToolbar({ openRegisterModal }: any) {
 
             {giftDetail.list.map((item) => (
               <div key={item.id}  className="gift-item">
-                <Image src={nvwashi} alt="gift-item-img" />
+                <Image src={gift} alt="gift-item-img" />
                 <div  className="gift-item-name">{item.name} * {item.number}</div>
               </div>
             ))}
@@ -58,9 +60,9 @@ export default function GameToolbar({ openRegisterModal }: any) {
           <div>
             因苹果公司政策苹果用户无法使用礼包码，登录即享九大公测福利。
           </div>
-          <img src="" />
+          <Image src={gift_line} alt="gift-item-img" />
           <div>关注QQ群更多惊喜礼包</div>
-          <img src="" />
+          <Image src={group_code} alt="gift-item-img" />
         </div>
       </Modal>
     </div>

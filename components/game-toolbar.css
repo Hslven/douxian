@@ -1,7 +1,8 @@
 .game-toolbar {
+        background: url(../public/images/game_toolbar_bg.png) center center no-repeat;
+    background-size: cover;
   width: 240px;
   text-align: center;
-  background: #34260f;
   border: 2px solid #513c1d;
   padding: 20px 10px;
   box-sizing: border-box;
@@ -9,7 +10,7 @@
 .game-toolbar-down {
   /* width: 240px; */
   cursor: pointer;
-  background: #b08129;
+          background: url(../public/images/game_toolbar_down.png) center center no-repeat;
   margin-bottom: 2px;
 }
 .game-toolbar-box {

@@ -8,9 +8,10 @@
 }
 
 .game-active-box {
-
+    background: url(../public/images/game_active_bg.png) center center no-repeat;
+    background-size: cover;
     border: 2px solid #665132;
-    background: #31220c;
+    /* background: #31220c; */
     padding: 20px;
 }
 
