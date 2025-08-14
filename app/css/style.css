@@ -91,3 +91,24 @@
     border-color: var(--color-gray-200, currentColor);
   }
 }
+
+@font-face {
+  font-family: 'SourceHanSerifSC-Regular';
+  src: url('../../public/fonts/SourceHanSerifSC-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* 优化字体加载体验 */
+}
+
+@font-face {
+  font-family: 'AlibabaPuHuiTi-3-55-Regular';
+  src: url('../../public/fonts/AlibabaPuHuiTi-3-55-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* 优化字体加载体验 */
+}
+
+:root {
+  --font-source-han-serif: 'SourceHanSerifSC-Regular', serif;
+  --font-alibaba-puhuiti: 'AlibabaPuHuiTi-3-55-Regular', serif;
+}

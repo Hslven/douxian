@@ -19,11 +19,11 @@ export default function Header({openRegisterModal}: any) {
             </div>
             <div className="game-header-btn-group">
                 <div className="game-header-btn">
-                    游戏下载
+                    <span className="game-header-btn-name">游戏下载</span>
                     <Image src={home_btn_bg} alt='' />
                 </div>
                 <div className="game-header-btn" onClick={openRegisterModal}>
-                    游戏注册
+                    <span className="game-header-btn-name">游戏注册</span>
                     <Image src={home_btn_bg} alt='' />
                 </div>
             </div>

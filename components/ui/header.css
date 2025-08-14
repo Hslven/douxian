@@ -1,26 +1,40 @@
 .game-header {
-    display: flex;
-    justify-content: space-between;
-    position: absolute;
-    top:0 ;
-    width: 100%;
-
-    padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding: 22px 32px;
 }
 
 .game-header-logo {
-    width: 100px;
-    height: 90px;
-    margin-left: 20px;
-    cursor: pointer;
+  width: 180px;
+  height: 136px;
+  margin-left: 60px;
+  cursor: pointer;
 }
 
 .game-header-btn-group {
-    display: flex;
-    gap: 8px;
+  display: flex;
+  gap: 20px;
 }
 
 .game-header-btn {
-    width: 145px;
-    cursor: pointer;
+  width: 254px;
+  height: 82px;
+  cursor: pointer;
+  position: relative;
+}
+
+.game-header-btn-name {
+  font-size: 40px;
+  font-family: var(--font-source-han-serif);
+  font-weight: 700;
+  position: absolute;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 82px;
 }

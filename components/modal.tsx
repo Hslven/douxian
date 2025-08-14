@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import "./modal.css"; // 样式文件
+import Image from "next/image";
+import modal_title_left from "../public/images/modal_title_left.png";
+import modal_title_right from "../public/images/modal_title_right.png";
 
 const Modal = ({
   visible,
-  // title,
+  title,
   children,
   onClose,
   maskClosable = true,
@@ -12,8 +15,8 @@ const Modal = ({
   // width = "520px",
   className = "",
   style = {},
-  // footer,
-}: any) => {
+}: // footer,
+any) => {
   const portalRootRef = useRef(null);
   const modalRef = useRef(null);
 
@@ -77,20 +80,13 @@ const Modal = ({
         }}
       >
         {/* 标题区域 */}
-        {/* {title && (
+        {!!title && (
           <div className="modal-header">
-            <h3 className="modal-title">{title}</h3>
-            {showCloseButton && (
-              <button
-                onClick={onClose}
-                className="modal-close-button"
-                aria-label="Close"
-              >
-                &times;
-              </button>
-            )}
+            <Image className="" src={modal_title_left} alt="" />
+            {title}
+            <Image className="" src={modal_title_right} alt="" />
           </div>
-        )} */}
+        )}
         <button
           onClick={onClose}
           className="modal-close-button"

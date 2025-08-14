@@ -71,9 +71,10 @@ export default function GameInfo() {
   return (
     <div className="game-info">
       <div className="game-info-role">
-        <div className="game-info-role-img">
-            <Image src={role_image} alt='' />
-        </div>
+        {/* <div className="game-info-role-img">
+        </div> */}
+            <Image className="game-info-role-img" src={role_image} alt='' />
+
         <div className="game-info-role-info">
             <Image className="game-info-role-info-bg" src={role_name} alt='' />
           <div className="game-info-tabs">
@@ -113,7 +114,9 @@ export default function GameInfo() {
             <Image src={more} alt='' />
           </div>
         </div>
-        <div className="game-info-news-top-title"></div>
+        <div className="game-info-news-top-title">
+            {'6月4日经典服新区“悠梦春晨”18:00开启'}
+        </div>
         <div className="game-info-news-list">
           {list.map((item) => (
             <div

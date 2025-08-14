@@ -11,13 +11,15 @@ import Pagination from "@/components/pagination";
 import RegisterModal from "@/components/register-modal";
 
 const feachData = (current: number) => {
+  console.log(current,'current');
+  
   return Promise.resolve({
     current,
     pages: 20,
     list: Array.from({ length: 20 }).map((_, index) => ({
-      id: index,
+      id: current + '-' + index,
       type: "新闻",
-      title: "6月4日经典服新区“悠梦春晨”18:00开启05-29",
+      title: `6月4日经典服新区“悠梦春晨”18:00开启05-29 ${current}`,
       time: "2025-05-29",
     })),
   });
@@ -27,13 +29,23 @@ export default function NewsPage() {
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const [list, setList] = useState<any[]>([]);
   const [current, setCurrent] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   const router = useRouter();
-
   useEffect(() => {
-    feachData(current).then((res) => {
+    feachData(currentPage).then((res) => {
+      setTotalPages(21);
       setList(res.list);
     });
   }, []);
+
+  const onPageChange = (page: number) => {
+    setCurrentPage(page);
+    setTotalPages(21);
+    feachData(page).then((res) => {
+      setList(res.list);
+    });
+  };
   return (
     <div>
       <HeroSection openRegisterModal={() => setRegisterModalOpen(true)} />
@@ -60,7 +72,13 @@ export default function NewsPage() {
               ))}
             </div>
           }
-          footer={<Pagination />}
+          footer={
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={onPageChange}
+            />
+          }
         />
       </div>
       <Footer />

@@ -14,6 +14,9 @@ import GameInfo from "./game-info";
 import GameCarousel from "./game-carousel";
 import GameEntry from "./game-entry";
 import RegisterModal from "./register-modal";
+import Image from "next/image";
+import glide from '../public/images/glide.png'
+import './hero-home.css'
 
 export default function HeroHome() {
   const scrollContainerRef = useRef(null);
@@ -75,6 +78,7 @@ export default function HeroHome() {
         {/* 第二部分 */}
         <div className="page-section">
           <GameActive openRegisterModal={()=>setRegisterModalOpen(true)} />
+            <Image className="game-glide" src={glide} alt="" />
           {/* <Workflows /> */}
           {/* <Workflows />
       <Features />
@@ -86,14 +90,19 @@ export default function HeroHome() {
         <div className="page-section">
           {/* <Features /> */}
           <GameInfo  />
+          <Image className="game-glide" src={glide} alt="" />
         </div>
 
         <div className="page-section">
           {/* <Testimonials /> */}
           <GameCarousel />
+          <Image className="game-glide" src={glide} alt="" />
         </div>
-        <div className="page-section">
+        <div className="page-section" style={{
+  background:'url(../public/images/bg5.png) center center no-repeat',
+  backgroundSize: 'cover'}}>
           <GameEntry openRegisterModal={()=>setRegisterModalOpen(true)} />
+            <Image className="game-glide" src={glide} alt="" />
         </div>
         {/* <div className="page-section">
      <Cta />

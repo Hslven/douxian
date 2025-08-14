@@ -34,12 +34,10 @@ export default function GameToolbar({ openRegisterModal }: any) {
       </div>
       <Modal
         visible={giftModalOpen}
-        title="示例弹窗"
+        title="官方独家礼包"
         onClose={() => setGiftModalOpen(false)}
-        width="600px"
       >
         <div className="gift-modal-content">
-          <div  className="gift-modal-title">官方独家礼包</div>
           <div className="gift-modal-detail">
             <div  className="gift-modal-code">礼包码：{giftDetail.code}</div>
             <div className="gift-list">

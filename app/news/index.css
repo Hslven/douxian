@@ -1,41 +1,42 @@
 .news-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
-    margin: 30px 20px;
-    gap:10px
+  background: url(../../public/images/bg4.png) center center no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  padding: 30px 20px;
+  gap: 10px;
 }
 
 .news-header {
-        text-align: left;
-    font-size: 24px;
-    margin-top: 30px;
-    color: #ebd2ac;
+  text-align: left;
+  font-size: 24px;
+  margin-top: 30px;
+  color: #ebd2ac;
 }
-
 
 .new-item {
-    display: flex;
-        justify-content: space-between;
-    align-items: center;
-    margin: 0 30px;
-    padding: 10px 0;
-    cursor: pointer;
-    color:#dbc1a0;
-    border-top: 1px dotted #604c25;
-    gap:10px
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 30px;
+  padding: 10px 0;
+  cursor: pointer;
+  color: #dbc1a0;
+  border-top: 1px dotted #604c25;
+  gap: 10px;
 }
-.new-list  > .new-item:first-child {
-    border-top: none;
+.new-list > .new-item:first-child {
+  border-top: none;
 }
 
 .new-item-type {
-    color: #936c1c;
-    margin-right: 5px;
+  color: #936c1c;
+  margin-right: 5px;
 }
 
 .new-item-content {
-    flex:1;
+  flex: 1;
   white-space: nowrap; /* 强制文本单行显示 */
   overflow: hidden; /* 隐藏超出部分 */
   text-overflow: ellipsis; /* 显示省略号 */

@@ -113,7 +113,7 @@ const RegisterModal = (props) => {
   };
 
   return (
-    <Modal title="示例弹窗" {...props}>
+    <Modal title="吉昭梦通行证注册" {...props}>
       <div className="register-type-group">
         <div
           className={`register-type ${

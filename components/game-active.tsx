@@ -29,8 +29,8 @@ export default function GameActive({openRegisterModal}: any) {
     <div className="game-active">
       <GameToolbar openRegisterModal={openRegisterModal} />
       <div className="game-active-box">
-        <div className="game-active-img">
-          <Image src={activeList[activeIndex]?.url || game_active} alt='' />
+        <div className="game-active-img-warp">
+          <Image className="game-active-img" src={activeList[activeIndex]?.url || game_active} alt='' />
         </div>
         <div className="game-active-tabs">
           {activeList.map((item, index) => (

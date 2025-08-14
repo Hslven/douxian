@@ -1,17 +1,17 @@
 .register-type {
-    color: #fff;
-        background: url(../public/images/register_type1.png) center center no-repeat;
-    background-size: cover;
-    width: 102px;
-    height: 29px;
-    /* background: #000; */
+  color: #fff;
+  background: url(../public/images/register_type1.png) center center no-repeat;
+  background-size: cover;
+  width: 102px;
+  height: 29px;
+  /* background: #000; */
 }
 
 .register-type-active {
-    /* background: red; */
-        background: url(../public/images/register_type2.png) center center no-repeat;
-    background-size: cover;
-}   
+  /* background: red; */
+  background: url(../public/images/register_type2.png) center center no-repeat;
+  background-size: cover;
+}
 
 .form-container {
   /* max-width: 400px;
@@ -23,6 +23,7 @@
 }
 
 .form-item {
+  display: flex;
   margin-bottom: 1.5rem;
 }
 
@@ -33,11 +34,12 @@ label {
 }
 
 input {
-  width: 100%;
+  width: 390px;
   padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
+  background: #e6e1de;
+  border: 1px solid #b9aca6;
+  font-size: 21px;
+  color: #020100;
 }
 
 input.invalid {
@@ -52,9 +54,8 @@ input.invalid {
 }
 
 .submit-btn {
-
-        background: url(../public/images/form_submit.png) center center no-repeat;
-    background-size: cover;
+  background: url(../public/images/form_submit.png) center center no-repeat;
+  background-size: cover;
   width: 100%;
   padding: 0.75rem;
   color: white;
@@ -69,7 +70,7 @@ input.invalid {
 
 .submit-btn:hover {
   /* background-color: #0f62d9; */
-  opacity: .9;
+  opacity: 0.9;
 }
 
 /* 新增：协议项样式 */

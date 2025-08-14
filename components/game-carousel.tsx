@@ -132,7 +132,7 @@ export default function GameCarousel() {
     }
   ];
   return (
-    <div >
+    <div className='game-carousel'>
       <Carousel 
         images={carouselImages} 
         interval={3000}  // 3秒切换一次

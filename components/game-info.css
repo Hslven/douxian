@@ -1,21 +1,39 @@
 .game-info {
     display: flex;
-    gap: 20px
+    gap: 16px;
+align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background: url(../public/images/bg3.png) center center no-repeat;
+  background-size: cover;
+  position: relative;
+  padding-left: 80px;
 }
 
 .game-info-role {
     display: flex;
-    background: rgba(0, 0, 0, .3);
+    background: #1a1a1a;
+    width: 1217px;
+    height: 633px;
+  font-family: var(--font-source-han-serif);
+    font-size: 28px;
+    text-align: left;
+    color: #ecd2ad;
+        justify-content: right;
+        position: relative;
 }
 
 .game-info-role-img {
-    width: 100px;
-    background: #3475ad;
-    height: 100%;
+    color: transparent;
+    position: absolute;
+    right: 563px;
+    bottom: 0;
 }
 
 .game-info-role-info {
     position: relative;
+    width: 563px;
+    padding: 78px 23px 50px;
 }
 
 .game-info-role-info-bg {
@@ -25,13 +43,25 @@
     z-index: -1;
 }
 
+
+
 .game-info-tabs {
     display: flex;
+    gap: 10px;
 }
 
 .game-info-tab {
-    background: #b7882a;
-    color: #ebd1ad;
+    width: 94px;
+    height: 49px;
+    /* background: #b7882a; */
+
+  background: linear-gradient(to bottom, #966734 0%, #b08129 90%);
+    border: 4px solid #b8882b;
+        border-radius: 4px;
+    color: #ecd2ad;
+    font-size: 30px;
+    line-height: 41px;
+    text-align: center;
 }
 
 .game-info-tab-inner {
@@ -39,8 +69,16 @@
 }
 
 .game-info-tab-active {
-    background: #b85b2b;
+    /* background: #b85b2b; */
+    border: 4px solid #b85d2b;
+  background: linear-gradient(to bottom, #83351c 0%, #b85316 90%);
 
+
+}
+
+.game-info-role-name {
+    font-size: 98px;
+    font-weight: 700;
 }
 
 .game-info-tab-active .game-info-tab-inner {
@@ -48,51 +86,73 @@
 }
 
 .game-info-news {
-    background: rgba(0, 0, 0, .3);
-    padding: 20px;
+    background: #1a1a1a;
+    padding: 25px;
+    width: 550px;
+    height: 633px;
+  font-family: var(--font-source-han-serif);
 }
 
 .game-info-news-header {
+    height: 105px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     border-bottom: 1px solid #5b4720;
 }
 
 .game-info-news-header-title {
-    font-size: 20px;
-    color: #ebd2ad;
+    font-size: 39px;
+    color: #ecd2ad;
+        margin-top: 30px;
+  font-family: var(--font-source-han-serif);
+  font-weight: 700;
 }
 
 .game-info-news-more {
     border-radius: 50%;
     background: #39311e;
-    color: #ebd2ad;
-    width: 30px;
-    height: 30px;
-    line-height: 30px;
+    width: 85px;
+    height: 85px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
 }
 
+.game-info-news-top-title {
+    font-size: 28px;
+    color: #ff2400;
+        padding: 25px 50px;
+}
+
 .game-info-news-item {
+    font-family: var(--font-alibaba-puhuiti);
+    
     display: flex;
         justify-content: space-between;
-    align-items: center;
-    margin: 0 30px;
+    align-items: top;
     padding: 10px 0;
     cursor: pointer;
     color:#dbc1a0;
-    gap:10px
+    gap:10px;
+    font-size: 20px;
 }
 
 .game-info-news-type {
     color: #936c1c;
+        vertical-align: top;
     margin-right: 5px;
 }
 
 .game-info-news-content {
-    flex:1;
-  white-space: nowrap; /* 强制文本单行显示 */
-  overflow: hidden; /* 隐藏超出部分 */
-  text-overflow: ellipsis; /* 显示省略号 */
+    /* flex:1; */
+    display: flex;
+}
+
+.game-info-news-title {
+    width: 250px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 控制显示的行数 */
+  overflow: hidden; /* 超出部分隐藏 */
 }

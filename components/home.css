@@ -1,7 +1,7 @@
 /* home.css */
 body {
   margin: 0;
-  font-family: 'Microsoft YaHei', sans-serif;
+  font-family: "Microsoft YaHei", sans-serif;
   background: linear-gradient(to bottom, #1a2a3a, #3a4a5a);
   color: white;
   overflow: hidden; /* 隐藏默认滚动条 */
@@ -36,12 +36,13 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 20px;
+  /* padding: 20px; */
   box-sizing: border-box;
   opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.5s ease, transform 0.5s ease;
   will-change: opacity, transform; /* 优化动画性能 */
+  position: relative;
 }
 
 /* 对最后一个 section (footer) 进行特殊处理 */
