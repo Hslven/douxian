@@ -1,49 +1,46 @@
 .game-toolbar {
-        background: url(../public/images/game_toolbar_bg.png) center center no-repeat;
-    background-size: cover;
-  width: 574px;
-  height: 539px;
+  background: url(../public/images/game_toolbar_bg.png) center center no-repeat;
+  background-size: cover;
+  width: 438px;
+  height: 412px;
   text-align: center;
-  padding: 20px 10px;
+  padding: 15px 7.5px;
   box-sizing: border-box;
 }
 .game-toolbar-down {
-  /* width: 240px; */
-  width: 535px;
-  height: 176px;
+  width: 398px;
+  height: 132px;
   cursor: pointer;
-          background: url(../public/images/game_toolbar_down.png) center center no-repeat;
-
-  margin: 58px auto 2px;
-
-  font-size: 89px;
+  background: url(../public/images/game_toolbar_down.png) center center
+    no-repeat;
+  background-size: cover;
+  margin: 24.5px auto 2px;
+  font-size: 66px;
   font-family: var(--font-source-han-serif);
   font-weight: 700;
   line-height: 1.9;
 }
 .game-toolbar-box {
-  width: 535px;
+  width: 398px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 3px;
+  gap: 2px;
   margin: 0 auto;
 }
 .game-toolbar-btn {
-  /* width: calc(50% - 1.5px); */
-  width: 254px;
-
+  width: 198px;
   text-align: center;
   cursor: pointer;
-  height: 119px;
-  line-height: 119px;
+  height: 97px;
+  line-height: 97px;
   color: #ead1ac;
   /* color: transparent; */
-  border: 4px solid #b08129;
-  border-radius: 4px;
+  border: 3x solid #b08129;
+  border-radius: 3px;
   background: linear-gradient(to bottom, #966734 0%, #b08129 90%);
 
-  font-size: 41px;
+  font-size: 30px;
   font-family: var(--font-source-han-serif);
   font-weight: 700;
   /* background: linear-gradient(to bottom, #ff9966, #ff5e62); */
@@ -52,30 +49,74 @@
 .gift-modal-content {
   color: #34260f;
   font-family: var(--font-alibaba-puhuiti);
-
-
+  margin-top: 20px;
 }
 
 .gift-modal-detail {
   text-align: center;
-  background: #ead1ac;
-  border: 1px solid #513c1d;
-  padding: 30px;
+  background: #e6e1de;
+  border: 1px solid #b9aca6;
+  padding: 52px 10px 10px;
   position: relative;
-  margin-top: 20px;
+  margin-bottom: 20px;
+  /* margin-top: 20px; */
 }
 
 .gift-modal-code {
+  background: url(../public/images/gift_code_bg.png) center center no-repeat;
+  background-size: cover;
   margin: 0 auto;
-  margin-top: -20px;
-  background: #34260f;
-  color: #ead1ac;
-  width: 200px;
+  margin-bottom: -26px;
+  color: #fff;
+  width: 501px;
+  height: 52px;
   position: relative;
-  top: -20px;
+  z-index: 1;
+  text-align: center;
+  line-height: 52px;
+  font-size: 26px;
+  /* top: -20px; */
 }
 
 .gift-list {
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
+  font-size: 20px;
+  color: #482a1f;
+  line-height: 2;
+}
+.gift-info {
+  line-height: 1.8;
+}
+.gift-footer {
+  text-align: center;
+}
+
+.game-active-toolbar {
+  width: 574px;
+  height: 539px;
+  padding: 20px 10px;
+}
+
+.game-active-toolbar .game-toolbar-down {
+  width: 535px;
+  height: 176px;
+  margin: 33px auto 2px;
+  font-size: 89px;
+}
+
+.game-active-toolbar .game-toolbar-box {
+  width: 535px;
+  gap: 3px;
+}
+
+.game-active-toolbar .game-toolbar-btn {
+  width: 254px;
+  height: 119px;
+  line-height: 119px;
+  border: 4px solid #b08129;
+  border-radius: 4px;
+  font-size: 41px;
 }

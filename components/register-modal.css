@@ -1,10 +1,24 @@
+.register-form-content {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding-right: 120px;
+}
+
 .register-type {
   color: #fff;
   background: url(../public/images/register_type1.png) center center no-repeat;
   background-size: cover;
-  width: 102px;
-  height: 29px;
-  /* background: #000; */
+  width: 203px;
+  height: 58px;
+  font-size: 24px;
+  line-height: 63px;
+  text-align: center;
+  padding-right: 30px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
 .register-type-active {
@@ -20,20 +34,26 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px; */
   color: #000;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }
 
 .form-item {
   display: flex;
-  margin-bottom: 1.5rem;
+  margin-bottom: 24px;
+  justify-content: end;
+  align-items: center;
+  gap: 35px;
 }
 
-label {
-  display: block;
-  margin-bottom: 0.5rem;
+.form-item label {
   font-weight: 500;
+  font-size: 23px;
+  color: #3d0f00;
 }
 
-input {
+.form-item input {
   width: 390px;
   padding: 0.75rem;
   background: #e6e1de;
@@ -42,26 +62,23 @@ input {
   color: #020100;
 }
 
-input.invalid {
-  border-color: #ff4d4f;
+.invalid-input {
+  border-color: #ff4d4f !important;
 }
 
 .error-message {
-  display: block;
+  display: none;
   color: #ff4d4f;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
 }
 
 .submit-btn {
   background: url(../public/images/form_submit.png) center center no-repeat;
   background-size: cover;
   width: 100%;
-  padding: 0.75rem;
   color: white;
   border: none;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 35px;
   cursor: pointer;
   /* transition: background-color 0.3s; */
   width: 221px;
@@ -74,33 +91,50 @@ input.invalid {
 }
 
 /* 新增：协议项样式 */
-.agreement-item {
-  margin-top: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.agreement-label {
+.register-form-footer {
   display: flex;
-  align-items: flex-start;
-  gap: 0.5rem;
-  font-weight: normal;
-  font-size: 0.9rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  /* gap: 10px; */
+
+  margin-top: 20px;
+  font-size: 17px;
 }
 
-.agreement-label input {
-  width: auto;
-  margin-top: 3px;
+.register-agreeTerms {
+  margin-left: 17px;
+  margin-right: 10px;
+}
+
+/* 隐藏原生checkbox */
+.register-agreeTerms .register-agreeTerms-input {
+  display: none;
+}
+
+/* 自定义checkbox样式 */
+.register-agreeTerms .register-agreeTerms-label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  border: 2px solid #b9a6a0;
+  background-color: #ece8e6;
+  cursor: pointer;
+  position: relative;
+}
+
+/* 选中状态显示定制图片 */
+.register-agreeTerms input:checked + label {
+  background-image: url("../public/images/checked.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .invalid-checkbox {
-  outline: 1px solid #ff4d4f;
+  border-color: #ff4d4f !important;
 }
 
 .agreement-link {
-  color: #1677ff;
-  text-decoration: none;
-}
-
-.agreement-link:hover {
-  text-decoration: underline;
+  color: #da5c1e;
 }

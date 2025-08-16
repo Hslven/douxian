@@ -2,18 +2,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8px;
-  padding: 12px;
-  font-family: Arial, sans-serif;
+  gap: 10px;
+  padding:  25px 12px;
+  font-size: 24px;
 }
 
 .pagination-btn {
-  padding: 6px 12px;
+    width: 48px;
+    height: 56px;
+    line-height: 56px;
+  /* padding: 6px 12px; */
   border: 1px solid #7c4a01;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-size: 14px;
   color: #f0d1a2;
   white-space: nowrap;
 }
@@ -35,16 +37,16 @@
 }
 
 .pagination-ellipsis {
-  color: #666;
+  color: #f0d1a2;
   padding: 0 4px;
 }
 
 .pagination-info {
   margin-left: 12px;
-  color: #666;
-  font-size: 14px;
+  color: #f0d1a2;
 }
 
 .prev-next {
+    width: 118px;
   /* background-color: #f8f9fa; */
 }

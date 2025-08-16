@@ -1,143 +1,105 @@
-import React, { useState, useEffect, useRef } from 'react';
-import './game-carousel.css';
-
-const Carousel = ({ 
-  images, 
-  interval = 5000, 
-  transitionDuration = 500 
-}) => {
-  // 状态管理
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const timerRef = useRef(null);
-
-  // 处理指示点点击
-  const handleDotClick = (index: number) => {
-    if (index !== currentIndex && !isTransitioning) {
-      setIsTransitioning(true);
-      setCurrentIndex(index);
-      
-      // 过渡结束后重置状态
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, transitionDuration);
-      
-      // 重置自动轮播计时器
-      resetTimer();
-    }
-  };
-
-  // 自动轮播到下一张
-  const nextSlide = () => {
-    if (!isTransitioning) {
-      setIsTransitioning(true);
-      setCurrentIndex(prev => (prev + 1) % images.length);
-      
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, transitionDuration);
-    }
-  };
-
-  // 重置自动轮播计时器
-  const resetTimer = () => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
-    
-    timerRef.current = setInterval(nextSlide, interval);
-  };
-
-  // 组件挂载时启动自动轮播
-  useEffect(() => {
-    resetTimer();
-    
-    // 组件卸载时清理计时器
-    return () => {
-      if (timerRef.current) {
-        clearInterval(timerRef.current);
-      }
-    };
-  }, []);
-
-  // 当轮播项数量变化时重置
-  useEffect(() => {
-    setCurrentIndex(0);
-    resetTimer();
-  }, [images.length]);
-
-  return (
-    <div className="carousel-container">
-      <div 
-        className="carousel-slider"
-        style={{
-          transform: `translateX(-${currentIndex * 100}%)`,
-          transition: isTransitioning ? `transform ${transitionDuration}ms ease-in-out` : 'none'
-        }}
-      >
-        {images.map((image, index) => (
-          <div key={index} className="carousel-slide">
-            <img 
-              src={image.src} 
-              alt={image.alt || `轮播图片 ${index + 1}`} 
-              className="carousel-image"
-            />
-            {image.caption && (
-              <div className="carousel-caption">
-                {image.caption}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-      
-      {/* 指示点 */}
-      <div className="carousel-dots">
-        {images.map((_, index) => (
-          <button
-            key={index}
-            className={`carousel-dot ${currentIndex === index ? 'active' : ''}`}
-            onClick={() => handleDotClick(index)}
-            aria-label={`切换到图片 ${index + 1}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-    
+import React, { useState, useEffect, useRef } from "react";
+import "./game-carousel.css";
+import Image from "next/image";
+import carousel_role from "../public/images/carousel_role.png";
+import carousel_bg from "../public/images/carousel_bg.png";
+import carousel1 from "../public/images/carousel1.png";
 
 export default function GameCarousel() {
-    const carouselImages = [
-    {
-      src: 'https://picsum.photos/id/10/1200/500',
-      alt: '山脉风景',
-      caption: '壮丽的山脉景观'
-    },
-    {
-      src: 'https://picsum.photos/id/20/1200/500',
-      alt: '海洋风景',
-      caption: '宁静的海洋风光'
-    },
-    {
-      src: 'https://picsum.photos/id/30/1200/500',
-      alt: '森林风景',
-      caption: '茂密的森林景色'
-    },
-    {
-      src: 'https://picsum.photos/id/40/1200/500',
-      alt: '城市风景',
-      caption: '现代城市天际线'
-    }
-  ];
+  const [images, setImages] = useState([
+    { id: 1, url: carousel1, alt: "图片1" },
+    { id: 2, url: carousel1, alt: "图片2" },
+    { id: 3, url: carousel1, alt: "图片3" },
+    { id: 4, url: carousel1, alt: "图片4" },
+    { id: 5, url: carousel1, alt: "图片5" },
+  ]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const intervalRef = useRef<any>(null);
+
+  // 自动轮播
+  // useEffect(() => {
+  //   intervalRef.current = setInterval(() => {
+  //     nextSlide();
+  //   }, 2000);
+  //   return () => clearInterval(intervalRef.current);
+  // }, []);
+
+  // 下一张
+  const nextSlide = () => {
+    setCurrentIndex(currentIndex + 1 === images.length ? 0 : currentIndex + 1);
+  };
+
+  const getPosition = (index: number) => {
+    if (index === currentIndex) return "current";
+    if (
+      index + 1 === currentIndex ||
+      (currentIndex === 0 && index === images.length - 1)
+    )
+      return "prev";
+    if (
+      index - 1 === currentIndex ||
+      (index === 0 && currentIndex === images.length - 1)
+    )
+      return "next";
+    return "";
+  };
+
   return (
-    <div className='game-carousel'>
-      <Carousel 
-        images={carouselImages} 
-        interval={3000}  // 3秒切换一次
-        transitionDuration={500}  // 0.5秒过渡动画
-      />
+    <div className="game-carousel">
+      <Image className="game-carousel-role" src={carousel_role} alt="" />
+
+      <div className="carousel-container">
+        <div className="box">
+          {images.map((slide, index) => {
+            return (
+              <div
+                key={slide.id}
+                className={`carousel-slide ${getPosition(index)}`}
+              >
+                <Image
+                  src={slide.url}
+                  alt={slide.alt}
+                  className="slide-image"
+                />
+                <Image
+                  style={{ position: "absolute" }}
+                  src={carousel_bg}
+                  alt=""
+                />
+              </div>
+            );
+          })}
+        </div>
+        {/* 小圆点指示器 */}
+        <div className="dots">
+          {images.map((_, index) => (
+            <button
+              key={index}
+              className={`dot ${currentIndex === index ? "dot-active" : ""}`}
+              onClick={() => {
+                console.log(index, 645745);
+                setCurrentIndex(index);
+              }}
+            />
+          ))}
+        </div>
+
+        {/* 导航按钮 */}
+        {/* <button 
+                className="nav-btn prev" 
+                onClick={prevSlide}
+                aria-label="上一张"
+            >
+                <span className="arrow">←</span>
+            </button>
+            <button 
+                className="nav-btn next" 
+                onClick={nextSlide}
+                aria-label="下一张"
+            >
+                <span className="arrow">→</span>
+            </button> */}
+      </div>
     </div>
   );
 }

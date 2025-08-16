@@ -2,7 +2,7 @@ import { useState } from "react";
 import Modal from "./modal";
 import "./register-modal.css";
 
-const RegisterModal = (props) => {
+const RegisterModal = (props: any) => {
   // 表单数据状态管理
   const [formData, setFormData] = useState({
     phone: "",
@@ -17,7 +17,7 @@ const RegisterModal = (props) => {
   const [errors, setErrors] = useState<Record<string, any>>({});
 
   const onFinish = (formData: any) => {
-    console.log("onFinish");
+    console.log("onFinish", formData);
   };
 
   // 手机号格式验证
@@ -27,7 +27,7 @@ const RegisterModal = (props) => {
     return reg.test(phone);
   };
 
-  function validateEmail(email) {
+  function validateEmail(email: string) {
     return /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email);
   }
 
@@ -114,141 +114,135 @@ const RegisterModal = (props) => {
 
   return (
     <Modal title="吉昭梦通行证注册" {...props}>
-      <div className="register-type-group">
-        <div
-          className={`register-type ${
-            registerType === "phone" ? "register-type-active" : ""
-          }`}
-          onClick={() => setRegisterType("phone")}
-        >
-          手机注册
-        </div>
-        <div
-          className={`register-type ${
-            registerType === "email" ? "register-type-active" : ""
-          }`}
-          onClick={() => setRegisterType("email")}
-        >
-          邮箱注册
-        </div>
+      <div className="register-modal-content">
+        <form onSubmit={handleSubmit} className="form-container">
+          <div className="register-form-content">
+            <div className="register-type-group">
+              <div
+                className={`register-type ${
+                  registerType === "phone" ? "register-type-active" : ""
+                }`}
+                onClick={() => setRegisterType("phone")}
+              >
+                手机注册
+              </div>
+              <div
+                className={`register-type ${
+                  registerType === "email" ? "register-type-active" : ""
+                }`}
+                onClick={() => setRegisterType("email")}
+              >
+                邮箱注册
+              </div>
+            </div>
+            <div className="register-form-info">
+              {registerType === "phone" && (
+                <div className="form-item">
+                  <label htmlFor="phone">手机号码:</label>
+                  <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className={errors.phone ? "invalid-input" : ""}
+                  />
+                  {errors.phone && (
+                    <span className="error-message">{errors.phone}</span>
+                  )}
+                </div>
+              )}
+              {registerType === "email" && (
+                <div className="form-item">
+                  <label htmlFor="email">邮箱地址:</label>
+                  <input
+                    id="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={errors.email ? "invalid-input" : ""}
+                  />
+                  {errors.phone && (
+                    <span className="error-message">{errors.phone}</span>
+                  )}
+                </div>
+              )}
+              <div className="form-item">
+                <label htmlFor="password">设置密码:</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className={errors.password ? "invalid-input" : ""}
+                />
+                {errors.password && (
+                  <span className="error-message">{errors.password}</span>
+                )}
+              </div>
+              <div className="form-item">
+                <label htmlFor="name">真实姓名:</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={errors.name ? "invalid-input" : ""}
+                />
+                {errors.name && (
+                  <span className="error-message">{errors.name}</span>
+                )}
+              </div>
+              <div className="form-item">
+                <label htmlFor="idCard">身份证号码:</label>
+                <input
+                  type="text"
+                  id="idCard"
+                  name="idCard"
+                  value={formData.idCard}
+                  onChange={handleChange}
+                  className={errors.idCard ? "invalid-input" : ""}
+                />
+                {errors.idCard && (
+                  <span className="error-message">{errors.idCard}</span>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="register-form-footer">
+            <button type="submit" className="submit-btn">
+              提交
+            </button>
+            <div className="register-agreeTerms">
+              <input
+                type="checkbox"
+                id="agreeTerms"
+                name="agreeTerms"
+                className="register-agreeTerms-input"
+                checked={formData.agreeTerms}
+                onChange={handleChange}
+              />
+              <label 
+                className={`register-agreeTerms-label ${errors.agreeTerms ? "invalid-checkbox" : ""}`}
+                htmlFor="agreeTerms"
+              ></label>
+            </div>
+              同意并阅读吉昭梦
+              <a href="#" className="agreement-link">
+                《用户协议》
+              </a>
+              和
+              <a href="#" className="agreement-link">
+                《隐私政策》
+              </a>
+            {errors.agreeTerms && (
+              <span className="error-message">{errors.agreeTerms}</span>
+            )}
+          </div>
+        </form>
       </div>
-      <form onSubmit={handleSubmit} className="form-container">
-        <div className="form-item">
-          <label htmlFor="name">姓名:</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            className={errors.name ? "invalid" : ""}
-          />
-          {errors.name && <span className="error-message">{errors.name}</span>}
-        </div>
-
-        {registerType === "phone" && (
-          <div className="form-item">
-            <label htmlFor="phone">手机号:</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              className={errors.phone ? "invalid" : ""}
-            />
-            {errors.phone && (
-              <span className="error-message">{errors.phone}</span>
-            )}
-          </div>
-        )}
-        {registerType === "email" && (
-          <div className="form-item">
-            <label htmlFor="email">邮箱:</label>
-            <input
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className={errors.email ? "invalid" : ""}
-            />
-            {errors.phone && (
-              <span className="error-message">{errors.phone}</span>
-            )}
-          </div>
-        )}
-
-        <div className="form-item">
-          <label htmlFor="idCard">身份证号:</label>
-          <input
-            type="text"
-            id="idCard"
-            name="idCard"
-            value={formData.idCard}
-            onChange={handleChange}
-            className={errors.idCard ? "invalid" : ""}
-          />
-          {errors.idCard && (
-            <span className="error-message">{errors.idCard}</span>
-          )}
-        </div>
-
-        <div className="form-item">
-          <label htmlFor="password">密码:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className={errors.password ? "invalid" : ""}
-          />
-          {errors.password && (
-            <span className="error-message">{errors.password}</span>
-          )}
-        </div>
-        <div className="form-item agreement-item">
-          <label className="agreement-label">
-            <input
-              type="checkbox"
-              name="agreeTerms"
-              checked={formData.agreeTerms}
-              onChange={handleChange}
-              className={errors.agreeTerms ? "invalid-checkbox" : ""}
-            />
-            我已阅读并同意
-            <a href="#" className="agreement-link">
-              《用户协议》
-            </a>
-            和
-            <a href="#" className="agreement-link">
-              《隐私政策》
-            </a>
-          </label>
-          {errors.agreeTerms && (
-            <span className="error-message">{errors.agreeTerms}</span>
-          )}
-        </div>
-
-        <button type="submit" className="submit-btn">
-          提交
-        </button>
-      </form>
-
-      {/* <div className="flex justify-end space-x-3 mt-6">
-          <button
-            className="px-4 py-2 border border-gray-300 rounded hover:bg-gray-100"
-            onClick={() => setIsModalOpen(false)}
-          >
-            取消
-          </button>
-          <button
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            onClick={() => setIsModalOpen(false)}
-          >
-            确认
-          </button>
-        </div> */}
     </Modal>
   );
 };

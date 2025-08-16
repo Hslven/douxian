@@ -27,7 +27,7 @@ export default function GameActive({openRegisterModal}: any) {
   }, []);
   return (
     <div className="game-active">
-      <GameToolbar openRegisterModal={openRegisterModal} />
+      <GameToolbar className="game-active-toolbar" openRegisterModal={openRegisterModal} />
       <div className="game-active-box">
         <div className="game-active-img-warp">
           <Image className="game-active-img" src={activeList[activeIndex]?.url || game_active} alt='' />
