@@ -12,6 +12,7 @@ body {
   width: 100%;
   height: 100vh;
   overflow-y: auto;
+  overflow-x: hidden;
   scroll-snap-type: y mandatory;
   -webkit-overflow-scrolling: touch; /* 优化移动端滚动 */
   scrollbar-width: none; /* 隐藏滚动条 */
@@ -48,7 +49,7 @@ body {
 /* 对最后一个 section (footer) 进行特殊处理 */
 .footer-section {
   height: auto; /* 设置为 auto，让 footer 自适应高度 */
-  min-height: 300px; /* 设置最小高度 */
+  /* min-height: 300px; 设置最小高度 */
   opacity: 1 !important; /* 确保 footer 显示 */
   transform: translateY(0) !important; /* 确保 footer 显示 */
   justify-content: flex-end; /* 将内容对齐到底部 */

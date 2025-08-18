@@ -24,6 +24,8 @@ export default function GameActive({openRegisterModal}: any) {
         url: game_active
       },
     ]);
+    console.log(1111);
+    
   }, []);
   return (
     <div className="game-active">

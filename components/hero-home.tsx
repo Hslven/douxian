@@ -2,35 +2,48 @@
 import { useState, useEffect, useRef } from "react";
 import VideoThumb from "@/public/images/topbanner.jpg";
 import ModalVideo from "@/components/modal-video";
-import Workflows from "@/components/workflows";
-import HeroSection from './HeroSection';
-import Features from "@/components/features";
-import Testimonials from "@/components/testimonials";
-import Cta from "@/components/cta";
+import HeroSection from "./HeroSection";
 import Footer from "@/components/ui/footer";
-import './home.css'; // 引入样式文件
+import "./home.css"; // 引入样式文件
 import GameActive from "./game-active";
 import GameInfo from "./game-info";
 import GameCarousel from "./game-carousel";
 import GameEntry from "./game-entry";
 import RegisterModal from "./register-modal";
 import Image from "next/image";
-import glide from '../public/images/glide.png'
-import './hero-home.css'
+import glide from "../public/images/glide.png";
+import bg1 from "../public/images/bg1.png";
+import bg2 from "../public/images/bg2.png";
+import bg3 from "../public/images/bg3.png";
+import bg4 from "../public/images/bg4.png";
+import bg5 from "../public/images/bg5.png";
+
+import "./hero-home.css";
+import request from "@/utils/request";
+
+const PageSection = ({ children, backgroundImg }: any) => {
+  return (
+    <div className="page-section">
+      <Image fill objectFit='cover' src={backgroundImg} alt="" />
+      {children}
+      <Image  className="game-glide" src={glide} alt="" />
+    </div>
+  );
+};
 
 export default function HeroHome() {
-  const scrollContainerRef = useRef(null);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const prevScrollPositionRef = useRef(0);
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
-  
 
   const handleScroll = (e) => {
-    const scrollContainer = e.target;
+    const scrollContainer = scrollContainerRef.current;
+    if (!scrollContainer) return;
     const scrollPosition = scrollContainer.scrollTop;
     const scrollHeight = scrollContainer.scrollHeight;
     const clientHeight = scrollContainer.clientHeight;
 
-    const pages = scrollContainer.querySelectorAll('.page-section');
+    const pages = scrollContainer.querySelectorAll(".page-section");
     pages.forEach((page, index) => {
       const pageTop = page.offsetTop;
       const pageHeight = page.offsetHeight;
@@ -41,12 +54,12 @@ export default function HeroHome() {
         scrollPosition < pageTop + pageHeight - clientHeight / 2
       ) {
         // 添加动画效果
-        page.style.opacity = '1';
-        page.style.transform = 'translateY(0)';
+        page.style.opacity = "1";
+        page.style.transform = "translateY(0)";
       } else {
         // 移除动画效果
-        page.style.opacity = '0';
-        page.style.transform = 'translateY(20px)';
+        page.style.opacity = "0";
+        page.style.transform = "translateY(20px)";
       }
     });
 
@@ -58,8 +71,8 @@ export default function HeroHome() {
   useEffect(() => {
     if (scrollContainerRef.current) {
       const scrollContainer = scrollContainerRef.current;
-      const pages = scrollContainer.querySelectorAll('.page-section');
-      const scrollContent = scrollContainer.querySelector('.scroll-content');
+      const pages = scrollContainer.querySelectorAll(".page-section");
+      const scrollContent = scrollContainer.querySelector(".scroll-content");
 
       // 设置滚动容器高度
       if (pages.length > 0) {
@@ -67,52 +80,42 @@ export default function HeroHome() {
         scrollContent.style.height = `${totalPageHeight}px`;
       }
     }
+    request.get("/douxian/web/home").then((res) => console.log(res, "res"));
   }, []);
 
   return (
-    <section className="scroll-container" ref={scrollContainerRef} onScroll={handleScroll}>
+    <section
+      className="scroll-container"
+      ref={scrollContainerRef}
+      onScroll={handleScroll}
+    >
       <div className="scroll-content">
         {/* 第一部分 */}
-        <HeroSection openRegisterModal={()=>setRegisterModalOpen(true)} />
-
+        <HeroSection
+          openRegisterModal={() => setRegisterModalOpen(true)}
+          showGlide
+        />
         {/* 第二部分 */}
-        <div className="page-section">
-          <GameActive openRegisterModal={()=>setRegisterModalOpen(true)} />
-            <Image className="game-glide" src={glide} alt="" />
-          {/* <Workflows /> */}
-          {/* <Workflows />
-      <Features />
-      <Testimonials />
-      <Cta /> */}
-        </div>
-
+        <PageSection backgroundImg={bg2}>
+          <GameActive openRegisterModal={() => setRegisterModalOpen(true)} />
+        </PageSection>
         {/* 第三部分 */}
-        <div className="page-section">
-          {/* <Features /> */}
-          <GameInfo  />
-          <Image className="game-glide" src={glide} alt="" />
-        </div>
-
-        <div className="page-section">
-          {/* <Testimonials /> */}
+        <PageSection backgroundImg={bg3}>
+          <GameInfo />
+        </PageSection>
+        {/* 第四部分 */}
+        <PageSection backgroundImg={bg4}>
           <GameCarousel />
-          <Image className="game-glide" src={glide} alt="" />
-        </div>
-        <div className="page-section" style={{
-  background:'url(../public/images/bg5.png) center center no-repeat',
-  backgroundSize: 'cover'}}>
-          <GameEntry openRegisterModal={()=>setRegisterModalOpen(true)} />
-            <Image className="game-glide" src={glide} alt="" />
-        </div>
-        {/* <div className="page-section">
-     <Cta />
-        </div> */}
-
+        </PageSection>
+        {/* 第五部分 */}
+        <PageSection backgroundImg={bg5}>
+          <GameEntry openRegisterModal={() => setRegisterModalOpen(true)} />
+        </PageSection>
         <div className="page-section footer-section">
           <Footer />
         </div>
       </div>
-            <RegisterModal
+      <RegisterModal
         visible={registerModalOpen}
         onClose={() => setRegisterModalOpen(false)}
       />

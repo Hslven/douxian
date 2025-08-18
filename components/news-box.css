@@ -1,18 +1,16 @@
 .news-box-warp {
-    width: 1338px;
-height: 1731px;
+  width: 69.69vw; /* 1338px ÷ 1920 × 100 = 69.6875vw */
+  height: 90.16vw; /* 1731px ÷ 1920 × 100 = 90.15625vw */
 }
+
 .news-box {
-    /* width: ; */
-min-height: 1646px;
-
-    border: 2px solid #513c1d;
-    background: rgba(235,210,174,.1);
+  min-height: 85.73vw; /* 1646px ÷ 1920 × 100 = 85.729166...vw */
+  border: 2px solid #513c1d; /* 忽略2px不转换 */
+  background: rgba(235,210,174,.1);
 }
-.news-box-header {
-    /* min-height: 50px; */
 
-    margin:30px 30px;
-    text-align: center;
-    border-bottom: 1px solid #513c1d;
+.news-box-header {
+  margin: 1.56vw 1.56vw 0; /* 30px ÷ 1920 × 100 = 1.5625vw */
+  text-align: center;
+  border-bottom: 1px solid #513c1d; /* 忽略1px不转换 */
 }

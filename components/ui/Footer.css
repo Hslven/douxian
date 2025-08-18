@@ -3,8 +3,8 @@
   display: flex;
   color: #fff;
   justify-content: center;
-  gap: 24px;
-  padding: 30px 50px 24px;
+  gap: 1.25vw; /* 24px ÷ 1920 × 100 = 1.25vw */
+  padding: 1.56vw 2.60vw 1.25vw; /* 30px→1.5625vw，50px→2.604vw，24px→1.25vw */
   width: 100%;
 }
 
@@ -18,15 +18,15 @@
 }
 
 .footer-icon-jr {
-  width: 215px;
-  margin-right: 30px;
+  width: 11.19vw; /* 215px ÷ 1920 × 100 = 11.1979vw */
+  margin-right: 1.56vw; /* 30px→1.5625vw */
 }
 
 .footer-icon-yy {
-  width: 195px;
+  width: 10.16vw; /* 195px ÷ 1920 × 100 = 10.15625vw */
 }
 
 .footer-text {
-  font-size: 20px;
-  line-height: 2;
+  font-size: 1.04vw; /* 20px ÷ 1920 × 100 = 1.0417vw */
+  line-height: 2; /* 非px单位保持不变 */
 }

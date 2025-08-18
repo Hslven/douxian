@@ -1,0 +1,68 @@
+.game-glide {
+  position: absolute;
+  width: 6.2vw;
+  height: 4.43vw;
+  bottom: 0.42vw;
+  left: 50%;
+  margin-left: -3.1vw;
+  z-index: 10;
+}
+
+
+/* 媒体查询 - 根据屏幕宽度设置缩放比例 */
+/* 1680px屏幕 */
+@media (max-width: 1680px) {
+  .game-active,.game-carousel,.game-entry ,.game-info {
+    transform: scale(0.875); /* 1680/1920 = 0.875 */
+  }
+
+}
+
+@media (max-width: 1500px) {
+  .game-active,.game-carousel,.game-entry ,.game-info {
+    transform: scale(0.78); /* 1500/1920 = 0.78 */
+  }
+}
+
+/* 1440px屏幕 */
+@media (max-width: 1440px) {
+  .game-active,.game-carousel,.game-entry ,.game-info {
+    transform: scale(0.75); /* 1440/1920 = 0.75 */
+  }
+}
+
+/* 1366px屏幕 */
+@media (max-width: 1366px) {
+  .game-active,.game-carousel,.game-entry ,.game-info {
+    transform: scale(0.711); /* 1366/1920 ≈ 0.711 */
+  }
+}
+
+/* 1280px屏幕 */
+@media (max-width: 1280px) {
+  .game-active,.game-carousel,.game-entry ,.game-info {
+    transform: scale(0.667); /* 1280/1920 ≈ 0.667 */
+  }
+}
+
+
+/* 1280px屏幕 */
+@media (max-width: 1200px) {
+  .game-active,.game-carousel,.game-entry ,.game-info {
+    transform: scale(0.625); /* 1200/1920 ≈ 0.625 */
+  }
+}
+
+/* 1024px屏幕 */
+@media (max-width: 1024px) {
+  .game-active,.game-carousel,.game-entry ,.game-info {
+    transform: scale(0.533); /* 1024/1920 ≈ 0.533 */
+  }
+}
+
+/* 处理极窄屏幕的溢出问题 */
+@media (max-width: 768px) {
+  .game-active,.game-carousel,.game-entry ,.game-info {
+    transform: scale(0.4); /* 768/1920 = 0.4 */
+  }
+}

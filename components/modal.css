@@ -27,9 +27,9 @@
   animation: scaleIn 0.3s ease;
   display: flex;
   flex-direction: column;
-  width: 1173px;
-  height: 696px;
-  padding: 50px 120px;
+  width: 61.09vw; /* 1173px ÷ 1920 × 100 = 61.09375vw */
+  height: 36.25vw; /* 696px ÷ 1920 × 100 = 36.25vw */
+  padding: 2vw 6.25vw; /* 50px→2.604vw，120px→6.25vw */
 }
 
 .modal-header {
@@ -37,20 +37,29 @@
   justify-content: center;
   align-items: center;
   font-family: var(--font-alibaba-puhuiti);
-  font-size: 32px;
+  font-size: 1.67vw; /* 32px ÷ 1920 × 100 = 1.666...vw */
   color: #34260f;
-  gap: 10px;
+  gap: 0.52vw; /* 10px ÷ 1920 × 100 = 0.5208vw */
+}
+
+.modal-header-left-line {
+  width: 7.24vw;
+  height: 1.46vw;
+}
+.modal-header-right-line {
+  width: 7.24vw;
+  height: 0.68vw;
 }
 
 .modal-close-button {
   background: url(../public/images/modal_close.png) center center no-repeat;
   background-size: cover;
   position: absolute;
-  right: 10px;
-  top: 30px;
+  right: 0.52vw; /* 10px→0.5208vw */
+  top: 1.56vw; /* 30px ÷ 1920 × 100 = 1.5625vw */
   cursor: pointer;
-  width: 37px;
-  height: 37px;
+  width: 1.93vw; /* 37px ÷ 1920 × 100 = 1.927vw */
+  height: 1.93vw; /* 37px→1.927vw */
 }
 
 .modal-close-button:hover {
@@ -81,23 +90,5 @@
   to {
     opacity: 1;
     transform: scale(1);
-  }
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-  .modal-content {
-    width: 95% !important;
-    max-width: 95%;
-  }
-
-  .modal-body {
-    padding: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .modal-body {
-    padding: 12px;
   }
 }

@@ -2,18 +2,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 10px;
-  padding:  25px 12px;
-  font-size: 24px;
+  gap: 0.52vw; /* 10px ÷ 1920 × 100 = 0.5208vw */
+  padding: 1.30vw 0.63vw; /* 25px→1.302vw，12px→0.625vw */
+  font-size: 1.25vw; /* 24px ÷ 1920 × 100 = 1.25vw */
 }
 
 .pagination-btn {
-    width: 48px;
-    height: 56px;
-    line-height: 56px;
-  /* padding: 6px 12px; */
+  width: 2.50vw; /* 48px ÷ 1920 × 100 = 2.5vw */
+  height: 2.92vw; /* 56px ÷ 1920 × 100 = 2.9167vw */
+  line-height: 2.92vw; /* 与height保持一致 */
   border: 1px solid #7c4a01;
-  border-radius: 4px;
+  border-radius: 0.21vw; /* 4px ÷ 1920 × 100 = 0.2083vw */
   cursor: pointer;
   transition: all 0.2s ease;
   color: #f0d1a2;
@@ -33,20 +32,18 @@
 .pagination-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  /* background-color: #f5f5f5; */
 }
 
 .pagination-ellipsis {
   color: #f0d1a2;
-  padding: 0 4px;
+  padding: 0 0.21vw; /* 4px → 0.2083vw */
 }
 
 .pagination-info {
-  margin-left: 12px;
+  margin-left: 0.63vw; /* 12px → 0.625vw */
   color: #f0d1a2;
 }
 
 .prev-next {
-    width: 118px;
-  /* background-color: #f8f9fa; */
+  width: 6.15vw; /* 118px ÷ 1920 × 100 = 6.1458vw */
 }

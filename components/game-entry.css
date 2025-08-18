@@ -1,13 +1,13 @@
 .game-entry {
   width: 100vw;
   height: 100vh;
-  background: url(../public/images/bg5.png) center center no-repeat;
-  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: end;
   padding-bottom: 5.2vw;
   gap: 15.6vw;
+      min-width: 1920px;
+
 }
 
 .game-entry-btn {

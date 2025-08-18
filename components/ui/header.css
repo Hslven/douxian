@@ -5,30 +5,31 @@
   position: absolute;
   top: 0;
   width: 100%;
-  padding: 22px 32px;
+  padding: 1.15vw 1.67vw; /* 22px→1.1458vw，32px→1.6667vw */
 }
 
 .game-header-logo {
-  width: 180px;
-  height: 136px;
-  margin-left: 60px;
+    position: relative;
+  width: 9.38vw; /* 180px ÷ 1920 × 100 = 9.375vw */
+  height: 7.08vw; /* 136px ÷ 1920 × 100 = 7.0833vw */
+  margin-left: 3.13vw; /* 60px ÷ 1920 × 100 = 3.125vw */
   cursor: pointer;
 }
 
 .game-header-btn-group {
   display: flex;
-  gap: 20px;
+  gap: 1.04vw; /* 20px ÷ 1920 × 100 = 1.0417vw */
 }
 
 .game-header-btn {
-  width: 254px;
-  height: 82px;
+  width: 13.23vw; /* 254px ÷ 1920 × 100 = 13.2292vw */
+  height: 4.27vw; /* 82px ÷ 1920 × 100 = 4.2708vw */
   cursor: pointer;
   position: relative;
 }
 
 .game-header-btn-name {
-  font-size: 40px;
+  font-size: 2.08vw; /* 40px ÷ 1920 × 100 = 2.0833vw */
   font-family: var(--font-source-han-serif);
   font-weight: 700;
   position: absolute;
@@ -36,5 +37,5 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  line-height: 82px;
+  line-height: 4.27vw; /* 与height保持一致（82px→4.2708vw） */
 }

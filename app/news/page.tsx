@@ -9,8 +9,9 @@ import "./index.css";
 import { useRouter } from "next/navigation";
 import Pagination from "@/components/pagination";
 import RegisterModal from "@/components/register-modal";
+import request from "@/utils/request";
 
-const feachData = (current: number) => {
+const feachData1 = (current: number) => {
   console.log(current,'current');
   
   return Promise.resolve({
@@ -29,26 +30,36 @@ export default function NewsPage() {
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const [list, setList] = useState<any[]>([]);
   const [current, setCurrent] = useState(1);
-  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const router = useRouter();
+
+
+const feachData = (pageNo: number, pageSize:number = 20) => {
+request.get('/douxian/web/notice',{params: {pageNo,pageSize}}).then((res: any) => {
+      setTotalPages(Math.ceil(res.total / pageSize));
+      setList([...res.list,...res.list,...res.list,...res.list]);
+      setCurrent(pageNo)
+    })
+};
   useEffect(() => {
-    feachData(currentPage).then((res) => {
-      setTotalPages(21);
-      setList(res.list);
-    });
+    feachData(current)
+    // feachData(currentPage).then((res) => {
+    //   setTotalPages(21);
+    //   setList(res.list);
+    // });
   }, []);
 
-  const onPageChange = (page: number) => {
-    setCurrentPage(page);
-    setTotalPages(21);
-    feachData(page).then((res) => {
-      setList(res.list);
-    });
-  };
+  // const onPageChange = (page: number) => {
+  //   setCurrentPage(page);
+  //   setTotalPages(21);
+  //   feachData(page).then((res) => {
+  //     setList(res.list);
+  //   });
+  // };
   return (
     <div>
       <HeroSection openRegisterModal={() => setRegisterModalOpen(true)} />
+      <div className="news-container-wrap">
       <div className="news-container">
         <GameToolbar openRegisterModal={() => setRegisterModalOpen(true)} />
         <NewsBox
@@ -57,29 +68,30 @@ export default function NewsPage() {
             <div className="new-list">
               {list.map((item) => (
                 <div
-                  key={item.id}
+                  key={item.noticeId}
                   className="new-item"
                   onClick={() => {
-                    router.push(`/detail/${item.id}`);
+                    router.push(`/detail/${item.noticeId}`);
                   }}
                 >
                   <div className="new-item-content">
-                    <span className="new-item-type">【 {item.type} 】</span>
-                    <span className="new-item-title">{item.title}</span>
+                    <span className="new-item-type">【 {item.type || '资讯'} 】</span>
+                    <span className="new-item-title">{item.noticeTitle}</span>
                   </div>
-                  <div>{item.time}</div>
+                  <div>{item.noticeShowTime}</div>
                 </div>
               ))}
             </div>
           }
           footer={
             <Pagination
-              currentPage={currentPage}
+              currentPage={current}
               totalPages={totalPages}
-              onPageChange={onPageChange}
+              onPageChange={feachData}
             />
           }
         />
+      </div>
       </div>
       <Footer />
       <RegisterModal

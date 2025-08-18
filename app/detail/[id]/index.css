@@ -4,54 +4,73 @@
   display: flex;
   justify-content: center;
   align-items: start;
-  padding: 90px 0 200px;
+  padding: 4.69vw 0 10.42vw; /* 90px→4.6875vw，200px→10.4167vw */
   margin: 0 auto;
-  gap: 34px;
+  gap: 1.77vw; /* 34px ÷ 1920 × 100 = 1.7708vw */
 }
 
 .detail-title {
   text-align: left;
-  font-size: 52px;
-  line-height: 2;
+  font-size: 2.71vw; /* 52px ÷ 1920 × 100 = 2.7083vw */
+  line-height: 4.43vw; /* 85px ÷ 1920 × 100 = 4.4271vw */
   color: #ebd2ae;
+  display: flex;
+  align-items: center;
+}
+
+.detail-title-arrow {
+  margin-left: 0.52vw; /* 10px→0.5208vw */
+  width: 2.13vw; /* 41px ÷ 1920 × 100 = 2.1354vw */
+  height: 1.77vw; /* 34px→1.7708vw */
 }
 
 .detail-header {
-  font-size: 57px;
+  font-size: 2.97vw; /* 57px ÷ 1920 × 100 = 2.9688vw */
   color: #db1f02;
 }
 
 .detail-time {
-  font-size: 24px;
+  font-size: 1.25vw; /* 24px→1.25vw */
   color: #574f44;
 }
 
 .detail-content {
-    font-size: 24px;
-  height: 900px;
-  padding: 0 10px;
-  margin: 0 20px;
-  line-height: 3;
+  font-size: 1.25vw; /* 24px→1.25vw */
+  height: 46.88vw; /* 900px ÷ 1920 × 100 = 46.875vw */
+  padding: 0 0.52vw; /* 10px→0.5208vw */
+  margin: 0 1.04vw; /* 20px→1.0417vw */
+  line-height: 3; /* 非px单位保持不变 */
   color: #d3bc9b;
   overflow-y: auto;
 }
 
 /* WebKit 浏览器滚动条样式（精细控制） */
 .detail-content::-webkit-scrollbar {
-  width: 8px;
+  width: 0.42vw; /* 8px ÷ 1920 × 100 = 0.4167vw */
 }
+
 .detail-content::-webkit-scrollbar-track {
-  background: #363636; /* 滚动条轨道颜色 */
-  border-radius: 4px;
+  background: #363636;
+  /* 滚动条轨道颜色 */
+  border-radius: 0.21vw; /* 4px→0.2083vw */
 }
+
 .detail-content::-webkit-scrollbar-thumb {
-  background: #bc8630; /* 滚动条滑块颜色 */
-  width: 8px; /* 滑块宽度 */
-  border-radius: 4px; /* 圆角（宽度的一半） */
-  margin: 0 4px; /* 左右各4px间距，实现居中 */
-  border: 4px solid #bc8630; /* 透明边框辅助居中 */
-  background-clip: content-box; /* 确保背景只在内容区域显示 */
+  background: #bc8630;
+  /* 滚动条滑块颜色 */
+  width: 0.42vw; /* 8px→0.4167vw */
+  /* 滑块宽度 */
+  border-radius: 0.21vw; /* 4px→0.2083vw */
+  /* 圆角（宽度的一半） */
+  margin: 0 0.21vw; /* 4px→0.2083vw */
+  /* 左右各4px间距，实现居中 */
+  border: 0.21vw solid #bc8630; /* 4px→0.2083vw */
+  /* 透明边框辅助居中 */
+  background-clip: content-box;
+  /* 确保背景只在内容区域显示 */
 }
+
 .detail-content::-webkit-scrollbar-thumb:hover {
-  background: #bc8630; /* 滑块 hover 颜色 */
+  background: #bc8630;
+  /* 滑块 hover 颜色 */
 }

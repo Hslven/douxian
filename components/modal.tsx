@@ -82,9 +82,9 @@ any) => {
         {/* 标题区域 */}
         {!!title && (
           <div className="modal-header">
-            <Image className="" src={modal_title_left} alt="" />
+            <Image className="modal-header-left-line" src={modal_title_left} alt="" />
             {title}
-            <Image className="" src={modal_title_right} alt="" />
+            <Image className="modal-header-right-line" src={modal_title_right} alt="" />
           </div>
         )}
         <button

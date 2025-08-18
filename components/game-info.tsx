@@ -6,6 +6,7 @@ import role_image from '../public/images/role_image.png'
 import role_name from '../public/images/role_name.png'
 import more from '../public/images/more.png'
 import Image from "next/image";
+import request from "@/utils/request";
  
 const feachData = (current: number) => {
   return Promise.resolve({
@@ -26,6 +27,11 @@ export default function GameInfo() {
   const router = useRouter();
 
   useEffect(() => {
+
+    request.get('/douxian/web/career').then(res => {
+        console.log(res,'res');
+        
+    })
     feachData(1).then((res) => {
       setList(res.list);
     });

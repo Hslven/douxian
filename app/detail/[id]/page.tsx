@@ -6,7 +6,10 @@ import Footer from "@/components/ui/footer";
 import { use, useEffect, useState } from "react";
 import "./index.css";
 import RegisterModal from "@/components/register-modal";
-
+import request from "@/utils/request";
+import Image from "next/image";
+import arrow from '../../../public/images/arrow.png'
+ 
 export default function Detail({
   params,
 }: {
@@ -18,6 +21,7 @@ export default function Detail({
 
   useEffect(() => {
     console.log(params, "params");
+    request.get(`/douxian/web/notice/${id}`)
     if (id) {
       setDetail({
         id,
@@ -31,10 +35,11 @@ export default function Detail({
   return (
     <div>
       <HeroSection openRegisterModal={() => setRegisterModalOpen(true)} />
-      <div className="detail-container">
+      <div className="detail-container-wrap">
+        <div className="detail-container">
         <GameToolbar openRegisterModal={() => setRegisterModalOpen(true)} />
         <NewsBox
-          title={<div className="detail-title">新闻资讯 》</div>}
+          title={<div className="detail-title">新闻资讯 <Image className="detail-title-arrow" src={arrow} alt='' /></div>}
           header={
             <div className="detail-header">
               {detail.title}
@@ -44,6 +49,7 @@ export default function Detail({
           content={<div className="detail-content">{detail.content}</div>}
           footer={<div style={{ height: "60px" }} />}
         />
+        </div>
       </div>
       <Footer />
       <RegisterModal

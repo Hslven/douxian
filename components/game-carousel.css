@@ -1,10 +1,9 @@
 .game-carousel {
   width: 100vw;
   height: 100vh;
-  background: url(../public/images/bg4.png) center center no-repeat;
-  background-size: cover;
   display: flex;
   align-items: center;
+      min-width: 1920px;
 }
 
 .game-carousel-role {

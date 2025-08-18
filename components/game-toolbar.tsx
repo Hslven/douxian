@@ -45,7 +45,7 @@ export default function GameToolbar({ className, openRegisterModal }: any) {
 
             {giftDetail.list.map((item) => (
               <div key={item.id}  className="gift-item">
-                <Image src={gift} alt="" />
+                <Image className="gift-item-image" src={gift} alt="" />
                 <div>{item.name}*{item.number}</div>
               </div>
             ))}
@@ -59,11 +59,11 @@ export default function GameToolbar({ className, openRegisterModal }: any) {
           <div className="gift-info">
             因苹果公司政策苹果用户无法使用礼包码，登录即享九大公测福利。
           </div>
-          <Image src={gift_line} alt="" />
+          <Image className="gift-line" src={gift_line} alt="" />
           <div className="gift-footer">
 
-          <div className="">关注QQ群更多惊喜礼包</div>
-          <Image className="inline-block" src={group_code} alt="" />
+          <div className="gift-info">关注QQ群更多惊喜礼包</div>
+          <Image  className="gift-group-code" src={group_code} alt="" />
           </div>
         </div>
       </Modal>

@@ -15,16 +15,17 @@ export default function Header({openRegisterModal}: any) {
     return (
         <div className="game-header">
             <div className="game-header-logo" onClick={() => router.push('/')}>
-                <Image src={logo} alt='' />
+                <Image fill objectFit="cover" src={logo} alt='' />
             </div>
             <div className="game-header-btn-group">
                 <div className="game-header-btn">
+                    <Image fill  objectFit="cover" src={home_btn_bg} alt='' />
                     <span className="game-header-btn-name">游戏下载</span>
-                    <Image src={home_btn_bg} alt='' />
                 </div>
                 <div className="game-header-btn" onClick={openRegisterModal}>
+                    <Image fill objectFit="cover" src={home_btn_bg} alt='' />
+
                     <span className="game-header-btn-name">游戏注册</span>
-                    <Image src={home_btn_bg} alt='' />
                 </div>
             </div>
         </div>
