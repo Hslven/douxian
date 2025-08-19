@@ -11,87 +11,75 @@ import Pagination from "@/components/pagination";
 import RegisterModal from "@/components/register-modal";
 import request from "@/utils/request";
 
-const feachData1 = (current: number) => {
-  console.log(current,'current');
-  
-  return Promise.resolve({
-    current,
-    pages: 20,
-    list: Array.from({ length: 20 }).map((_, index) => ({
-      id: current + '-' + index,
-      type: "新闻",
-      title: `6月4日经典服新区“悠梦春晨”18:00开启05-29 ${current}`,
-      time: "2025-05-29",
-    })),
-  });
-};
-
 export default function NewsPage() {
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const [list, setList] = useState<any[]>([]);
   const [current, setCurrent] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const router = useRouter();
+  const [homeDetails, setHomeDetails] = useState<any>({});
+    const [buttonImgs, setButtonImgs] = useState<any>({});
 
-
-const feachData = (pageNo: number, pageSize:number = 20) => {
-request.get('/douxian/web/notice',{params: {pageNo,pageSize}}).then((res: any) => {
-      setTotalPages(Math.ceil(res.total / pageSize));
-      setList([...res.list,...res.list,...res.list,...res.list]);
-      setCurrent(pageNo)
-    })
-};
   useEffect(() => {
-    feachData(current)
-    // feachData(currentPage).then((res) => {
-    //   setTotalPages(21);
-    //   setList(res.list);
-    // });
+    request.get("/douxian/web/home").then((res) => setHomeDetails(res));
+    request.get("/douxian/web/button").then((res) => setButtonImgs(res));
   }, []);
 
-  // const onPageChange = (page: number) => {
-  //   setCurrentPage(page);
-  //   setTotalPages(21);
-  //   feachData(page).then((res) => {
-  //     setList(res.list);
-  //   });
-  // };
+  const feachData = (pageNo: number, pageSize: number = 20) => {
+    request
+      .get("/douxian/web/notice", { params: { pageNo, pageSize } })
+      .then((res: any) => {
+        setTotalPages(Math.ceil(res.total / pageSize));
+        setList(res.list);
+        setCurrent(pageNo);
+      });
+  };
+  useEffect(() => {
+    feachData(current);
+  }, []);
+
   return (
     <div>
-      <HeroSection openRegisterModal={() => setRegisterModalOpen(true)} />
+      <HeroSection
+        homeDetails={homeDetails}
+        buttonImgs={buttonImgs}
+        openRegisterModal={() => setRegisterModalOpen(true)}
+      />
       <div className="news-container-wrap">
-      <div className="news-container">
-        <GameToolbar openRegisterModal={() => setRegisterModalOpen(true)} />
-        <NewsBox
-          header={<div className="news-header">新闻资讯</div>}
-          content={
-            <div className="new-list">
-              {list.map((item) => (
-                <div
-                  key={item.noticeId}
-                  className="new-item"
-                  onClick={() => {
-                    router.push(`/detail/${item.noticeId}`);
-                  }}
-                >
-                  <div className="new-item-content">
-                    <span className="new-item-type">【 {item.type || '资讯'} 】</span>
-                    <span className="new-item-title">{item.noticeTitle}</span>
+        <div className="news-container">
+          <GameToolbar openRegisterModal={() => setRegisterModalOpen(true)} buttonImgs={buttonImgs} />
+          <NewsBox
+            header={<div className="news-header">新闻资讯</div>}
+            content={
+              <div className="new-list">
+                {list.map((item) => (
+                  <div
+                    key={item.noticeId}
+                    className="new-item"
+                    onClick={() => {
+                      router.push(`/detail/${item.noticeId}`);
+                    }}
+                  >
+                    <div className="new-item-content">
+                      <span className="new-item-type">
+                        【 {item.type || "资讯"} 】
+                      </span>
+                      <span className="new-item-title">{item.noticeTitle}</span>
+                    </div>
+                    <div>{item.noticeShowTime}</div>
                   </div>
-                  <div>{item.noticeShowTime}</div>
-                </div>
-              ))}
-            </div>
-          }
-          footer={
-            <Pagination
-              currentPage={current}
-              totalPages={totalPages}
-              onPageChange={feachData}
-            />
-          }
-        />
-      </div>
+                ))}
+              </div>
+            }
+            footer={
+              <Pagination
+                currentPage={current}
+                totalPages={totalPages}
+                onPageChange={feachData}
+              />
+            }
+          />
+        </div>
       </div>
       <Footer />
       <RegisterModal

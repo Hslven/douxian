@@ -50,6 +50,7 @@
   flex: 1;
   background: #a77634;
   color: #eeddc1;
+  cursor: pointer;
 }
 .game-active-tab-active {
   background: #823c16;

@@ -1,36 +1,56 @@
 import Image from "next/image";
 import "./game-toolbar.css";
 import Modal from "./modal";
-import gift from '../public/images/gift.png'
-import gift_line from '../public/images/gift_line.png'
-import group_code from '../public/images/group_code.png'
+import gift from "../public/images/gift.png";
+import gift_line from "../public/images/gift_line.png";
+import group_code from "../public/images/group_code.png";
 import { useState } from "react";
+import { getImgUrl } from "@/utils/request";
 
-export default function GameToolbar({ className, openRegisterModal }: any) {
+export default function GameToolbar({ className, openRegisterModal, buttonImgs }: any) {
   const [giftDetail, setGiftDetail] = useState({
-    code: '5512315asd',
-    list: [{id:1, name: '女娲石' ,number: 1},{id:2, name: '女娲石' ,number: 1},{id:3, name: '女娲石' ,number: 1},{id:4, name: '女娲石' ,number: 1},{id:5, name: '女娲石' ,number: 1}],
-
+    code: "5512315asd",
+    list: [
+      { id: 1, name: "女娲石", number: 1 },
+      { id: 2, name: "女娲石", number: 1 },
+      { id: 3, name: "女娲石", number: 1 },
+      { id: 4, name: "女娲石", number: 1 },
+      { id: 5, name: "女娲石", number: 1 },
+    ],
   });
   const [giftModalOpen, setGiftModalOpen] = useState(false);
 
   return (
     <div className={`game-toolbar ${className}`}>
-      <div className="game-toolbar-down">
-        游戏下载
+      <div className="game-toolbar-down" onClick={() => alert("敬请期待")}>
+        {/* 游戏下载 */}
+        <img className="btn-bg" src={getImgUrl(buttonImgs?.gameDownLoadImg)} />
       </div>
       <div className="game-toolbar-box">
-        <div className="game-toolbar-btn" onClick={openRegisterModal}>
-          账号注册
+        <div
+          className="game-toolbar-btn"
+          // onClick={openRegisterModal}
+          onClick={() => alert("敬请期待")}
+        >
+          {/* 账号注册 */}
+          <img className="btn-bg" src={getImgUrl(buttonImgs?.accountRegisterImg)} />
         </div>
         <div
           className="game-toolbar-btn"
-          onClick={() => setGiftModalOpen(true)}
+          // onClick={() => setGiftModalOpen(true)}
+          onClick={() => alert("敬请期待")}
         >
-          特权礼包
+          {/* 特权礼包 */}
+          <img className="btn-bg" src={getImgUrl(buttonImgs?.privilegeGiftImg)} />
         </div>
-        <div className="game-toolbar-btn">新手入门</div>
-        <div className="game-toolbar-btn">客服服务</div>
+        <div className="game-toolbar-btn" onClick={() => alert("敬请期待")}>
+          {/* 新手入门 */}
+          <img className="btn-bg" src={getImgUrl(buttonImgs?.newbieGuideImg)} />
+        </div>
+        <div className="game-toolbar-btn" onClick={() => alert("敬请期待")}>
+          {/* 客服服务 */}
+          <img className="btn-bg" src={getImgUrl(buttonImgs?.customerServiceImg)} />
+        </div>
       </div>
       <Modal
         visible={giftModalOpen}
@@ -38,20 +58,23 @@ export default function GameToolbar({ className, openRegisterModal }: any) {
         onClose={() => setGiftModalOpen(false)}
       >
         <div className="gift-modal-content">
-            <div  className="gift-modal-code">礼包码：{giftDetail.code}</div>
+          <div className="gift-modal-code">礼包码：{giftDetail.code}</div>
 
           <div className="gift-modal-detail">
             <div className="gift-list">
-
-            {giftDetail.list.map((item) => (
-              <div key={item.id}  className="gift-item">
-                <Image className="gift-item-image" src={gift} alt="" />
-                <div>{item.name}*{item.number}</div>
-              </div>
-            ))}
+              {giftDetail.list.map((item) => (
+                <div key={item.id} className="gift-item">
+                  <Image className="gift-item-image" src={gift} alt="" />
+                  <div>
+                    {item.name}*{item.number}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-          <div className="gift-info">兑换途径:游戏内主界面右上角“礼包奖励”官网礼包”进行兑换</div>
+          <div className="gift-info">
+            兑换途径:游戏内主界面右上角“礼包奖励”官网礼包”进行兑换
+          </div>
           <div className="gift-info">有效期:2017年12月28日-2018年12月31日</div>
           <div className="gift-info">
             礼包说明:本礼包仅限安卓官服玩家激活使用，每个账号仅限激活一次该礼包
@@ -61,9 +84,8 @@ export default function GameToolbar({ className, openRegisterModal }: any) {
           </div>
           <Image className="gift-line" src={gift_line} alt="" />
           <div className="gift-footer">
-
-          <div className="gift-info">关注QQ群更多惊喜礼包</div>
-          <Image  className="gift-group-code" src={group_code} alt="" />
+            <div className="gift-info">关注QQ群更多惊喜礼包</div>
+            <Image className="gift-group-code" src={group_code} alt="" />
           </div>
         </div>
       </Modal>

@@ -27,6 +27,7 @@
 .detail-header {
   font-size: 2.97vw; /* 57px ÷ 1920 × 100 = 2.9688vw */
   color: #db1f02;
+  min-height: 6.46vw;
 }
 
 .detail-time {
@@ -73,4 +74,11 @@
 .detail-content::-webkit-scrollbar-thumb:hover {
   background: #bc8630;
   /* 滑块 hover 颜色 */
+}
+
+.btn-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

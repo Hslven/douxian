@@ -18,35 +18,34 @@ export default function Detail({
   const { id } = use(params);
   const [detail, setDetail] = useState<any>({});
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
+      const [homeDetails, setHomeDetails] = useState<any>({});
+    const [buttonImgs, setButtonImgs] = useState<any>({});
 
   useEffect(() => {
-    console.log(params, "params");
-    request.get(`/douxian/web/notice/${id}`)
+    request.get("/douxian/web/home").then((res) => setHomeDetails(res));
+    request.get("/douxian/web/button").then((res) => setButtonImgs(res));
+  }, []);
+
+  useEffect(() => {
     if (id) {
-      setDetail({
-        id,
-        title: "6月4日经典服新区“悠梦春晨”18:00开启原汁原味",
-        time: "2025-6-12 16:04",
-        content:
-          "月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-296月4日经典服新区“悠梦春晨”18:00开启05-29",
-      });
+    request.get(`/douxian/web/notice/${id}`).then(res => setDetail(res || {}))
     }
   }, [id]);
   return (
     <div>
-      <HeroSection openRegisterModal={() => setRegisterModalOpen(true)} />
+      <HeroSection homeDetails={homeDetails} buttonImgs={buttonImgs} openRegisterModal={() => setRegisterModalOpen(true)} />
       <div className="detail-container-wrap">
         <div className="detail-container">
-        <GameToolbar openRegisterModal={() => setRegisterModalOpen(true)} />
+        <GameToolbar openRegisterModal={() => setRegisterModalOpen(true)} buttonImgs={buttonImgs} />
         <NewsBox
           title={<div className="detail-title">新闻资讯 <Image className="detail-title-arrow" src={arrow} alt='' /></div>}
           header={
             <div className="detail-header">
-              {detail.title}
-              <div className="detail-time">{detail.time}</div>
+              {detail.noticeTitle}
+              <div className="detail-time">{detail.noticeShowTime}</div>
             </div>
           }
-          content={<div className="detail-content">{detail.content}</div>}
+          content={<div className="detail-content">{detail.noticeContent}</div>}
           footer={<div style={{ height: "60px" }} />}
         />
         </div>

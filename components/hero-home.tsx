@@ -17,14 +17,12 @@ import bg2 from "../public/images/bg2.png";
 import bg3 from "../public/images/bg3.png";
 import bg4 from "../public/images/bg4.png";
 import bg5 from "../public/images/bg5.png";
-
+import request, { getImgUrl } from "@/utils/request";
 import "./hero-home.css";
-import request from "@/utils/request";
-
 const PageSection = ({ children, backgroundImg }: any) => {
   return (
     <div className="page-section">
-      <Image fill objectFit='cover' src={backgroundImg} alt="" />
+      <img  className="page-section-bg" src={getImgUrl(backgroundImg)} />
       {children}
       <Image  className="game-glide" src={glide} alt="" />
     </div>
@@ -35,6 +33,13 @@ export default function HeroHome() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const prevScrollPositionRef = useRef(0);
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
+    const [homeDetails, setHomeDetails] = useState<any>({});
+    const [buttonImgs, setButtonImgs] = useState<any>({});
+
+  useEffect(() => {
+    request.get("/douxian/web/home").then((res) => setHomeDetails(res));
+    request.get("/douxian/web/button").then((res) => setButtonImgs(res));
+  }, []);
 
   const handleScroll = (e) => {
     const scrollContainer = scrollContainerRef.current;
@@ -80,7 +85,6 @@ export default function HeroHome() {
         scrollContent.style.height = `${totalPageHeight}px`;
       }
     }
-    request.get("/douxian/web/home").then((res) => console.log(res, "res"));
   }, []);
 
   return (
@@ -92,23 +96,25 @@ export default function HeroHome() {
       <div className="scroll-content">
         {/* 第一部分 */}
         <HeroSection
+          homeDetails={homeDetails}
+          buttonImgs={buttonImgs}
           openRegisterModal={() => setRegisterModalOpen(true)}
           showGlide
         />
         {/* 第二部分 */}
-        <PageSection backgroundImg={bg2}>
-          <GameActive openRegisterModal={() => setRegisterModalOpen(true)} />
+        <PageSection backgroundImg={homeDetails.homeBackgroundUrl?.[1]}>
+          <GameActive homeDetails={homeDetails} buttonImgs={buttonImgs} openRegisterModal={() => setRegisterModalOpen(true)} />
         </PageSection>
         {/* 第三部分 */}
-        <PageSection backgroundImg={bg3}>
+        <PageSection backgroundImg={homeDetails.homeBackgroundUrl?.[2]}>
           <GameInfo />
         </PageSection>
         {/* 第四部分 */}
-        <PageSection backgroundImg={bg4}>
-          <GameCarousel />
+        <PageSection backgroundImg={homeDetails.homeBackgroundUrl?.[3]}>
+          <GameCarousel homeDetails={homeDetails}/>
         </PageSection>
         {/* 第五部分 */}
-        <PageSection backgroundImg={bg5}>
+        <PageSection backgroundImg={homeDetails.homeBackgroundUrl?.[4]}>
           <GameEntry openRegisterModal={() => setRegisterModalOpen(true)} />
         </PageSection>
         <div className="page-section footer-section">

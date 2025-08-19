@@ -1,49 +1,34 @@
 import { useEffect, useState } from "react";
 import GameToolbar from "./game-toolbar";
 import "./game-active.css";
-import game_active from '../public/images/game_active.png'
-import Image from "next/image";
+import { getImgUrl } from "@/utils/request";
 
-export default function GameActive({openRegisterModal}: any) {
+export default function GameActive({openRegisterModal,homeDetails, buttonImgs}: any) {
   const [activeList, setActiveList] = useState<any[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeUrl, setActiveUrl] = useState<any>("");
 
   useEffect(() => {
-    setActiveList([
-      {
-        name: "活动页面1",
-        url: game_active
-      },
-      {
-        name: "活动页面2",
-        url: game_active
-      },
-      {
-        name: "活动页面3",
-        url: game_active
-      },
-    ]);
-    console.log(1111);
-    
-  }, []);
+    if(homeDetails.gameShots?.length) {
+      setActiveList(homeDetails.gameShots.map(url => getImgUrl(url)))
+    }
+  }, [homeDetails.gameShots]);
   return (
     <div className="game-active">
-      <GameToolbar className="game-active-toolbar" openRegisterModal={openRegisterModal} />
+      <GameToolbar className="game-active-toolbar" openRegisterModal={openRegisterModal} buttonImgs={buttonImgs} />
       <div className="game-active-box">
         <div className="game-active-img-warp">
-          <Image className="game-active-img" src={activeList[activeIndex]?.url || game_active} alt='' />
+          <img className="game-active-img" src={activeList[activeIndex]} alt='' />
         </div>
         <div className="game-active-tabs">
-          {activeList.map((item, index) => (
+          {Array.from({length:3}).map((_, index) => (
             <div
               onMouseEnter={() => setActiveIndex(index)}
               className={`game-active-tab ${
                 activeIndex === index ? "game-active-tab-active" : ""
               }`}
-              key={item.name}
+              key={index}
             >
-              {item.name}
+              活动页面{index+ 1}
             </div>
           ))}
         </div>
