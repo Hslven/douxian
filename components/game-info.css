@@ -25,7 +25,7 @@ align-items: center;
 
 .game-info-role-img {
     width: 726px;
-    height: 836px;
+    height: 100%;
     object-fit: cover;
     color: transparent;
     position: absolute;

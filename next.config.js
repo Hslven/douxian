@@ -12,7 +12,7 @@ const nextConfig = {
     const targetApiUrl =
       process.env.NEXT_PUBLIC_ENV === 'development'
         ? 'http://douxian.zhuzhu.pro:2285'
-        : 'http://prod-cn.your-api-server.com';
+        : 'http://douxian.zhuzhu.pro:2285';
 
     return [
       {
