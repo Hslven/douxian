@@ -102,20 +102,20 @@ export default function HeroHome() {
           showGlide
         />
         {/* 第二部分 */}
-        <PageSection backgroundImg={homeDetails.homeBackgroundUrl?.[1]}>
+        <PageSection backgroundImg={homeDetails.homeBackgroundUrls?.[1]}>
           <GameActive homeDetails={homeDetails} buttonImgs={buttonImgs} openRegisterModal={() => setRegisterModalOpen(true)} />
         </PageSection>
         {/* 第三部分 */}
-        <PageSection backgroundImg={homeDetails.homeBackgroundUrl?.[2]}>
+        <PageSection backgroundImg={homeDetails.homeBackgroundUrls?.[2]}>
           <GameInfo />
         </PageSection>
         {/* 第四部分 */}
-        <PageSection backgroundImg={homeDetails.homeBackgroundUrl?.[3]}>
+        <PageSection backgroundImg={homeDetails.homeBackgroundUrls?.[3]}>
           <GameCarousel homeDetails={homeDetails}/>
         </PageSection>
         {/* 第五部分 */}
-        <PageSection backgroundImg={homeDetails.homeBackgroundUrl?.[4]}>
-          <GameEntry openRegisterModal={() => setRegisterModalOpen(true)} />
+        <PageSection backgroundImg={homeDetails.homeBackgroundUrls?.[4]}>
+          <GameEntry      buttonImgs={buttonImgs} openRegisterModal={() => setRegisterModalOpen(true)} />
         </PageSection>
         <div className="page-section footer-section">
           <Footer />

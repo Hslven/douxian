@@ -9,6 +9,7 @@
 }
 
 .game-header-logo {
+  z-index: 9999;
     position: relative;
   width: 9.38vw; /* 180px ÷ 1920 × 100 = 9.375vw */
   height: 7.08vw; /* 136px ÷ 1920 × 100 = 7.0833vw */

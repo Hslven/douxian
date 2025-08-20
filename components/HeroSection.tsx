@@ -11,7 +11,7 @@ export default function HeroSection({ openRegisterModal, showGlide, homeDetails,
       <div className="game-hero">
         <img
           className="section-bg"
-          src={getImgUrl(homeDetails.homeBackgroundUrl?.[0])}
+          src={getImgUrl(homeDetails.homeBackgroundUrls?.[0])}
           alt=""
         />
         <GameHeader buttonImgs={buttonImgs} openRegisterModal={openRegisterModal} />

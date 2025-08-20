@@ -86,5 +86,7 @@ export default request;
 
 export const getImgUrl = (url: string) => {
   if (!url) return undefined;
-  return `http://douxian.zhuzhu.pro${url}`;
+  const prefix = "http://douxian.zhuzhu.pro";
+  return url.startsWith(prefix) ? url : `${prefix}${url}`;
 };
+
