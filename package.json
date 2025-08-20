@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "NODE_ENV=development next dev --turbopack --port 2286",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --port 2286",
     "lint": "next lint"
   },
   "dependencies": {
