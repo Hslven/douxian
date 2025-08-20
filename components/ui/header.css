@@ -23,6 +23,7 @@
 }
 
 .game-header-btn {
+  z-index: 9999;
   width: 13.23vw; /* 254px ÷ 1920 × 100 = 13.2292vw */
   height: 4.27vw; /* 82px ÷ 1920 × 100 = 4.2708vw */
   cursor: pointer;

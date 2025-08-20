@@ -85,6 +85,7 @@ request.interceptors.response.use(
 export default request;
 
 export const getImgUrl = (url: string) => {
+  if(!process.env.NEXT_PUBLIC_ENV === 'development') return
   if (!url) return undefined;
   const prefix = "http://douxian.zhuzhu.pro";
   return url.startsWith(prefix) ? url : `${prefix}${url}`;
