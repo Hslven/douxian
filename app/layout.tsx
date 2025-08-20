@@ -1,15 +1,20 @@
 import "./css/style.css";
 
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 import localFont from "next/font/local";
-
+// 本地可变字重 Inter
+// const inter = localFont({
+//   // src: './fonts/Inter-Variable.woff2',
+//   display: 'swap',
+//   variable: '--font-inter',   // 方便 Tailwind 或 CSS 变量使用
+// });
 import Header from "@/components/ui/header";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
+// const inter = Inter({
+//   subsets: ["latin"],
+//   variable: "--font-inter",
+//   display: "swap",
+// });
 
 const nacelle = localFont({
   src: [
@@ -51,7 +56,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${nacelle.variable} bg-gray-950 font-inter text-base text-gray-200 antialiased`}
+        className={`${nacelle.variable} bg-gray-950 font-inter text-base text-gray-200 antialiased`}
       >
         <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
           {/* <Header /> */}
