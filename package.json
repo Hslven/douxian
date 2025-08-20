@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development next dev --turbopack",
+    "dev": "NODE_ENV=development next dev --turbopack --port 2286",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
