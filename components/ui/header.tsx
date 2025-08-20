@@ -2,9 +2,6 @@
 
 import { useRouter } from "next/navigation";
 import "./header.css";
-import Image from "next/image";
-import logo from "../../public/images/logo.png";
-import home_btn_bg from "../../public/images/home_btn_bg.png";
 import { getImgUrl } from "@/utils/request";
 
 export default function Header({ openRegisterModal, buttonImgs }: any) {

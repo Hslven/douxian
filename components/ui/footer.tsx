@@ -1,7 +1,4 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
-// import Link from "next/link";
-import FooterIllustration from "@/public/images/footer-illustration.svg";
 import "./Footer.css"; // 引入 CSS 文件
 
 export default function Footer() {

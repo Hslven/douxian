@@ -33,7 +33,7 @@ export default function Detail({
   }, [id]);
   return (
     <div>
-      <HeroSection homeDetails={homeDetails} buttonImgs={buttonImgs} openRegisterModal={() => setRegisterModalOpen(true)} />
+      <HeroSection homeBackgroundUrl={(homeDetails.homeBackgroundUrls || []).at(-1)} homeDetails={homeDetails} buttonImgs={buttonImgs} openRegisterModal={() => setRegisterModalOpen(true)} />
       <div className="detail-container-wrap">
         <div className="detail-container">
         <GameToolbar openRegisterModal={() => setRegisterModalOpen(true)} buttonImgs={buttonImgs} />
@@ -45,7 +45,7 @@ export default function Detail({
               <div className="detail-time">{detail.noticeShowTime}</div>
             </div>
           }
-          content={<div className="detail-content">{detail.noticeContent}</div>}
+          content={<div className="detail-content" dangerouslySetInnerHTML={{__html: detail.noticeContent}} />}
           footer={<div style={{ height: "60px" }} />}
         />
         </div>

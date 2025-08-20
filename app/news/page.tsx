@@ -41,6 +41,7 @@ export default function NewsPage() {
   return (
     <div>
       <HeroSection
+        homeBackgroundUrl={(homeDetails.homeBackgroundUrls || []).at(-1)}
         homeDetails={homeDetails}
         buttonImgs={buttonImgs}
         openRegisterModal={() => setRegisterModalOpen(true)}

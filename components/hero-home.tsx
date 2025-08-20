@@ -12,11 +12,6 @@ import GameEntry from "./game-entry";
 import RegisterModal from "./register-modal";
 import Image from "next/image";
 import glide from "../public/images/glide.png";
-import bg1 from "../public/images/bg1.png";
-import bg2 from "../public/images/bg2.png";
-import bg3 from "../public/images/bg3.png";
-import bg4 from "../public/images/bg4.png";
-import bg5 from "../public/images/bg5.png";
 import request, { getImgUrl } from "@/utils/request";
 import "./hero-home.css";
 const PageSection = ({ children, backgroundImg }: any) => {
@@ -97,6 +92,7 @@ export default function HeroHome() {
         {/* 第一部分 */}
         <HeroSection
           homeDetails={homeDetails}
+          homeBackgroundUrl={homeDetails.homeBackgroundUrls?.[0]}
           buttonImgs={buttonImgs}
           openRegisterModal={() => setRegisterModalOpen(true)}
           showGlide

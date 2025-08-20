@@ -5,13 +5,13 @@ import Image from "next/image";
 import GameHeader from "../components/ui/header";
 import "./HeroSection.css";
 import request, { getImgUrl } from "@/utils/request";
-export default function HeroSection({ openRegisterModal, showGlide, homeDetails, buttonImgs }: any) {
+export default function HeroSection({ openRegisterModal, showGlide, homeDetails, buttonImgs, homeBackgroundUrl }: any) {
   return (
     <section className="hero-section">
       <div className="game-hero">
         <img
           className="section-bg"
-          src={getImgUrl(homeDetails.homeBackgroundUrls?.[0])}
+          src={getImgUrl(homeBackgroundUrl)}
           alt=""
         />
         <GameHeader buttonImgs={buttonImgs} openRegisterModal={openRegisterModal} />
