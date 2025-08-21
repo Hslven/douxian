@@ -45,7 +45,7 @@ export default function GameCarousel({ homeDetails }: any) {
 
   return (
     <div className="game-carousel">
-      <Image className="game-carousel-role" src={carousel_role} alt="" />
+      {/* <Image className="game-carousel-role" src={carousel_role} alt="" /> */}
       <div className="carousel-container">
         <div className="carousel-slide-box">
           {images.map((slide, index) => {

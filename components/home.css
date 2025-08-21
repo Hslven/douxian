@@ -33,11 +33,10 @@ body {
   scroll-snap-align: start;
   height: 100vh;
   height: auto;
-  padding: 94px 20px 20px 20px; /* 顶部留空，底部也留空 */
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
   text-align: center;
   /* padding: 20px; */

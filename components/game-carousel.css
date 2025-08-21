@@ -15,7 +15,7 @@
   height: 740px; /* 可视区域高度 */
   overflow: hidden; /* 隐藏框外内容 */
   position: relative;
-  margin-left: -400px;
+  margin-left: 765px;
 }
 
 .carousel-slide {
