@@ -49,7 +49,7 @@
 }
 
 .new-list {
-  height: 76.46vw; /* 1468px ÷ 1920 × 100 = 76.4583vw */
+  height: 79.01vw;
   overflow-y: auto;
 }
 

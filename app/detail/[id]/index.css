@@ -37,7 +37,7 @@
 
 .detail-content {
   font-size: 1.25vw; /* 24px→1.25vw */
-  height: 46.88vw; /* 900px ÷ 1920 × 100 = 46.875vw */
+  height: 72.81vw; /* 900px ÷ 1920 × 100 = 46.875vw */
   padding: 0 0.52vw; /* 10px→0.5208vw */
   margin: 0 1.04vw; /* 20px→1.0417vw */
   line-height: 3; /* 非px单位保持不变 */

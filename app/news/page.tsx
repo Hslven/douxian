@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 import Pagination from "@/components/pagination";
 import RegisterModal from "@/components/register-modal";
 import request from "@/utils/request";
+import Modal from "@/components/modal";
 
 export default function NewsPage() {
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
@@ -18,7 +19,8 @@ export default function NewsPage() {
   const [totalPages, setTotalPages] = useState(0);
   const router = useRouter();
   const [homeDetails, setHomeDetails] = useState<any>({});
-    const [buttonImgs, setButtonImgs] = useState<any>({});
+  const [buttonImgs, setButtonImgs] = useState<any>({});
+  const [tipsOpen, setTipsOpen] = useState(false);
 
   useEffect(() => {
     request.get("/douxian/web/home").then((res) => setHomeDetails(res));
@@ -45,10 +47,15 @@ export default function NewsPage() {
         homeDetails={homeDetails}
         buttonImgs={buttonImgs}
         openRegisterModal={() => setRegisterModalOpen(true)}
+        openTips={() => setTipsOpen(true)}
       />
       <div className="news-container-wrap">
         <div className="news-container">
-          <GameToolbar openRegisterModal={() => setRegisterModalOpen(true)} buttonImgs={buttonImgs} />
+          <GameToolbar
+            openTips={() => setTipsOpen(true)}
+            openRegisterModal={() => setRegisterModalOpen(true)}
+            buttonImgs={buttonImgs}
+          />
           <NewsBox
             header={<div className="news-header">新闻资讯</div>}
             content={
@@ -57,6 +64,10 @@ export default function NewsPage() {
                   <div
                     key={item.noticeId}
                     className="new-item"
+                    style={{
+                      backgroundColor: item.noticeBackgroundColor,
+                      border: item.noticeBorderStyle,
+                    }}
                     onClick={() => {
                       router.push(`/detail/${item.noticeId}`);
                     }}
@@ -65,7 +76,12 @@ export default function NewsPage() {
                       <span className="new-item-type">
                         【 {item.type || "资讯"} 】
                       </span>
-                      <span className="new-item-title">{item.noticeTitle}</span>
+                      <span
+                        className="new-item-title"
+                        style={{ color: item.noticeTitleColor }}
+                      >
+                        {item.noticeTitle}
+                      </span>
                     </div>
                     <div>{item.noticeShowTime}</div>
                   </div>
@@ -87,6 +103,19 @@ export default function NewsPage() {
         visible={registerModalOpen}
         onClose={() => setRegisterModalOpen(false)}
       />
+      <Modal visible={tipsOpen} onClose={() => setTipsOpen(false)}>
+        <div
+          style={{
+            textAlign: "center",
+            lineHeight: "32.2vw",
+            fontWeight: 700,
+            color: "#34110a",
+            fontSize: "5vw",
+          }}
+        >
+          敬请期待...
+        </div>
+      </Modal>
     </div>
   );
 }

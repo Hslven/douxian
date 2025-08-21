@@ -1,10 +1,9 @@
 .news-box-warp {
-  width: 69.69vw; /* 1338px ÷ 1920 × 100 = 69.6875vw */
-  height: 90.16vw; /* 1731px ÷ 1920 × 100 = 90.15625vw */
+  width: 72.03vw;
+  height: 92.86vw
 }
 
 .news-box {
-  min-height: 85.73vw; /* 1646px ÷ 1920 × 100 = 85.729166...vw */
   border: 2px solid #513c1d; /* 忽略2px不转换 */
   background: rgba(235,210,174,.1);
 }

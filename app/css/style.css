@@ -101,6 +101,21 @@
 }
 
 @font-face {
+  font-family: 'SC-SemiBold';
+  src: url('../../public/fonts/SC-SemiBold.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* 优化字体加载体验 */
+}
+
+@font-face {
+  font-family: 'SC-Heavy';
+  src: url('../../public/fonts/SC-Heavy.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* 优化字体加载体验 */
+}
+@font-face {
   font-family: 'AlibabaPuHuiTi-3-55-Regular';
   src: url('../../public/fonts/AlibabaPuHuiTi-3-55-Regular.otf') format('opentype');
   font-weight: normal;
@@ -110,5 +125,7 @@
 
 :root {
   --font-source-han-serif: 'SourceHanSerifSC-Regular', serif;
+  --font-sc-semi-bold: 'SC-SemiBold', serif;
+  --font-sc-heavy: 'SC-Heavy', serif;
   --font-alibaba-puhuiti: 'AlibabaPuHuiTi-3-55-Regular', serif;
 }

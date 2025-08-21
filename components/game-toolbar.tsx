@@ -7,7 +7,7 @@ import group_code from "../public/images/group_code.png";
 import { useState } from "react";
 import { getImgUrl } from "@/utils/request";
 
-export default function GameToolbar({ className, openRegisterModal, buttonImgs }: any) {
+export default function GameToolbar({ className, openRegisterModal, buttonImgs,openTips }: any) {
   const [giftDetail, setGiftDetail] = useState({
     code: "5512315asd",
     list: [
@@ -22,7 +22,7 @@ export default function GameToolbar({ className, openRegisterModal, buttonImgs }
 
   return (
     <div className={`game-toolbar ${className}`}>
-      <div className="game-toolbar-down" onClick={() => alert("敬请期待")}>
+      <div className="game-toolbar-down" onClick={openTips}>
         {/* 游戏下载 */}
         <img className="btn-bg" src={getImgUrl(buttonImgs?.gameDownLoadImg)} />
       </div>
@@ -30,7 +30,7 @@ export default function GameToolbar({ className, openRegisterModal, buttonImgs }
         <div
           className="game-toolbar-btn"
           // onClick={openRegisterModal}
-          onClick={() => alert("敬请期待")}
+          onClick={openTips}
         >
           {/* 账号注册 */}
           <img className="btn-bg" src={getImgUrl(buttonImgs?.accountRegisterImg)} />
@@ -38,16 +38,16 @@ export default function GameToolbar({ className, openRegisterModal, buttonImgs }
         <div
           className="game-toolbar-btn"
           // onClick={() => setGiftModalOpen(true)}
-          onClick={() => alert("敬请期待")}
+          onClick={openTips}
         >
           {/* 特权礼包 */}
           <img className="btn-bg" src={getImgUrl(buttonImgs?.privilegeGiftImg)} />
         </div>
-        <div className="game-toolbar-btn" onClick={() => alert("敬请期待")}>
+        <div className="game-toolbar-btn" onClick={openTips}>
           {/* 新手入门 */}
           <img className="btn-bg" src={getImgUrl(buttonImgs?.newbieGuideImg)} />
         </div>
-        <div className="game-toolbar-btn" onClick={() => alert("敬请期待")}>
+        <div className="game-toolbar-btn" onClick={openTips}>
           {/* 客服服务 */}
           <img className="btn-bg" src={getImgUrl(buttonImgs?.customerServiceImg)} />
         </div>

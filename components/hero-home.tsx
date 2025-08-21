@@ -14,6 +14,7 @@ import Image from "next/image";
 import glide from "../public/images/glide.png";
 import request, { getImgUrl } from "@/utils/request";
 import "./hero-home.css";
+import Modal from "./modal";
 const PageSection = ({ children, backgroundImg }: any) => {
   return (
     <div className="page-section">
@@ -30,6 +31,7 @@ export default function HeroHome() {
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
     const [homeDetails, setHomeDetails] = useState<any>({});
     const [buttonImgs, setButtonImgs] = useState<any>({});
+  const [tipsOpen, setTipsOpen] = useState(false);
 
   useEffect(() => {
     request.get("/douxian/web/home").then((res) => setHomeDetails(res));
@@ -94,12 +96,13 @@ export default function HeroHome() {
           homeDetails={homeDetails}
           homeBackgroundUrl={homeDetails.homeBackgroundUrls?.[0]}
           buttonImgs={buttonImgs}
+           openTips={()=>setTipsOpen(true)} 
           openRegisterModal={() => setRegisterModalOpen(true)}
           showGlide
         />
         {/* 第二部分 */}
         <PageSection backgroundImg={homeDetails.homeBackgroundUrls?.[1]}>
-          <GameActive homeDetails={homeDetails} buttonImgs={buttonImgs} openRegisterModal={() => setRegisterModalOpen(true)} />
+          <GameActive  openTips={()=>setTipsOpen(true)}  homeDetails={homeDetails} buttonImgs={buttonImgs} openRegisterModal={() => setRegisterModalOpen(true)} />
         </PageSection>
         {/* 第三部分 */}
         <PageSection backgroundImg={homeDetails.homeBackgroundUrls?.[2]}>
@@ -111,7 +114,7 @@ export default function HeroHome() {
         </PageSection>
         {/* 第五部分 */}
         <PageSection backgroundImg={homeDetails.homeBackgroundUrls?.[4]}>
-          <GameEntry      buttonImgs={buttonImgs} openRegisterModal={() => setRegisterModalOpen(true)} />
+          <GameEntry  openTips={()=>setTipsOpen(true)}    buttonImgs={buttonImgs} openRegisterModal={() => setRegisterModalOpen(true)} />
         </PageSection>
         <div className="page-section footer-section">
           <Footer />
@@ -121,6 +124,14 @@ export default function HeroHome() {
         visible={registerModalOpen}
         onClose={() => setRegisterModalOpen(false)}
       />
+      <Modal
+        visible={tipsOpen}
+        onClose={() => setTipsOpen(false)}
+      >
+        <div style={{textAlign:'center',lineHeight:'32.2vw',fontWeight:700,color:'#34110a',fontSize:'5vw'}}>
+        敬请期待...
+        </div>
+      </Modal>
     </section>
   );
 }

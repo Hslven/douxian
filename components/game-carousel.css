@@ -7,7 +7,7 @@
 }
 
 .game-carousel-role {
-    z-index: 5;
+    z-index: 1;
 }
 
 .carousel-container {
@@ -31,7 +31,6 @@
   top: 46.5px;
   transition: all 0.5s;
   opacity: 0;
-  padding: 11px;
 }
 
 .carousel-slide.active {
@@ -60,8 +59,8 @@
 }
 
 .dot {
-  width: 14.5px;
-  height: 14.5px;
+  width: 14px;
+  height: 14px;
   border-radius: 50%;
   background-color: #563817;
   cursor: pointer;
@@ -83,17 +82,44 @@
   top: 0;
   width: 996px;
   height: 688px;
-  z-index: 2;
+  z-index: 3;
   opacity: 1;
-  padding: 12px;
 }
 
 .carousel-prev {
   left: 0;
-  opacity: .5;
+  opacity: 1;
+  z-index: 2;
+}
+/* 伪元素作为黑色覆盖层 */
+.carousel-prev::before {
+  content: ""; /* 伪元素必须有 content */
+  position: absolute; /* 覆盖在容器上方 */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000; /* 纯黑覆盖层 */
+  opacity: 0.5; /* 覆盖层透明度（0.9 表示 90% 黑色覆盖） */
+  z-index: 2; /* 确保覆盖在内容上方 */
 }
 
 .carousel-next {
   left: 239px;
-  opacity: .5;
+  opacity: 1;
+  z-index: 2;
+}
+
+
+/* 伪元素作为黑色覆盖层 */
+.carousel-next::before {
+  content: ""; /* 伪元素必须有 content */
+  position: absolute; /* 覆盖在容器上方 */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #000; /* 纯黑覆盖层 */
+  opacity: 0.5; /* 覆盖层透明度（0.9 表示 90% 黑色覆盖） */
+  z-index: 2; /* 确保覆盖在内容上方 */
 }

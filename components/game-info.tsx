@@ -45,11 +45,11 @@ export default function GameInfo() {
             <div className="game-info-role-name">
               {roleList[activeIndex]?.careerName}
             </div>
-            <div>
+            <div className="game-info-role-number">
               操作难度：{" "}
               <Rate value={roleList[activeIndex]?.careerDifficulty} />
             </div>
-            <div>
+            <div className="game-info-role-number">
               重要程度：{" "}
               <Rate value={roleList[activeIndex]?.careerImportance} />
             </div>
@@ -77,6 +77,7 @@ export default function GameInfo() {
         </div>
         <div
           className="game-info-news-top-title"
+          style={{color:newsDetail[0]?.noticeTitleColor}}
           onClick={() => window.open(`/detail/${newsDetail[0]?.noticeId}`)}
         >
           {newsDetail[0]?.noticeTitle}
@@ -87,12 +88,13 @@ export default function GameInfo() {
             return (
               <div
                 className="game-info-news-item"
+                style={{border:item.noticeBorderStyle,backgroundColor:item.noticeBackgroundColor}}
                 key={item.noticeId}
                 onClick={() => window.open(`/detail/${item.noticeId}`)}
               >
                 <div className="game-info-news-content">
                   <span className="game-info-news-type">【 新闻 】</span>
-                  <span className="game-info-news-title">
+                  <span className="game-info-news-title" style={{color:item.noticeTitleColor}}>
                     {item.noticeTitle}
                   </span>
                 </div>

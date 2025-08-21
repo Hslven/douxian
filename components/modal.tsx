@@ -64,14 +64,11 @@ any) => {
 
   const modalContent = (
     <div className="modal-container">
-      {/* 遮罩层 */}
       <div
         className="modal-mask"
         onClick={handleMaskClick}
         data-testid="modal-mask"
       />
-
-      {/* 弹窗主体 */}
       <div
         className={`modal-content ${className}`}
         style={{

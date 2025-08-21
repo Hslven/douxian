@@ -1,27 +1,23 @@
 .game-toolbar {
   background: url(../public/images/game_toolbar_bg.png) center center no-repeat;
   background-size: cover;
-  width: 22.81vw; /* 438px ÷ 1920 × 100 = 22.8125vw */
-  height: 21.46vw; /* 412px ÷ 1920 × 100 = 21.4583vw */
+  width: 22.86vw; /* 438px ÷ 1920 × 100 = 22.8125vw */
+  height: 21.51vw; /* 412px ÷ 1920 × 100 = 21.4583vw */
   text-align: center;
   padding: 0.78vw 0.39vw; /* 15px→0.7813vw，7.5px→0.3906vw */
   box-sizing: border-box;
 }
 
 .game-toolbar-down {
-  width: 20.73vw; /* 398px ÷ 1920 × 100 = 20.7292vw */
-  height: 6.88vw; /* 132px ÷ 1920 × 100 = 6.875vw */
+  width: 21.2vw; 
+  height: 6.98vw;
   cursor: pointer;
   margin: 1.27vw auto 0.10vw; /* 24.5px→1.276vw，2px→0.104vw */
-  font-size: 3.44vw; /* 66px ÷ 1920 × 100 = 3.4375vw */
-  font-family: var(--font-source-han-serif);
-  font-weight: 700;
-  line-height: 1.9; /* 非px单位保持不变 */
   position: relative;
 }
 
 .game-toolbar-box {
-  width: 20.73vw; /* 398px→20.7292vw */
+  width: 21.2vw; 
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -30,10 +26,10 @@
 }
 
 .game-toolbar-btn {
-  width: 10.31vw; /* 198px ÷ 1920 × 100 = 10.3125vw */
+  width: 10.36vw; /* 198px ÷ 1920 × 100 = 10.3125vw */
   /* text-align: center; */
   cursor: pointer;
-  height: 5.05vw; /* 97px ÷ 1920 × 100 = 5.0521vw */
+  height: 5.1vw; /* 97px ÷ 1920 × 100 = 5.0521vw */
   /* line-height: 5.05vw;  */
   /* color: #ead1ac; */
   /* border: 3x solid #b08129; 
@@ -114,7 +110,7 @@
 
 .game-active-toolbar {
   width: 574px;
-  height: 539px;
+  height: 540px;
   padding: 20px 10px;
 }
 
@@ -131,8 +127,8 @@
 }
 
 .game-active-toolbar .game-toolbar-btn {
-  width: 254px;
-  height: 119px;
+  width: 263px;
+  height: 128px;
   /* line-height: 119px; */
   /* border: 4px solid #b08129; */
   /* border-radius: 4px; */
