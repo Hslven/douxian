@@ -22,7 +22,7 @@ export default function GameInfo() {
   }, []);
   return (
     <div className="game-info">
-      <div className="game-info-role">
+      <div className="game-info-role" style={{ backgroundImage: `url(${getImgUrl(roleList[activeIndex]?.careerRoleBackgroundImage)})`, backgroundSize: 'cover', }}>
         <img
           className="game-info-role-img"
           src={getImgUrl(roleList[activeIndex]?.careerRoleImage)}
@@ -57,10 +57,10 @@ export default function GameInfo() {
               {roleList[activeIndex]?.remark}
             </div>
           </div>
-          <img
+          {/* <img
             className="game-info-role-info-bg"
             src={getImgUrl(roleList[activeIndex]?.careerRoleBackgroundImage)}
-          />
+          /> */}
         </div>
       </div>
       <div className="game-info-news">
