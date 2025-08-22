@@ -18,6 +18,8 @@ export default function GameToolbar({ className, openRegisterModal, buttonImgs,o
       { id: 5, name: "女娲石", number: 1 },
     ],
   });
+  const [tipsOpen, setTipsOpen] = useState(false);
+
   const [giftModalOpen, setGiftModalOpen] = useState(false);
 
   return (
@@ -30,7 +32,7 @@ export default function GameToolbar({ className, openRegisterModal, buttonImgs,o
         <div
           className="game-toolbar-btn"
           // onClick={openRegisterModal}
-          onClick={openTips}
+          onClick={()=>setTipsOpen(true)}
         >
           {/* 账号注册 */}
           <img className="btn-bg" src={getImgUrl(buttonImgs?.accountRegisterImg)} />
@@ -38,16 +40,16 @@ export default function GameToolbar({ className, openRegisterModal, buttonImgs,o
         <div
           className="game-toolbar-btn"
           // onClick={() => setGiftModalOpen(true)}
-          onClick={openTips}
+          onClick={()=>setTipsOpen(true)}
         >
           {/* 特权礼包 */}
           <img className="btn-bg" src={getImgUrl(buttonImgs?.privilegeGiftImg)} />
         </div>
-        <div className="game-toolbar-btn" onClick={openTips}>
+        <div className="game-toolbar-btn" onClick={()=>setTipsOpen(true)}>
           {/* 新手入门 */}
           <img className="btn-bg" src={getImgUrl(buttonImgs?.newbieGuideImg)} />
         </div>
-        <div className="game-toolbar-btn" onClick={openTips}>
+        <div className="game-toolbar-btn" onClick={()=>setTipsOpen(true)}>
           {/* 客服服务 */}
           <img className="btn-bg" src={getImgUrl(buttonImgs?.customerServiceImg)} />
         </div>
@@ -87,6 +89,14 @@ export default function GameToolbar({ className, openRegisterModal, buttonImgs,o
             <div className="gift-info">关注QQ群更多惊喜礼包</div>
             <Image className="gift-group-code" src={group_code} alt="" />
           </div>
+        </div>
+      </Modal>
+      <Modal
+        visible={tipsOpen}
+        onClose={() => setTipsOpen(false)}
+      >
+        <div style={{textAlign:'center',lineHeight:'32.2vw',fontWeight:700,color:'#34110a',fontSize:'5vw'}}>
+        敬请期待...
         </div>
       </Modal>
     </div>

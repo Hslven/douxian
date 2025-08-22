@@ -16,7 +16,8 @@ export default function GameActive({openRegisterModal,homeDetails, buttonImgs}: 
     <div className="game-active">
       <GameToolbar className="game-active-toolbar" openRegisterModal={openRegisterModal} buttonImgs={buttonImgs} />
       <div className="game-active-box">
-        <div className="game-active-img-warp">
+        <div className="game-active-img-warp"               onClick={() => window.open(`/detail/${activeIndex+4}`)}
+        >
           <img className="game-active-img" src={activeList[activeIndex]} alt='' />
         </div>
         <div className="game-active-tabs">
@@ -27,6 +28,7 @@ export default function GameActive({openRegisterModal,homeDetails, buttonImgs}: 
                 activeIndex === index ? "game-active-tab-active" : ""
               }`}
               key={index}
+              onClick={() => window.open(`/detail/${index+4}`)}
             >
               活动页面{index+ 1}
             </div>

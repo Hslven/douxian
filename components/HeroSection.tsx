@@ -30,7 +30,7 @@ export default function HeroSection({
           buttonImgs={buttonImgs}
           openRegisterModal={openRegisterModal}
         />
-        <div
+        {/* <div
           className="hero-section-slogan"
           onClick={() => setIsModalVisible(true)}
         >
@@ -39,7 +39,7 @@ export default function HeroSection({
             src={getImgUrl(homeDetails.homeSloganUrl)}
             alt=""
           />
-        </div>
+        </div> */}
         {showGlide && <Image className="game-glide" src={glide} alt="" />}
       </div>
 

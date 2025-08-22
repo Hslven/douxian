@@ -7,7 +7,7 @@
   position: relative;
   padding-left: 72px;
   min-width: 1920px;
-  top: 50px;
+  top: 33px;
 }
 
 .game-info-role {
@@ -106,7 +106,7 @@
 .game-info-role-descript {
     font-size: 21px;
     line-height: 33px;
-    letter-spacing: 10px
+    letter-spacing: 5px
 }
 
 .game-info-news {
