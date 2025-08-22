@@ -1,6 +1,11 @@
 .news-box-warp {
   width: 72.03vw;
-  height: 92.86vw
+  height: 92.86vw;
+    transform: scale(0.7);
+  transform-origin: top left; /* 从左上角开始缩放，保持左上角位置不变 */
+  margin-right: -10%; /* 补偿右侧多出的空间，具体值根据缩放比例计算 */
+  margin-bottom: -10%; /* 补偿底部多出的空间 */
+  
 }
 
 .news-box {

@@ -122,10 +122,17 @@
   font-style: normal;
   font-display: swap; /* 优化字体加载体验 */
 }
+@font-face {
+  font-family: 'sy';
+  src: url('../../public/fonts/sy.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap; /* 优化字体加载体验 */
+}
 
 :root {
   --font-source-han-serif: 'SourceHanSerifSC-Regular', serif;
   --font-sc-semi-bold: 'SC-SemiBold', serif;
   --font-sc-heavy: 'SC-Heavy', serif;
-  --font-alibaba-puhuiti: 'AlibabaPuHuiTi-3-55-Regular', serif;
+  --font-sy: 'sy', serif;
 }

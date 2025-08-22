@@ -4,7 +4,7 @@
   color: #fff;
   justify-content: center;
   gap: 1.25vw; /* 24px ÷ 1920 × 100 = 1.25vw */
-  padding: 1.56vw 2.60vw 1.25vw; /* 30px→1.5625vw，50px→2.604vw，24px→1.25vw */
+  padding: .96vw 2.6vw .25vw; /* 30px→1.5625vw，50px→2.604vw，24px→1.25vw */
   width: 100%;
 }
 
@@ -27,6 +27,7 @@
 }
 
 .footer-text {
-  font-size: 1.04vw; /* 20px ÷ 1920 × 100 = 1.0417vw */
+  font-size: 0.64vw; /* 20px ÷ 1920 × 100 = 1.0417vw */
   line-height: 2; /* 非px单位保持不变 */
+  text-align: left;
 }

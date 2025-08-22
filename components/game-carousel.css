@@ -15,7 +15,9 @@
   height: 740px; /* 可视区域高度 */
   overflow: hidden; /* 隐藏框外内容 */
   position: relative;
-  margin-left: 765px;
+  transform:scale(0.9);
+  margin-left: 670px;
+  top: -20px;
 }
 
 .carousel-slide {
@@ -75,6 +77,7 @@
   width: 1100px; /* 可视区域宽度 */
   height: 740px; /* 可视区域高度 */
   position: relative;
+
 }
 
 .carousel-current {
@@ -84,6 +87,7 @@
   height: 688px;
   z-index: 3;
   opacity: 1;
+  
 }
 
 .carousel-prev {

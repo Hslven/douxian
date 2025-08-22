@@ -4,12 +4,19 @@ import Rate from "./rate";
 import more from "../public/images/more.png";
 import Image from "next/image";
 import request, { getImgUrl } from "@/utils/request";
-
 export default function GameInfo() {
   const [roleList, setRoleList] = useState<any[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [newsDetail, setNewsDetail] = useState<any>([]);
-
+  // 创建角色与转职方向的映射关系
+  const careerDirections: Record<string, string> = {
+    "渊龙": "玄翎 / 龙羽",
+    "轩辕": "圣手 / 风神",
+    "万妖": "天妖 / 妖皇",
+    "无极": "剑仙 / 奕剑",
+    "九黎": "暗影 / 弑魂"
+    
+  };
   useEffect(() => {
     request
       .get("/douxian/web/career")
@@ -20,6 +27,11 @@ export default function GameInfo() {
         setNewsDetail(res.list);
       });
   }, []);
+  // 获取当前角色的转职方向
+  const getCurrentCareerDirection = () => {
+    const currentRole = roleList[activeIndex]?.careerName;
+    return careerDirections[currentRole] || "";
+  };
   return (
     <div className="game-info">
       <div className="game-info-role" style={{ backgroundImage: `url(${getImgUrl(roleList[activeIndex]?.careerRoleBackgroundImage)})`, backgroundSize: 'cover', }}>
@@ -50,17 +62,12 @@ export default function GameInfo() {
               <Rate value={roleList[activeIndex]?.careerDifficulty} />
             </div>
             <div className="game-info-role-number">
-              重要程度：{" "}
-              <Rate value={roleList[activeIndex]?.careerImportance} />
+              转职方向：{getCurrentCareerDirection()}
             </div>
             <div className="game-info-role-descript">
               {roleList[activeIndex]?.remark}
             </div>
           </div>
-          {/* <img
-            className="game-info-role-info-bg"
-            src={getImgUrl(roleList[activeIndex]?.careerRoleBackgroundImage)}
-          /> */}
         </div>
       </div>
       <div className="game-info-news">

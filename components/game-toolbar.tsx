@@ -24,7 +24,7 @@ export default function GameToolbar({ className, openRegisterModal, buttonImgs,o
 
   return (
     <div className={`game-toolbar ${className}`}>
-      <div className="game-toolbar-down" onClick={openTips}>
+      <div className="game-toolbar-down"  onClick={()=>setTipsOpen(true)}>
         {/* 游戏下载 */}
         <img className="btn-bg" src={getImgUrl(buttonImgs?.gameDownLoadImg)} />
       </div>
@@ -95,9 +95,9 @@ export default function GameToolbar({ className, openRegisterModal, buttonImgs,o
         visible={tipsOpen}
         onClose={() => setTipsOpen(false)}
       >
-        <div style={{textAlign:'center',lineHeight:'32.2vw',fontWeight:700,color:'#34110a',fontSize:'5vw'}}>
+        {/* <div style={{textAlign:'center',lineHeight:'32.2vw',fontWeight:700,color:'#34110a',fontSize:'5vw'}}>
         敬请期待...
-        </div>
+        </div> */}
       </Modal>
     </div>
   );

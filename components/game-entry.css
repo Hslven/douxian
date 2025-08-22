@@ -17,6 +17,7 @@ z-index: 1;
   line-height: 120px;
   font-size: 62px;
   font-family: var(--font-source-han-serif);
+  transform: scale(0.8);
   font-weight: 700;
   position: relative;
 }

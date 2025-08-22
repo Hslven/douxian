@@ -5,7 +5,14 @@
   height: 21.51vw; /* 412px ÷ 1920 × 100 = 21.4583vw */
   text-align: center;
   padding: 0.78vw 0.39vw; /* 15px→0.7813vw，7.5px→0.3906vw */
+
   box-sizing: border-box;
+}
+.game-detail{
+  transform: scale(0.8);
+  transform-origin: top left; /* 从左上角开始缩放，保持左上角位置不变 */
+  margin-right: -5%; /* 补偿右侧多出的空间，具体值根据缩放比例计算 */
+  margin-bottom: -10%; /* 补偿底部多出的空间 */
 }
 
 .game-toolbar-down {
@@ -14,8 +21,12 @@
   cursor: pointer;
   margin: 1.27vw auto 0.10vw; /* 24.5px→1.276vw，2px→0.104vw */
   position: relative;
+  
 }
+.game-toolbar-down img {
 
+  margin-top: 3px;
+}
 .game-toolbar-box {
   width: 21.2vw; 
   display: flex;
@@ -109,28 +120,25 @@
 }
 
 .game-active-toolbar {
-  width: 574px;
-  height: 540px;
-  padding: 20px 10px;
+  width: 30.00vw;
+  height: 28.12vw;
+  padding: 1.04vw 0.52vw;
 }
 
 .game-active-toolbar .game-toolbar-down {
-  width: 535px;
-  height: 176px;
-  margin: 33px auto 2px;
-  font-size: 89px;
+  width: 27.86vw;
+  height: 9.17vw;
+  margin: 1.72vw auto 0.10vw;
+  font-size: 4.63vw;
 }
 
 .game-active-toolbar .game-toolbar-box {
-  width: 535px;
-  gap: 3px;
+  width: 27.86vw;
+  gap: 0.05vw;
 }
 
 .game-active-toolbar .game-toolbar-btn {
-  width: 263px;
-  height: 128px;
-  /* line-height: 119px; */
-  /* border: 4px solid #b08129; */
-  /* border-radius: 4px; */
-  /* font-size: 41px; */
+  width: 13.69vw;
+  height: 6.67vw;
+  font-size: 2.14vw;
 }

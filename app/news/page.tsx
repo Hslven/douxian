@@ -1,17 +1,15 @@
 "use client";
-
 import GameToolbar from "@/components/game-toolbar";
 import HeroSection from "@/components/HeroSection";
 import NewsBox from "@/components/news-box";
 import Footer from "@/components/ui/footer";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react"; // 添加useRef导入
 import "./index.css";
 import { useRouter } from "next/navigation";
 import Pagination from "@/components/pagination";
 import RegisterModal from "@/components/register-modal";
 import request from "@/utils/request";
 import Modal from "@/components/modal";
-
 export default function NewsPage() {
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const [list, setList] = useState<any[]>([]);
@@ -21,12 +19,12 @@ export default function NewsPage() {
   const [homeDetails, setHomeDetails] = useState<any>({});
   const [buttonImgs, setButtonImgs] = useState<any>({});
   const [tipsOpen, setTipsOpen] = useState(false);
-
+  // 创建ref引用news-container元素
+  const newsContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     request.get("/douxian/web/home").then((res) => setHomeDetails(res));
     request.get("/douxian/web/button").then((res) => setButtonImgs(res));
   }, []);
-
   const feachData = (pageNo: number, pageSize: number = 20) => {
     request
       .get("/douxian/web/notice", { params: { pageNo, pageSize } })
@@ -34,12 +32,20 @@ export default function NewsPage() {
         setTotalPages(Math.ceil(res.total / pageSize));
         setList(res.list);
         setCurrent(pageNo);
+        // 数据加载完成后滚动到news-container
+        setTimeout(() => {
+          if (newsContainerRef.current) {
+            newsContainerRef.current.scrollIntoView({ 
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        }, 100);
       });
   };
   useEffect(() => {
     feachData(current);
   }, []);
-
   return (
     <div>
       <HeroSection
@@ -49,13 +55,16 @@ export default function NewsPage() {
         openRegisterModal={() => setRegisterModalOpen(true)}
         openTips={() => setTipsOpen(true)}
       />
-      <div className="news-container-wrap">
+      {/* 添加ref到news-container-wrap元素 */}
+      <div className="news-container-wrap" ref={newsContainerRef}>
         <div className="news-container">
           <GameToolbar
             openTips={() => setTipsOpen(true)}
             openRegisterModal={() => setRegisterModalOpen(true)}
             buttonImgs={buttonImgs}
           />
+
+{/*  */}
           <NewsBox
             header={<div className="news-header">新闻资讯</div>}
             content={
@@ -104,7 +113,7 @@ export default function NewsPage() {
         onClose={() => setRegisterModalOpen(false)}
       />
       <Modal visible={tipsOpen} onClose={() => setTipsOpen(false)}>
-        <div
+        {/* <div
           style={{
             textAlign: "center",
             lineHeight: "32.2vw",
@@ -114,7 +123,8 @@ export default function NewsPage() {
           }}
         >
           敬请期待...
-        </div>
+        </div> */}
+        {/* <img src={mobile} alt="" srcset="" /> */}
       </Modal>
     </div>
   );

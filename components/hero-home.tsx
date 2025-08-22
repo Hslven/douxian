@@ -1,7 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import VideoThumb from "@/public/images/topbanner.jpg";
-import ModalVideo from "@/components/modal-video";
 import HeroSection from "./HeroSection";
 import Footer from "@/components/ui/footer";
 import "./home.css"; // 引入样式文件
@@ -11,16 +9,22 @@ import GameCarousel from "./game-carousel";
 import GameEntry from "./game-entry";
 import RegisterModal from "./register-modal";
 import Image from "next/image";
-import glide from "../public/images/glide.png";
+import one from "../public/images/1.png";
+import two from "../public/images/2.png";
+import three from "../public/images/3.png";
+import four from "../public/images/4.png";
+import five from "../public/images/5.png";
 import request, { getImgUrl } from "@/utils/request";
 import "./hero-home.css";
 import Modal from "./modal";
-const PageSection = ({ children, backgroundImg }: any) => {
+
+const PageSection = ({ children, backgroundImg, glideImg }: any) => {
   return (
     <div className="page-section">
-      <img  className="page-section-bg" src={getImgUrl(backgroundImg)} />
+      <img className="page-section-bg" src={getImgUrl(backgroundImg)} />
       {children}
-      <Image  className="game-glide" src={glide} alt="" />
+      {/* 每个 Section 用不同的图片 */}
+      <Image className="game-glide" src={glideImg} alt="" />
     </div>
   );
 };
@@ -29,8 +33,8 @@ export default function HeroHome() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const prevScrollPositionRef = useRef(0);
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
-    const [homeDetails, setHomeDetails] = useState<any>({});
-    const [buttonImgs, setButtonImgs] = useState<any>({});
+  const [homeDetails, setHomeDetails] = useState<any>({});
+  const [buttonImgs, setButtonImgs] = useState<any>({});
   const [tipsOpen, setTipsOpen] = useState(false);
 
   useEffect(() => {
@@ -38,48 +42,40 @@ export default function HeroHome() {
     request.get("/douxian/web/button").then((res) => setButtonImgs(res));
   }, []);
 
-  const handleScroll = (e) => {
+  const handleScroll = () => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
-    const scrollPosition = scrollContainer.scrollTop;
-    const scrollHeight = scrollContainer.scrollHeight;
-    const clientHeight = scrollContainer.clientHeight;
 
+    const scrollPosition = scrollContainer.scrollTop;
+    const clientHeight = scrollContainer.clientHeight;
     const pages = scrollContainer.querySelectorAll(".page-section");
-    pages.forEach((page, index) => {
+
+    pages.forEach((page) => {
       const pageTop = page.offsetTop;
       const pageHeight = page.offsetHeight;
-
-      // 检查页面是否在视口中
       if (
         scrollPosition >= pageTop - clientHeight / 2 &&
         scrollPosition < pageTop + pageHeight - clientHeight / 2
       ) {
-        // 添加动画效果
         page.style.opacity = "1";
         page.style.transform = "translateY(0)";
       } else {
-        // 移除动画效果
         page.style.opacity = "0";
         page.style.transform = "translateY(20px)";
       }
     });
 
-    // 保存当前滚动位置
     prevScrollPositionRef.current = scrollPosition;
   };
 
-  // 初始化滚动容器高度
   useEffect(() => {
     if (scrollContainerRef.current) {
       const scrollContainer = scrollContainerRef.current;
       const pages = scrollContainer.querySelectorAll(".page-section");
       const scrollContent = scrollContainer.querySelector(".scroll-content");
-
-      // 设置滚动容器高度
       if (pages.length > 0) {
         const totalPageHeight = pages.length * window.innerHeight;
-        scrollContent.style.height = `${totalPageHeight}px`;
+        (scrollContent as HTMLElement).style.height = `${totalPageHeight}px`;
       }
     }
   }, []);
@@ -91,46 +87,79 @@ export default function HeroHome() {
       onScroll={handleScroll}
     >
       <div className="scroll-content">
-        {/* 第一部分 */}
-        <HeroSection
-          homeDetails={homeDetails}
-          homeBackgroundUrl={homeDetails.homeBackgroundUrls?.[0]}
-          buttonImgs={buttonImgs}
-           openTips={()=>setTipsOpen(true)} 
-          openRegisterModal={() => setRegisterModalOpen(true)}
-          showGlide
-        />
-        {/* 第二部分 */}
-        <PageSection backgroundImg={homeDetails.homeBackgroundUrls?.[1]}>
-          <GameActive  openTips={()=>setTipsOpen(true)}  homeDetails={homeDetails} buttonImgs={buttonImgs} openRegisterModal={() => setRegisterModalOpen(true)} />
+        {/* 第一部分 - 用 1.png */}
+        <PageSection
+          backgroundImg={homeDetails.homeBackgroundUrls?.[0]}
+          glideImg={one}
+        >
+          <HeroSection
+            homeDetails={homeDetails}
+            homeBackgroundUrl={homeDetails.homeBackgroundUrls?.[0]}
+            buttonImgs={buttonImgs}
+            openTips={() => setTipsOpen(true)}
+            openRegisterModal={() => setRegisterModalOpen(true)}
+            showGlide
+          />
         </PageSection>
-        {/* 第三部分 */}
-        <PageSection backgroundImg={homeDetails.homeBackgroundUrls?.[2]}>
+
+        {/* 第二部分 - 用 2.png */}
+        <PageSection
+          backgroundImg={homeDetails.homeBackgroundUrls?.[1]}
+          glideImg={two}
+        >
+          <GameActive
+            openTips={() => setTipsOpen(true)}
+            homeDetails={homeDetails}
+            buttonImgs={buttonImgs}
+            openRegisterModal={() => setRegisterModalOpen(true)}
+          />
+        </PageSection>
+
+        {/* 第三部分 - 用 3.png */}
+        <PageSection
+          backgroundImg={homeDetails.homeBackgroundUrls?.[2]}
+          glideImg={three}
+        >
           <GameInfo />
         </PageSection>
-        {/* 第四部分 */}
-        <PageSection backgroundImg={homeDetails.homeBackgroundUrls?.[3]}>
-          <GameCarousel homeDetails={homeDetails}/>
+
+        {/* 第四部分 - 用 4.png */}
+        <PageSection
+          backgroundImg={homeDetails.homeBackgroundUrls?.[3]}
+          glideImg={four}
+        >
+          <GameCarousel homeDetails={homeDetails} />
         </PageSection>
-        {/* 第五部分 */}
-        <PageSection backgroundImg={homeDetails.homeBackgroundUrls?.[4]}>
-          <GameEntry  openTips={()=>setTipsOpen(true)}    buttonImgs={buttonImgs} openRegisterModal={() => setRegisterModalOpen(true)} />
+
+        {/* 第五部分 - 用 5.png */}
+        <PageSection
+          backgroundImg={homeDetails.homeBackgroundUrls?.[4]}
+          glideImg={five}
+        >
+          <GameEntry
+            openTips={() => setTipsOpen(true)}
+            buttonImgs={buttonImgs}
+            openRegisterModal={() => setRegisterModalOpen(true)}
+          />
         </PageSection>
+
+        {/* 底部 Footer */}
         <div className="page-section footer-section">
           <Footer />
         </div>
       </div>
+
+      {/* 注册弹窗 */}
       <RegisterModal
         visible={registerModalOpen}
         onClose={() => setRegisterModalOpen(false)}
       />
-      <Modal
-        visible={tipsOpen}
-        onClose={() => setTipsOpen(false)}
-      >
-        <div style={{textAlign:'center',lineHeight:'32.2vw',fontWeight:700,color:'#34110a',fontSize:'5vw'}}>
-        敬请期待...
-        </div>
+
+      {/* Tips 弹窗 */}
+      <Modal visible={tipsOpen} onClose={() => setTipsOpen(false)}>
+        {/* <div style={{textAlign:'center',lineHeight:'32.2vw',fontWeight:700,color:'#34110a',fontSize:'5vw'}}>
+          敬请期待...
+        </div> */}
       </Modal>
     </section>
   );

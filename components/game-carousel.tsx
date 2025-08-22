@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useRef } from "react";
 import "./game-carousel.css";
 import Image from "next/image";
@@ -11,7 +12,7 @@ export default function GameCarousel({ homeDetails }: any) {
 
   useEffect(() => {
     if(homeDetails.homeCarouselUrls?.length) {
-    setImages(homeDetails.homeCarouselUrls.map((item:string) => getImgUrl(item)));
+      setImages(homeDetails.homeCarouselUrls.map((item:string) => getImgUrl(item)));
     }
   }, [homeDetails.homeCarouselUrls]);
 
@@ -45,34 +46,25 @@ export default function GameCarousel({ homeDetails }: any) {
 
   return (
     <div className="game-carousel">
-      {/* <Image className="game-carousel-role" src={carousel_role} alt="" /> */}
       <div className="carousel-container">
         <div className="carousel-slide-box">
-          {images.map((slide, index) => {
-            return (
-              <div
-                key={slide}
-                className={`carousel-slide ${getPosition(index)}`}
-              >
-                <img src={slide} className="slide-image" />
-                {/* <Image
-                  style={{ position: "absolute" }}
-                  src={carousel_bg}
-                  alt=""
-                /> */}
-              </div>
-            );
-          })}
+          {images.map((slide, index) => (
+            <div
+              key={slide}
+              className={`carousel-slide ${getPosition(index)}`}
+            >
+              <img src={slide} className="slide-image" alt={`Slide ${index}`} />
+            </div>
+          ))}
         </div>
+        
         {/* 小圆点指示器 */}
         <div className="dots">
           {images.map((_, index) => (
             <button
               key={index}
               className={`dot ${currentIndex === index ? "dot-active" : ""}`}
-              onClick={() => {
-                setCurrentIndex(index);
-              }}
+              onClick={() => setCurrentIndex(index)}
             />
           ))}
         </div>

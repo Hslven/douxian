@@ -9,9 +9,11 @@
   align-items: center;
   justify-content: center;
   z-index: 10001;
+  
 }
 
 .modal-mask {
+  
   position: absolute;
   top: 0;
   left: 0;
@@ -21,16 +23,17 @@
   animation: fadeIn 0.3s ease;
 }
 
+
 .modal-content {
-  background: url(../public/images/modal_bg.png) center center no-repeat;
+  background: url(../public/images/modal.jpg) center center no-repeat;
   background-size: cover;
   position: relative;
   animation: scaleIn 0.3s ease;
   display: flex;
   flex-direction: column;
-  width: 61.09vw; /* 1173px ÷ 1920 × 100 = 61.09375vw */
-  height: 36.25vw; /* 696px ÷ 1920 × 100 = 36.25vw */
-  padding: 2vw 6.25vw; /* 50px→2.604vw，120px→6.25vw */
+  width: 48.87vw;  /* 61.09vw × 0.8 = 48.872vw */
+  height: 29vw;     /* 36.25vw × 0.8 = 29vw */
+  padding: 1.6vw 5vw;  /* 上下: 2vw×0.8=1.6vw, 左右: 6.25vw×0.8=5vw */
 }
 
 .modal-header {
@@ -52,15 +55,16 @@
   height: 0.68vw;
 }
 
+
 .modal-close-button {
   background: url(../public/images/modal_close.png) center center no-repeat;
   background-size: cover;
   position: absolute;
-  right: 0.52vw; /* 10px→0.5208vw */
-  top: 1.56vw; /* 30px ÷ 1920 × 100 = 1.5625vw */
+  right: 1.12vw;    /* 1.4vw × 0.8 = 1.12vw */
+  top: -0.14vw;     /* -0.18vw × 0.8 = -0.144vw ≈ -0.14vw */
   cursor: pointer;
-  width: 1.93vw; /* 37px ÷ 1920 × 100 = 1.927vw */
-  height: 1.93vw; /* 37px→1.927vw */
+  width: 3.04vw;    /* 3.8vw × 0.8 = 3.04vw */
+  height: 3.04vw;   /* 3.8vw × 0.8 = 3.04vw */
 }
 
 .modal-close-button:hover {
@@ -70,6 +74,12 @@
 
 .modal-body {
   /* overflow-y: auto; */
+  font-family: var(--font-sc-heavy);
+
+
+/* trea
+
+*/
   flex: 1;
 }
 

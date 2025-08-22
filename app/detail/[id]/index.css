@@ -15,6 +15,7 @@
   line-height: 4.43vw; /* 85px ÷ 1920 × 100 = 4.4271vw */
   color: #ebd2ae;
   display: flex;
+  font-family:var(--font-sc-heavy);
   align-items: center;
 }
 
@@ -28,6 +29,8 @@
   font-size: 2.97vw; /* 57px ÷ 1920 × 100 = 2.9688vw */
   color: #db1f02;
   min-height: 6.46vw;
+  font-weight: 100;
+  font-family:var(--font-sy);
 }
 
 .detail-time {
@@ -38,9 +41,9 @@
 .detail-content {
   font-size: 1.25vw; /* 24px→1.25vw */
   height: 72.81vw; /* 900px ÷ 1920 × 100 = 46.875vw */
-  padding: 0 0.52vw; /* 10px→0.5208vw */
+  padding: 0 1.2vw; /* 10px→0.5208vw */
   margin: 0 1.04vw; /* 20px→1.0417vw */
-  line-height: 3; /* 非px单位保持不变 */
+  line-height: 2.5; /* 非px单位保持不变 */
   color: #d3bc9b;
   overflow-y: auto;
 }
@@ -81,4 +84,5 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    
 }

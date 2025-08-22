@@ -28,7 +28,7 @@ export default function GameActive({openRegisterModal,homeDetails, buttonImgs}: 
                 activeIndex === index ? "game-active-tab-active" : ""
               }`}
               key={index}
-              onClick={() => window.open(`/detail/${index+4}`)}
+
             >
               活动页面{index+ 1}
             </div>
