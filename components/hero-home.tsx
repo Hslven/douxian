@@ -88,19 +88,16 @@ export default function HeroHome() {
     >
       <div className="scroll-content">
         {/* 第一部分 - 用 1.png */}
-        <PageSection
-          backgroundImg={homeDetails.homeBackgroundUrls?.[0]}
-          glideImg={one}
-        >
+    
           <HeroSection
             homeDetails={homeDetails}
             homeBackgroundUrl={homeDetails.homeBackgroundUrls?.[0]}
             buttonImgs={buttonImgs}
             openTips={() => setTipsOpen(true)}
-            openRegisterModal={() => setRegisterModalOpen(true)}
+          openRegisterModal={() => setRegisterModalOpen(true)}
+          glideImg={one}
             showGlide
           />
-        </PageSection>
 
         {/* 第二部分 - 用 2.png */}
         <PageSection

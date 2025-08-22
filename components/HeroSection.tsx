@@ -14,6 +14,7 @@ export default function HeroSection({
   buttonImgs,
   homeBackgroundUrl,
   openTips,
+  glideImg
 }: any) {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const pathname = usePathname();
@@ -50,7 +51,7 @@ export default function HeroSection({
             />
           </div>
         )}
-        {showGlide && <Image className="game-glide" src={glide} alt="" />}
+        {showGlide && <Image className="game-glide" src={glideImg} alt="" />}
       </div>
       <VideoModal
         url={videoUrl}
