@@ -17,14 +17,14 @@ const noticeTypeMap = {
   GUIDE:'攻略'
 }
 export default function NewsPage() {
-  const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const [list, setList] = useState<any[]>([]);
   const [current, setCurrent] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const router = useRouter();
   const [homeDetails, setHomeDetails] = useState<any>({});
   const [buttonImgs, setButtonImgs] = useState<any>({});
-  const [tipsOpen, setTipsOpen] = useState(false);
+  const [activeNewsType, setActiveNewsType] = useState("LATEST");
+
   // 创建ref引用news-container元素
   const newsContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -83,7 +83,9 @@ export default function NewsPage() {
 
           {/*  */}
           <NewsBox
-            header={<div className="news-header">新闻资讯</div>}
+            header={<div className="news-header">
+              {Object.keys(noticeTypeMap).map((type) => <div style={{color: activeNewsType === type ? 'red' : ''}} key={type} onClick={() => setActiveNewsType(type)}>{noticeTypeMap[type]}</div>)}
+            </div>}
             content={
               <div className="new-list">
                 {list.map((item) => (

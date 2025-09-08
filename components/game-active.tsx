@@ -7,14 +7,6 @@ import more from "../public/images/more.png";
 import Image from "next/image";
 import { useVideoModal } from "./video-modal";
 
-const newsType = [
-  { key: "new", name: "最新" },
-  { key: "news", name: "新闻" },
-  { key: "notice", name: "公告" },
-  { key: "nin", name: "攻略" },
-];
-
-
 const noticeTypeMap = {
   LATEST: '最新',
   NEWS:'新闻',
@@ -33,7 +25,7 @@ export default function GameActive({
 }: any) {
   const [activeList, setActiveList] = useState<any[]>(["", "", "", ""]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [activeNewsType, setActiveNewsType] = useState("new");
+  const [activeNewsType, setActiveNewsType] = useState("LATEST");
   const [newsDetail, setNewsDetail] = useState<any>([]);
   const intervalRef = useRef<any>(null);
 const {openVideo} = useVideoModal()
@@ -136,7 +128,7 @@ const {openVideo} = useVideoModal()
               window.open("/news");
             }}
           >
-            <Image src={more} alt="" />
+            <Image className="game-info-news-more-img" src={more} alt="" />
           </div>
         </div>
         <div

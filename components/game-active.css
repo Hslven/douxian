@@ -129,15 +129,13 @@
 }
 
 .game-info-news-more {
-  border-radius: 50%;
-  transform: scale(0.8);
-  background: #39311e;
-  width: 53px;
-  height: 53px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+  width: 44px;
+  height: 44px;
+}
+
+.game-info-news-more-img {
+  width: 100%;
+  height: 100%;
 }
 
 .game-info-news-top-title {

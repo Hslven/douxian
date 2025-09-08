@@ -93,48 +93,6 @@ export default function GameInfo() {
           </div>
           </div>
         </div>
-      {/* </div> */}
-      {/* <div className="game-info-news">
-        <div className="game-info-news-header">
-          <div className="game-info-news-header-title">新闻公告</div>
-          <div
-            className="game-info-news-more"
-            onClick={() => {
-              window.open("/news");
-            }}
-          >
-            <Image src={more} alt="" />
-          </div>
-        </div>
-        <div
-          className="game-info-news-top-title"
-          style={{color:newsDetail[0]?.noticeTitleColor}}
-          onClick={() => window.open(`/detail/${newsDetail[0]?.noticeId}`)}
-        >
-          {newsDetail[0]?.noticeTitle}
-        </div>
-        <div className="game-info-news-list">
-          {newsDetail.map((item, index) => {
-            if (!index) return null;
-            return (
-              <div
-                className="game-info-news-item"
-                style={{border:item.noticeBorderStyle,backgroundColor:item.noticeBackgroundColor}}
-                key={item.noticeId}
-                onClick={() => window.open(`/detail/${item.noticeId}`)}
-              >
-                <div className="game-info-news-content">
-                  <span className="game-info-news-type">【 新闻 】</span>
-                  <span className="game-info-news-title" style={{color:item.noticeTitleColor}}>
-                    {item.noticeTitle}
-                  </span>
-                </div>
-                <div className="game-info-news-time">{item.noticeShowTime}</div>
-              </div>
-            );
-          })}
-        </div>
-      </div> */}
     </div>
   );
 }

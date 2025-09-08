@@ -10,6 +10,7 @@
 }
 
 .news-header {
+  display: flex;
   text-align: left;
   font-size: 2.81vw; /* 52px ÷ 1920 × 100 = 2.7083vw */
   line-height: 1; /* 非px单位保持不变 */
