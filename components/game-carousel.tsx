@@ -1,8 +1,5 @@
-
 import React, { useState, useEffect, useRef } from "react";
 import "./game-carousel.css";
-import Image from "next/image";
-import carousel_role from "../public/images/carousel_role.png";
 import { getImgUrl } from "@/utils/request";
 
 export default function GameCarousel({ homeDetails }: any) {
@@ -11,22 +8,28 @@ export default function GameCarousel({ homeDetails }: any) {
   const intervalRef = useRef<any>(null);
 
   useEffect(() => {
-    if(homeDetails.homeCarouselUrls?.length) {
-      setImages(homeDetails.homeCarouselUrls.map((item:string) => getImgUrl(item)));
+    if (homeDetails.homeCarouselUrls?.length) {
+      setImages(
+        homeDetails.homeCarouselUrls.map((item: string) => getImgUrl(item))
+      );
     }
   }, [homeDetails.homeCarouselUrls]);
 
   // 自动轮播
   useEffect(() => {
-    intervalRef.current = setInterval(() => {
-      nextSlide();
-    }, 5000);
+    if (images.length && !intervalRef.current) {
+      intervalRef.current = setInterval(() => {
+        nextSlide();
+      }, 5000);
+    }
     return () => clearInterval(intervalRef.current);
-  }, []);
+  }, [images.length]);
 
   // 下一张
   const nextSlide = () => {
-    setCurrentIndex(currentIndex + 1 === images.length ? 0 : currentIndex + 1);
+    setCurrentIndex((prevIndex) =>
+      prevIndex + 1 === images.length ? 0 : prevIndex + 1
+    );
   };
 
   const getPosition = (index: number) => {
@@ -49,15 +52,11 @@ export default function GameCarousel({ homeDetails }: any) {
       <div className="carousel-container">
         <div className="carousel-slide-box">
           {images.map((slide, index) => (
-            <div
-              key={slide}
-              className={`carousel-slide ${getPosition(index)}`}
-            >
+            <div key={slide} className={`carousel-slide ${getPosition(index)}`}>
               <img src={slide} className="slide-image" alt={`Slide ${index}`} />
             </div>
           ))}
         </div>
-        
         {/* 小圆点指示器 */}
         <div className="dots">
           {images.map((_, index) => (
@@ -67,6 +66,36 @@ export default function GameCarousel({ homeDetails }: any) {
               onClick={() => setCurrentIndex(index)}
             />
           ))}
+        </div>
+      </div>
+      <div className="game-carousel-msg">
+        <div className="game-carousel-msg-title">洪荒旦古 一念神魔</div>
+
+        <div className="game-carousel-msg-content">
+          洪荒中有无数的远古生灵，
+          <br />
+          他们努力的提高自己的力量，他们
+          <br />
+          修炼的终极目标就是
+          <br />
+          成为“圣”。远古生灵中最厉害
+          <br />
+          的一个叫做鸿钧，鸿钧凭借神器天书“封神榜“
+          <br />
+          成为了最早的“圣”级高手之后收了六个弟子:
+          <br />
+          太上老君、元始天尊、通天教主、女娲娘娘、
+          <br />
+          接引道人、准提道人，并指引
+          <br />
+          这六个弟子也成为了“圣”级的高手，学成之后
+          <br />
+          接引道人和准提道人回到了西方世界，鸿钧将天道神器
+          <br />
+          封神榜”交给了元始天尊保管，
+          <br />
+          自己不知所终... <br />
+          太上老君清净无为，四处游历。
         </div>
       </div>
     </div>

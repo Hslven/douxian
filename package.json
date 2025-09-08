@@ -15,6 +15,7 @@
     "@types/react-dom": "19.0.3",
     "aos": "3.0.0-beta.6",
     "axios": "^1.11.0",
+    "classnames": "^2.5.1",
     "next": "15.1.6",
     "react": "19.0.0",
     "react-dom": "19.0.0",
@@ -25,6 +26,7 @@
     "@tailwindcss/postcss": "^4.0.3",
     "@types/aos": "^3.0.7",
     "postcss": "^8.5.1",
+    "postcss-px-to-viewport": "^1.1.1",
     "tailwindcss": "^4.0.3"
   }
 }

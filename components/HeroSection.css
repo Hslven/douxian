@@ -6,7 +6,7 @@
 
 .hero-section-slogan {
   position: absolute;
-  bottom: 3.64vw;
+  bottom: 250px;
   left: 50%;
   margin-left: -36.3vw;
   width: 72.6vw;
@@ -27,4 +27,55 @@
   width: 100vw;
   height: 100vh;
   object-fit: cover;
+}
+
+
+.hero-section-btn-group1 {
+  display: flex;
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  margin-left: -264px;
+  /* width: 72.6vw; */
+  /* height: 18vw; */
+  height: 164px;
+  align-items: center;
+  gap: 1.04vw; /* 20px ÷ 1920 × 100 = 1.0417vw */
+}
+
+.hero-section-btn1 {
+  z-index: 9999;
+  width: 254px; /* 254px ÷ 1920 × 100 = 13.2292vw */
+  height: 82px; /* 82px ÷ 1920 × 100 = 4.2708vw */
+  cursor: pointer;
+  position: relative;
+}
+
+
+.hero-section-btn-group2 {
+  display: flex;
+  position: absolute;
+  bottom: 70px;
+  left: 50%;
+  margin-left: -264px;
+  /* width: 72.6vw; */
+  /* height: 18vw; */
+  gap: 1.04vw; /* 20px ÷ 1920 × 100 = 1.0417vw */
+}
+
+.hero-section-down-btn {
+
+  z-index: 9999;
+  width: 254px; /* 254px ÷ 1920 × 100 = 13.2292vw */
+  height: 164px; /* 82px ÷ 1920 × 100 = 4.2708vw */
+  cursor: pointer;
+  position: relative;
+}
+
+.hero-section-btn2 {
+  z-index: 9999;
+  width: 254px; /* 254px ÷ 1920 × 100 = 13.2292vw */
+  height: 82px; /* 82px ÷ 1920 × 100 = 4.2708vw */
+  cursor: pointer;
+  position: relative;
 }

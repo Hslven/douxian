@@ -1,15 +1,21 @@
 "use client";
-import GameToolbar from "@/components/game-toolbar";
-import HeroSection from "@/components/HeroSection";
 import NewsBox from "@/components/news-box";
 import Footer from "@/components/ui/footer";
 import { useEffect, useState, useRef } from "react"; // 添加useRef导入
 import "./index.css";
 import { useRouter } from "next/navigation";
 import Pagination from "@/components/pagination";
-import RegisterModal from "@/components/register-modal";
-import request from "@/utils/request";
+import request, { getImgUrl } from "@/utils/request";
 import Modal from "@/components/modal";
+import Header from "@/components/ui/header";
+
+
+const noticeTypeMap = {
+  LATEST: '最新',
+  NEWS:'新闻',
+  NOTICE:'公告',
+  GUIDE:'攻略'
+}
 export default function NewsPage() {
   const [registerModalOpen, setRegisterModalOpen] = useState(false);
   const [list, setList] = useState<any[]>([]);
@@ -35,9 +41,9 @@ export default function NewsPage() {
         // 数据加载完成后滚动到news-container
         setTimeout(() => {
           if (newsContainerRef.current) {
-            newsContainerRef.current.scrollIntoView({ 
-              behavior: 'smooth',
-              block: 'start'
+            newsContainerRef.current.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
             });
           }
         }, 100);
@@ -46,25 +52,36 @@ export default function NewsPage() {
   useEffect(() => {
     feachData(current);
   }, []);
+
+  const scrollToPage = (index) => {
+ window.open(`/?section=${index}`);
+  }
   return (
     <div>
-      <HeroSection
-        homeBackgroundUrl={(homeDetails.homeBackgroundUrls || []).at(-1)}
-        homeDetails={homeDetails}
+      <Header
         buttonImgs={buttonImgs}
-        openRegisterModal={() => setRegisterModalOpen(true)}
-        openTips={() => setTipsOpen(true)}
+        showLogo
+        currentPage={1}
+        scrollToPage={scrollToPage}
       />
+      <div className="new-bg">
+        <img
+          className="new-bg-img"
+          style={{ width: "100vw" }}
+          src={getImgUrl((homeDetails.homeBackgroundUrls || []).at(-1))}
+          alt=""
+        />
+      </div>
       {/* 添加ref到news-container-wrap元素 */}
       <div className="news-container-wrap" ref={newsContainerRef}>
         <div className="news-container">
-          <GameToolbar
+          {/* <GameToolbar
             openTips={() => setTipsOpen(true)}
             openRegisterModal={() => setRegisterModalOpen(true)}
             buttonImgs={buttonImgs}
-          />
+          /> */}
 
-{/*  */}
+          {/*  */}
           <NewsBox
             header={<div className="news-header">新闻资讯</div>}
             content={
@@ -83,7 +100,7 @@ export default function NewsPage() {
                   >
                     <div className="new-item-content">
                       <span className="new-item-type">
-                        【 {item.type || "资讯"} 】
+                        【 {noticeTypeMap[item.noticeType]} 】
                       </span>
                       <span
                         className="new-item-title"
@@ -108,11 +125,11 @@ export default function NewsPage() {
         </div>
       </div>
       <Footer />
-      <RegisterModal
+      {/* <RegisterModal
         visible={registerModalOpen}
         onClose={() => setRegisterModalOpen(false)}
-      />
-      <Modal visible={tipsOpen} onClose={() => setTipsOpen(false)}>
+      /> */}
+      {/* <Modal visible={tipsOpen} onClose={() => setTipsOpen(false)}> */}
         {/* <div
           style={{
             textAlign: "center",
@@ -125,7 +142,7 @@ export default function NewsPage() {
           敬请期待...
         </div> */}
         {/* <img src={mobile} alt="" srcset="" /> */}
-      </Modal>
+      {/* </Modal> */}
     </div>
   );
 }

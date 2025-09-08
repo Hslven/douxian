@@ -35,6 +35,29 @@
   height: 100%;
 }
 
+/* 小圆点样式 */
+.game-active-dots {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.game-active-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #563817;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.game-active-dot-active {
+  background-color: #ff9e33;
+}
+
+
 .game-active-tabs {
   width: 43.75vw;
   height: 3.13vw;
@@ -55,4 +78,110 @@
 }
 .game-active-tab-active {
   background: #823c16;
+}
+
+
+.game-info-news {
+  background: #1a1a1a;
+  padding: 25px;
+  width: 550px;
+  height: 580px;
+  font-family: var(--font-source-han-serif);
+  overflow: hidden;
+}
+
+.game-info-news-header {
+  height: 75px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #5b4720;
+}
+
+.game-info-news-header-title {
+  font-size: 32px;
+  color: #ecd2ad;
+  font-family: var(--font-sc-heavy);
+  display: flex;
+}
+
+
+/* .game-info-news-tabs {
+  width: 43.75vw;
+  height: 3.13vw;
+  line-height: 3.13vw;
+  border-top: 1px solid #c69253;
+  display: flex;
+  font-size: 1.61vw;
+  font-family: var(--font-source-han-serif);
+  font-weight: 700;
+  margin: 0 auto;
+} */
+
+.game-info-news-tab {
+  flex: 1;
+  /* background: #a77634; */
+  color: #c3c2c1;
+  cursor: pointer;
+}
+.game-info-news-tab-active {
+  color: #efd09e;
+}
+
+.game-info-news-more {
+  border-radius: 50%;
+  transform: scale(0.8);
+  background: #39311e;
+  width: 53px;
+  height: 53px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.game-info-news-top-title {
+  font-family: var(--font-sc-semi-bold);
+  font-size: 21px;
+  line-height: 26px;
+  color: #ff2400;
+  margin: 25px 50px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 控制显示的行数 */
+  overflow: hidden; /* 超出部分隐藏 */
+  cursor: pointer;
+}
+
+.game-info-news-item {
+  font-family: var(--font-alibaba-puhuiti);
+  display: flex;
+  justify-content: space-between;
+  align-items: top;
+  padding: 10px 0;
+  cursor: pointer;
+  color: #dbc1a0;
+  gap: 10px;
+  font-size: 16.61px;
+  line-height: 21.11px;
+}
+
+.game-info-news-type {
+  color: #936c1c;
+  vertical-align: top;
+  margin-right: 5px;
+}
+
+.game-info-news-content {
+  /* flex:1; */
+  display: flex;
+}
+
+.game-info-news-title {
+  width: 250px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 控制显示的行数 */
+  overflow: hidden; /* 超出部分隐藏 */
+  text-align: left;
 }

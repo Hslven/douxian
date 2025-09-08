@@ -1,5 +1,6 @@
 "use client";
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
+import { createRoot } from 'react-dom/client';
 import './video-modal.css'; // 可单独创建样式文件
 
 const VideoModal = ({ url, visible, onClose }) => {
@@ -66,3 +67,58 @@ const VideoModal = ({ url, visible, onClose }) => {
 };
 
 export default VideoModal;
+
+export const useVideoModal = () => {
+  // 创建一个唯一的容器元素引用
+  const containerRef = useRef(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const [videoUrl, setVideoUrl] = useState('');
+  const [visible, setVisible] = useState(false);
+
+  // 创建并挂载容器到body
+  useEffect(() => {
+    // 创建容器元素
+    containerRef.current = document.createElement('div');
+    containerRef.current.id = 'video-modal-container';
+    document.body.appendChild(containerRef.current);
+    setIsMounted(true);
+
+    // 清理函数：移除容器
+    return () => {
+      if (containerRef.current && containerRef.current.parentNode) {
+        document.body.removeChild(containerRef.current);
+      }
+    };
+  }, []);
+
+  // 渲染视频弹窗到容器
+  useEffect(() => {
+    if (!isMounted || !containerRef.current) return;
+
+    const root = createRoot(containerRef.current);
+    
+    root.render(
+      <VideoModal
+        url={videoUrl}
+        visible={visible}
+        onClose={() => setVisible(false)}
+      />
+    );
+
+    // 清理函数：卸载组件
+    return () => {
+      root.unmount();
+    };
+  }, [isMounted, videoUrl, visible]);
+
+  // 打开视频弹窗的方法
+  const openVideo = (url) => {
+    if (url) {
+      setVideoUrl(url);
+      setVisible(true);
+    }
+  };
+
+  return { openVideo };
+};
+    
