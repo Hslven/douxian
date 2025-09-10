@@ -52,13 +52,13 @@
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 10px;
+  gap: 12px;
   z-index: 10;
 }
 
 .dot {
-  width: 14px;
-  height: 14px;
+  width: 12.4px;
+  height: 12.4px;
   border-radius: 50%;
   background-color: #563817;
   cursor: pointer;
@@ -125,6 +125,22 @@
 }
 
 .game-carousel-msg {
-  width: 300px;
+  width: 621px;
   text-align: center;
+}
+.game-carousel-msg-title {
+  font-size: 52px;
+  color: #e9ba78;
+}
+
+.game-carousel-msg-line {
+  width: 391px;
+  height: 15px;
+  background: url(../public/images/game_carousel_msg_line.png) center center no-repeat;
+  background-size: cover;
+  display: inline-block;
+}
+
+.game-carousel-msg-content {
+  color:#ecd2ad
 }

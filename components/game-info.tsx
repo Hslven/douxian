@@ -5,6 +5,10 @@ import more from "../public/images/more.png";
 import Image from "next/image";
 import request, { getImgUrl } from "@/utils/request";
 import { useVideoModal } from "./video-modal";
+import video_play from "../public/images/video_play.png";
+import game_carousel_next from "../public/images/game_carousel_next.png";
+import game_carousel_prev from "../public/images/game_carousel_prev.png";
+
 export default function GameInfo() {
   const [roleList, setRoleList] = useState<any[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
@@ -45,38 +49,65 @@ export default function GameInfo() {
           backgroundSize: "cover",
         }}
       > */}
-        <img
-          className="game-info-role-img"
-          src={getImgUrl(roleList[activeIndex]?.careerRoleImage)}
-        />
-        <div className="game-info-role-info">
-          <div className="game-info-role-card">
-            <div className="game-info-role-name">
-              {roleList[activeIndex]?.careerName}
+      <img
+        className="game-info-role-img"
+        src={getImgUrl(roleList[activeIndex]?.careerRoleImage)}
+      />
+      <div className="game-info-role-info">
+        <div className="game-info-role-card">
+          <div className="game-info-role-card-header">
+            <img
+              className="game-info-role-name"
+              src={getImgUrl(roleList[activeIndex]?.careerRoleBackgroundImage)}
+            />
+            <img
+              className="game-info-role-badge"
+              src={getImgUrl(roleList[activeIndex]?.selectedBadges)}
+            />
+          </div>
+          <div className="game-info-role-number">
+            操作难度： <Rate value={roleList[activeIndex]?.careerDifficulty} />
+          </div>
+          <div className="game-info-role-number">
+            转职方向：{getCurrentCareerDirection()}
+          </div>
+          <div className="game-info-role-descript">
+            {roleList[activeIndex]?.remark}
+          </div>
+          <div className="game-info-video-group">
+            <div
+              className="game-info-video"
+              onClick={() => openVideo("http://vjs.zencdn.net/v/oceans.mp4")}
+            >
+              <img
+                className="game-info-video-img"
+                src={getImgUrl(
+                  roleList[activeIndex]?.careerMaterial?.[0]?.imageUrl
+                )}
+              />
+              <Image className="game-info-video-play" src={video_play} alt="" />
             </div>
-            <div className="game-info-role-number">
-              操作难度：{" "}
-              <Rate value={roleList[activeIndex]?.careerDifficulty} />
+            <div
+              className="game-info-video"
+              onClick={() => openVideo("http://vjs.zencdn.net/v/oceans.mp4")}
+            >
+              <img
+                className="game-info-video-img"
+                src={getImgUrl(
+                  roleList[activeIndex]?.careerMaterial?.[1]?.imageUrl
+                )}
+              />
+              <Image className="game-info-video-play" src={video_play} alt="" />
             </div>
-            <div className="game-info-role-number">
-              转职方向：{getCurrentCareerDirection()}
-            </div>
-            <div className="game-info-role-descript">
-              {roleList[activeIndex]?.remark}
-            </div>
-            <div className="game-info-video-group">
-              <div
-                className="game-info-video"
-                onClick={() => openVideo("http://vjs.zencdn.net/v/oceans.mp4")}
-              ></div>
-              <div
-                className="game-info-video"
-                onClick={() => openVideo("http://vjs.zencdn.net/v/oceans.mp4")}
-              ></div>
-            </div>
+          </div>
+
+        </div>
 
           <div className="game-info-tabs">
-            <div  onClick={() => setActiveIndex(activeIndex ? activeIndex - 1 : 0)}>上一个</div>
+            <div
+              className="game-info-tab-prev"
+              onClick={() => setActiveIndex(activeIndex ? activeIndex - 1 : 0)}
+            ></div>
             {roleList.map((item, index) => (
               <div
                 className={`game-info-tab ${
@@ -85,14 +116,30 @@ export default function GameInfo() {
                 key={item.careerId}
                 onClick={() => setActiveIndex(index)}
               >
+                <img
+                className="game-info-tab-img"
+               
+                  src={getImgUrl(
+                    index === activeIndex
+                      ? item?.selectedBadges
+                      : item?.unselectedBadges
+                  )}
+                />
                 {item.careerName}
               </div>
             ))}
-            <div onClick={() => setActiveIndex(activeIndex + 1 ===  roleList.length? activeIndex : activeIndex + 1)}>下一个</div>
-
+            <div
+              className="game-info-tab-next"
+              onClick={() =>
+                setActiveIndex(
+                  activeIndex + 1 === roleList.length
+                    ? activeIndex
+                    : activeIndex + 1
+                )
+              }
+            ></div>
           </div>
-          </div>
-        </div>
+      </div>
     </div>
   );
 }

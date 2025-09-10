@@ -1,14 +1,14 @@
 .game-info {
   display: flex;
-  gap: 16px;
-  align-items: center;
+  align-items: end;
   width: 100vw;
   height: 100vh;
   position: relative;
-  padding-right: 72px;
+  padding-right: 100px;
+  padding-bottom: 115px;
   min-width: 1920px;
-  top: 20px;
   justify-content: end;
+  color: #ecd2ad;
 }
 
 /* .game-info-role {
@@ -37,8 +37,6 @@
 
 .game-info-role-info {
   position: relative;
-  width: 563px;
-  padding: 78px 23px 50px;
 }
 
 .game-info-role-info-bg {
@@ -50,54 +48,31 @@
   object-fit: cover;
 }
 
-.game-info-tabs {
-  display: flex;
-  gap: 10px;
-  position: relative;
-  z-index: 1;
-}
-
 .game-info-role-card {
+  width: 600px;
   position: relative;
+  padding-left: 46px;
   z-index: 1;
   font-family: var(--font-sc-heavy);
   font-size: 21px;
 }
 
-.game-info-tab {
-  width: 94px;
-  height: 49px;
-  font-family: var(--font-sc-heavy);
-  /* background: #b7882a; */
-  cursor: pointer;
-  background: linear-gradient(to bottom, #966734 0%, #b08129 90%);
-  border: 4px solid #b8882b;
-  border-radius: 4px;
-  color: #ecd2ad;
-  font-size: 30px;
-  line-height: 41px;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.game-info-tab-inner {
-  background: #976734;
-}
-
-.game-info-tab-active {
-  /* background: #b85b2b; */
-  border: 4px solid #b85d2b;
-  background: linear-gradient(to bottom, #83351c 0%, #b85316 90%);
+.game-info-role-card-header {
+  display: flex;
+  justify-content: space-between;
 }
 
 .game-info-role-name {
-  font-size: 73.52px;
+  
+  width: 277px;
+  height: 153px;
 }
 
-.game-info-tab-active .game-info-tab-inner {
-  background: #85341c;
+.game-info-role-badge {
+  width: 173px;
+  height: 184px;
 }
+
 
 .game-info-role-number {
     display: flex;
@@ -106,9 +81,9 @@
 }
 
 .game-info-role-descript {
+  width: 584px;
+  height: 107px;
     font-size: 21px;
-    line-height: 33px;
-    letter-spacing: 1px
 }
 
 .game-info-video-group {
@@ -117,8 +92,68 @@
 }
 
 .game-info-video {
-  width: 170px;
-  height: 100px;
-  background: #85341c;
+  width: 296px;
+  height: 177px;
   cursor: pointer;
+  position: relative;
+  border: 4px solid #000;
+}
+
+.game-info-video-img {
+  width: 100%;
+  height: 100%;
+}
+
+.game-info-video-play {
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -32px;
+  margin-left: -32px;
+}
+
+.game-info-tabs {
+  display: flex;
+  align-items: center;
+  margin-top: 53px;
+  height: 141px;
+  gap: 60px;
+}
+
+
+.game-info-tab {
+  width: 76px;
+  height: 129px;
+  /* background: #b7882a; */
+  cursor: pointer;
+  color: #6e6964;
+}
+.game-info-tab-img {
+  width: 76px;
+  height: 95px;
+  margin-bottom: 10px;
+}
+
+.game-info-tab-active {
+  color: #ecd2ad;
+}
+
+.game-info-tab-prev {
+  width: 76px;
+  height: 52px;
+  cursor: pointer;
+  background: url(../public/images/game_carousel_prev.png) center center no-repeat;
+  background-size: cover;
+  margin-right: -30px;
+}
+
+.game-info-tab-next {
+  width: 76px;
+  height: 52px;
+  cursor: pointer;
+  margin-left: -30px;
+  background: url(../public/images/game_carousel_next.png) center center no-repeat;
+  background-size: cover;
 }

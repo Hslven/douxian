@@ -1,72 +1,110 @@
-.game-header {
-  /* display: flex; */
-  /* justify-content: space-between;
-  align-items: center; */
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 1.15vw 1.67vw; /* 22px→1.1458vw，32px→1.6667vw */
-}
-
 .game-header-logo {
   z-index: 9999;
-    position: relative;
-  width: 9.38vw; /* 180px ÷ 1920 × 100 = 9.375vw */
-  height: 7.08vw; /* 136px ÷ 1920 × 100 = 7.0833vw */
-  margin-left: 3.13vw; /* 60px ÷ 1920 × 100 = 3.125vw */
-  cursor: pointer;
-}
-
-
-.game-header-btn-name {
-  font-size: 2.08vw; /* 40px ÷ 1920 × 100 = 2.0833vw */
-  font-family: var(--font-source-han-serif);
-  font-weight: 700;
+  width: 167px;
+  height: 127px;
   position: absolute;
-  margin: 0 auto;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  line-height: 4.27vw; /* 与height保持一致（82px→4.2708vw） */
+
+  cursor: pointer;
+
+  top: 50px;
+  left: 55px;
 }
 
 .nav-bar {
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 999;
-    display: flex;
-    gap: 10px;
-    width: 100vw;
-   background: url('../../public/images/导航栏背后框框阴影（必加）.png') center center no-repeat;
-    justify-content: end;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 999;
+  display: flex;
+  gap: 125px;
+  width: 100vw;
+  height: 94px;
+  padding: 0 92px;
+  background-image: url("../../public/images/nav_bg.png");
+  /* background-repeat: no-repeat; */
+  background-position: center;
+  background-size: cover;
+  justify-content: end;
+}
+
+.nav-bar-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .nav-bar-btn {
-    cursor: pointer;
-    font-size: 30px;
-    line-height: 200px;
+  cursor: pointer;
+  width: 122px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  /* height: 62px; */
 }
 
 .nav-bar-btn-active {
-    color: brown;
+  /* margin: 0 -16.5px; */
+  /* width: 122px; */
+}
+
+/* .nav-bar-btn-active img {
+  margin-top: 42px;
+} */
+
+.btn-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .nav-bar-contact {
-    /* width: 200px; */
-    height: 170px;
-        position: absolute;
-    /* background: red; */
-    right: 0;
-    top: 200px;
-    display: flex;
-    text-align: center;
-
+  height: 179px;
+  position: absolute;
+  /* background: red; */
+  right: 43px;
+  top: 85px;
+  display: flex;
+  text-align: center;
+  background-image: url("../../public/images/contact_bg.png");
+  /* background-repeat: no-repeat; */
+  background-position: center;
+  background-size: cover;
+  gap: 26px;
+  padding: 25px;
+  overflow: hidden;
 }
 
 .nav-bar-contact-code {
-    
-    width: 150px;
-    height: 150px;
-    background: red;
+  background-image: url("../../public/images/nav-bar-code-border.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 108px;
+  height: 108px;
+  padding: 4px;
+  position: relative;
+  /* background: red; */
+}
+
+.nav-bar-contact-code-border {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.nav-bar-contact-code-img {
+  width: 100px;
+  height: 100px;
+  z-index: 1;
+}
+
+.nav-bar-contact-codename {
+  font-size: 17px;
 }

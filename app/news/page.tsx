@@ -8,14 +8,14 @@ import Pagination from "@/components/pagination";
 import request, { getImgUrl } from "@/utils/request";
 import Modal from "@/components/modal";
 import Header from "@/components/ui/header";
-
+import classNames from "classnames";
 
 const noticeTypeMap = {
-  LATEST: '最新',
-  NEWS:'新闻',
-  NOTICE:'公告',
-  GUIDE:'攻略'
-}
+  LATEST: "最新",
+  NEWS: "新闻",
+  NOTICE: "公告",
+  GUIDE: "攻略",
+};
 export default function NewsPage() {
   const [list, setList] = useState<any[]>([]);
   const [current, setCurrent] = useState(1);
@@ -31,9 +31,11 @@ export default function NewsPage() {
     request.get("/douxian/web/home").then((res) => setHomeDetails(res));
     request.get("/douxian/web/button").then((res) => setButtonImgs(res));
   }, []);
-  const feachData = (pageNo: number, pageSize: number = 20) => {
+  const feachData = (noticeType: string, pageNo: number, pageSize: number = 20) => {
     request
-      .get("/douxian/web/notice", { params: { pageNo, pageSize } })
+      .get("/douxian/web/notice", {
+        params: { pageNo, pageSize, noticeType },
+      })
       .then((res: any) => {
         setTotalPages(Math.ceil(res.total / pageSize));
         setList(res.list);
@@ -50,12 +52,12 @@ export default function NewsPage() {
       });
   };
   useEffect(() => {
-    feachData(current);
+    feachData(activeNewsType, current);
   }, []);
 
   const scrollToPage = (index) => {
- window.open(`/?section=${index}`);
-  }
+    window.open(`/?section=${index}`);
+  };
   return (
     <div>
       <Header
@@ -65,27 +67,37 @@ export default function NewsPage() {
         scrollToPage={scrollToPage}
       />
       <div className="new-bg">
-        <img
+        {/* <img
           className="new-bg-img"
           style={{ width: "100vw" }}
           src={getImgUrl((homeDetails.homeBackgroundUrls || []).at(-1))}
           alt=""
-        />
+        /> */}
       </div>
       {/* 添加ref到news-container-wrap元素 */}
       <div className="news-container-wrap" ref={newsContainerRef}>
         <div className="news-container">
-          {/* <GameToolbar
-            openTips={() => setTipsOpen(true)}
-            openRegisterModal={() => setRegisterModalOpen(true)}
-            buttonImgs={buttonImgs}
-          /> */}
-
-          {/*  */}
           <NewsBox
-            header={<div className="news-header">
-              {Object.keys(noticeTypeMap).map((type) => <div style={{color: activeNewsType === type ? 'red' : ''}} key={type} onClick={() => setActiveNewsType(type)}>{noticeTypeMap[type]}</div>)}
-            </div>}
+            header={
+              <div className="news-header">
+                {Object.keys(noticeTypeMap).map((type) => (
+                  <div
+                    className={classNames("news-tab", {
+                      "news-tab-active": activeNewsType === type,
+                    })}
+                    key={type}
+                    onClick={() => {
+                      setCurrent(1);
+                      setActiveNewsType(type);
+                      feachData(type,1,);
+                    }}
+                  >
+                    {noticeTypeMap[type]}
+                    <div className="news-tab-active-line"></div>
+                  </div>
+                ))}
+              </div>
+            }
             content={
               <div className="new-list">
                 {list.map((item) => (
@@ -120,7 +132,7 @@ export default function NewsPage() {
               <Pagination
                 currentPage={current}
                 totalPages={totalPages}
-                onPageChange={feachData}
+                onPageChange={(current) => feachData(activeNewsType,current)}
               />
             }
           />
@@ -132,7 +144,7 @@ export default function NewsPage() {
         onClose={() => setRegisterModalOpen(false)}
       /> */}
       {/* <Modal visible={tipsOpen} onClose={() => setTipsOpen(false)}> */}
-        {/* <div
+      {/* <div
           style={{
             textAlign: "center",
             lineHeight: "32.2vw",
@@ -143,7 +155,7 @@ export default function NewsPage() {
         >
           敬请期待...
         </div> */}
-        {/* <img src={mobile} alt="" srcset="" /> */}
+      {/* <img src={mobile} alt="" srcset="" /> */}
       {/* </Modal> */}
     </div>
   );

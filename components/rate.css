@@ -1,9 +1,9 @@
 .game-rate {
   display: inline-flex;
-  gap:  0.52vw;
+  gap:  8px;
 }
 
 .game-rate-item {
-  width: 1.30vw;
-  height: 1.30vw;
+  width: 22px;
+  height: 23px;
 }

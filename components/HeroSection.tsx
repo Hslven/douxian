@@ -73,7 +73,7 @@ export default function HeroSection({
                 src={getImgUrl(buttonImgs.topGameDownLoadImg)}
               />
             </div>
-            <div>
+            <div className="hero-section-btn2-box">
               <div
                 className="hero-section-btn2"
                 // onClick={openRegisterModal}

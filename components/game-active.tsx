@@ -23,21 +23,21 @@ export default function GameActive({
   homeDetails,
   buttonImgs,
 }: any) {
-  const [activeList, setActiveList] = useState<any[]>(["", "", "", ""]);
+  const [activeList, setActiveList] = useState<any[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [activeNewsType, setActiveNewsType] = useState("LATEST");
   const [newsDetail, setNewsDetail] = useState<any>([]);
   const intervalRef = useRef<any>(null);
 const {openVideo} = useVideoModal()
-  // useEffect(() => {
-  //   if(homeDetails.gameShots?.length) {
-  //     setActiveList(homeDetails.gameShots.map(url => getImgUrl(url)))
-  //   }
-  // }, [homeDetails.gameShots]);
+  useEffect(() => {
+    if(homeDetails.gameShots?.length) {
+      setActiveList(homeDetails.gameShots.map(url => getImgUrl(url)))
+    }
+  }, [homeDetails.gameShots]);
 
   useEffect(() => {
     request
-      .get("/douxian/web/notice", { params: { pageNo: 1, pageSize: 10 } })
+      .get("/douxian/web/notice", { params: { pageNo: 1, pageSize: 6 } })
       .then((res: any) => {
         setNewsDetail(res.list);
       });
@@ -80,21 +80,6 @@ const {openVideo} = useVideoModal()
             alt=""
           />
         </div>
-        {/* <div className="game-active-tabs">
-          {Array.from({length:3}).map((_, index) => (
-            <div
-              onMouseEnter={() => setActiveIndex(index)}
-              className={`game-active-tab ${
-                activeIndex === index ? "game-active-tab-active" : ""
-              }`}
-              key={index}
-
-            >
-              活动页面{index+ 1}
-            </div>
-          ))}
-        </div> */}
-
         <div className="game-active-dots">
           {activeList.map((_, index) => (
             <button
@@ -112,13 +97,14 @@ const {openVideo} = useVideoModal()
           <div className="game-info-news-header-title">
             {Object.keys(noticeTypeMap).map((type) => (
               <div
-                onMouseEnter={() => setActiveNewsType(type)}
+                onClick={() => setActiveNewsType(type)}
                 className={`game-info-news-tab ${
                   activeNewsType === type ? "game-info-news-tab-active" : ""
                 }`}
                 key={type}
               >
                 {noticeTypeMap[type]}
+                <div className="game-info-news-tab-active-line" />
               </div>
             ))}
           </div>
@@ -128,12 +114,11 @@ const {openVideo} = useVideoModal()
               window.open("/news");
             }}
           >
-            <Image className="game-info-news-more-img" src={more} alt="" />
           </div>
         </div>
         <div
           className="game-info-news-top-title"
-          style={{ color: newsDetail[0]?.noticeTitleColor }}
+          // style={{ color: newsDetail[0]?.noticeTitleColor }}
           onClick={() => window.open(`/detail/${newsDetail[0]?.noticeId}`)}
         >
           {newsDetail[0]?.noticeTitle}
@@ -144,18 +129,18 @@ const {openVideo} = useVideoModal()
             return (
               <div
                 className="game-info-news-item"
-                style={{
-                  border: item.noticeBorderStyle,
-                  backgroundColor: item.noticeBackgroundColor,
-                }}
+                // style={{
+                //   border: item.noticeBorderStyle,
+                //   backgroundColor: item.noticeBackgroundColor,
+                // }}
                 key={item.noticeId}
                 onClick={() => window.open(`/detail/${item.noticeId}`)}
               >
                 <div className="game-info-news-content">
-                  <span className="game-info-news-type">【 {noticeTypeMap[item.noticeType]} 】</span>
+                  <span className="game-info-news-type">[{noticeTypeMap[item.noticeType]}]</span>
                   <span
                     className="game-info-news-title"
-                    style={{ color: item.noticeTitleColor }}
+                    // style={{ color: item.noticeTitleColor }}
                   >
                     {item.noticeTitle}
                   </span>
