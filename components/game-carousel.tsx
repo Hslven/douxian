@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./game-carousel.css";
 import { getImgUrl } from "@/utils/request";
-import Image from "next/image";
-import game_carousel_msg_line from "../public/images/game_carousel_msg_line.png";
-
 
 export default function GameCarousel({ homeDetails }: any) {
   const [images, setImages] = useState<string[]>([]);
@@ -11,12 +8,10 @@ export default function GameCarousel({ homeDetails }: any) {
   const intervalRef = useRef<any>(null);
 
   useEffect(() => {
-    if (homeDetails.homeCarouselUrls?.length) {
-      setImages(
-        homeDetails.homeCarouselUrls.map((item: string) => getImgUrl(item))
-      );
+    if (homeDetails.gameShots?.length) {
+      setImages(homeDetails.gameShots.map((item: string) => getImgUrl(item)));
     }
-  }, [homeDetails.homeCarouselUrls]);
+  }, [homeDetails.gameShots]);
 
   // 自动轮播
   useEffect(() => {
@@ -72,7 +67,9 @@ export default function GameCarousel({ homeDetails }: any) {
         </div>
       </div>
       <div className="game-carousel-msg">
-        <div className="game-carousel-msg-title">洪荒旦古    一念神魔</div>
+        <div className="game-carousel-msg-title">
+          洪荒旦古&nbsp;&nbsp;&nbsp;一念神魔
+        </div>
         <div className="game-carousel-msg-line"></div>
         <div className="game-carousel-msg-content">
           洪荒中有无数的远古生灵，

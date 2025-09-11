@@ -20,7 +20,7 @@ export default function Detail({
   // 创建ref引用detail-container-wrap元素
   const detailContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    request.get("/douxian/web/home").then((res) => setHomeDetails(res));
+    // request.get("/douxian/web/home").then((res) => setHomeDetails(res));
     request.get("/douxian/web/button").then((res) => setButtonImgs(res));
   }, []);
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function Detail({
     }
   }, [id]);
 
-  const scrollToPage = (index) => {
+  const scrollToPage = (index: number) => {
     window.open(`/?section=${index}`);
   };
   return (
@@ -51,28 +51,20 @@ export default function Detail({
         currentPage={1}
         scrollToPage={scrollToPage}
       />
-      <div className="new-bg">
-        <img
-          className="new-bg-img"
-          style={{ width: "100vw" }}
-          src={getImgUrl((homeDetails.homeBackgroundUrls || []).at(-1))}
-          alt=""
-        />
-      </div>
+      <div className="new-bg"></div>
       {/* 添加ref到detail-container-wrap元素 */}
       <div className="detail-container-wrap" ref={detailContainerRef}>
         <div className="detail-container">
+          <div className="detail-title">
+            新闻资讯 <Image className="detail-title-arrow" src={arrow} alt="" />
+          </div>
           <NewsBox
-            style={{ width: "72.39vw", height: "88.44vw" }}
-            title={
-              <div className="detail-title">
-                新闻资讯{" "}
-                <Image className="detail-title-arrow" src={arrow} alt="" />
-              </div>
-            }
             header={
               <div className="detail-header">
-                <div style={{ color: detail.noticeTitleColor }}>
+                <div
+                  className="detail-header-title"
+                  // style={{ color: detail.noticeTitleColor }}
+                >
                   {detail.noticeTitle}
                 </div>
                 <div className="detail-time">{detail.noticeShowTime}</div>
@@ -81,11 +73,11 @@ export default function Detail({
             content={
               <div
                 className="detail-content"
-                style={{ color: detail.noticeContentColor }}
+                // style={{ color: detail.noticeContentColor }}
                 dangerouslySetInnerHTML={{ __html: detail.noticeContent }}
               />
             }
-            footer={<div style={{ height: "60px" }} />}
+            // footer={<div style={{ height: "60px" }} />}
           />
         </div>
       </div>

@@ -28,10 +28,14 @@ export default function NewsPage() {
   // 创建ref引用news-container元素
   const newsContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    request.get("/douxian/web/home").then((res) => setHomeDetails(res));
+    // request.get("/douxian/web/home").then((res) => setHomeDetails(res));
     request.get("/douxian/web/button").then((res) => setButtonImgs(res));
   }, []);
-  const feachData = (noticeType: string, pageNo: number, pageSize: number = 20) => {
+  const feachData = (
+    noticeType: string,
+    pageNo: number,
+    pageSize: number = 15
+  ) => {
     request
       .get("/douxian/web/notice", {
         params: { pageNo, pageSize, noticeType },
@@ -55,7 +59,7 @@ export default function NewsPage() {
     feachData(activeNewsType, current);
   }, []);
 
-  const scrollToPage = (index) => {
+  const scrollToPage = (index: number) => {
     window.open(`/?section=${index}`);
   };
   return (
@@ -66,14 +70,7 @@ export default function NewsPage() {
         currentPage={1}
         scrollToPage={scrollToPage}
       />
-      <div className="new-bg">
-        {/* <img
-          className="new-bg-img"
-          style={{ width: "100vw" }}
-          src={getImgUrl((homeDetails.homeBackgroundUrls || []).at(-1))}
-          alt=""
-        /> */}
-      </div>
+      <div className="new-bg"></div>
       {/* 添加ref到news-container-wrap元素 */}
       <div className="news-container-wrap" ref={newsContainerRef}>
         <div className="news-container">
@@ -89,7 +86,7 @@ export default function NewsPage() {
                     onClick={() => {
                       setCurrent(1);
                       setActiveNewsType(type);
-                      feachData(type,1,);
+                      feachData(type, 1);
                     }}
                   >
                     {noticeTypeMap[type]}
@@ -104,10 +101,10 @@ export default function NewsPage() {
                   <div
                     key={item.noticeId}
                     className="new-item"
-                    style={{
-                      backgroundColor: item.noticeBackgroundColor,
-                      border: item.noticeBorderStyle,
-                    }}
+                    // style={{
+                    //   backgroundColor: item.noticeBackgroundColor,
+                    //   border: item.noticeBorderStyle,
+                    // }}
                     onClick={() => {
                       router.push(`/detail/${item.noticeId}`);
                     }}
@@ -118,7 +115,7 @@ export default function NewsPage() {
                       </span>
                       <span
                         className="new-item-title"
-                        style={{ color: item.noticeTitleColor }}
+                        // style={{ color: item.noticeTitleColor }}
                       >
                         {item.noticeTitle}
                       </span>
@@ -132,7 +129,7 @@ export default function NewsPage() {
               <Pagination
                 currentPage={current}
                 totalPages={totalPages}
-                onPageChange={(current) => feachData(activeNewsType,current)}
+                onPageChange={(current) => feachData(activeNewsType, current)}
               />
             }
           />

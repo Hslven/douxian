@@ -3,30 +3,30 @@
   height: 100vh;
   display: flex;
   align-items: center;
-      min-width: 1920px;
-      position: relative;
+  min-width: 1920px;
+  position: relative;
+  gap: 30px;
+  justify-content: center;
 }
 
 .carousel-container {
-  width: 1100px; /* 可视区域宽度 */
-  height: 740px; /* 可视区域高度 */
   overflow: hidden; /* 隐藏框外内容 */
-  transform:scale(0.9);
-  margin-left: 70px;
-  top: -20px;
+  position: relative;
+  /* margin-left: 70px; */
+  /* top: -20px; */
 }
 
 .carousel-slide {
   position: absolute;
-  width: 861px;
-  height: 595px;
+  width: 810px;
+  height: 567px;
   flex: 0 0 auto;
   display: flex;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
   left: 120px;
-  top: 46.5px;
+  top: 20.5px;
   transition: all 0.5s;
   opacity: 0;
 }
@@ -48,7 +48,7 @@
 /* 小圆点样式 */
 .dots {
   position: absolute;
-  bottom: 20px;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -70,20 +70,18 @@
 }
 
 .carousel-slide-box {
-  width: 1100px; /* 可视区域宽度 */
-  height: 740px; /* 可视区域高度 */
+  width: 969px;
+  height: 640px; /* 可视区域高度 */
   position: relative;
-
 }
 
 .carousel-current {
-  left: 54px;
+  left: 45px;
   top: 0;
-  width: 996px;
-  height: 688px;
+  width: 879px;
+  height: 608px;
   z-index: 3;
   opacity: 1;
-  
 }
 
 .carousel-prev {
@@ -105,11 +103,10 @@
 }
 
 .carousel-next {
-  left: 239px;
+  left: 159px;
   opacity: 1;
   z-index: 2;
 }
-
 
 /* 伪元素作为黑色覆盖层 */
 .carousel-next::before {
@@ -129,6 +126,7 @@
   text-align: center;
 }
 .game-carousel-msg-title {
+  font-family: var(--font-sc-heavy);
   font-size: 52px;
   color: #e9ba78;
 }
@@ -136,11 +134,15 @@
 .game-carousel-msg-line {
   width: 391px;
   height: 15px;
-  background: url(../public/images/game_carousel_msg_line.png) center center no-repeat;
+  background: url(../public/images/game_carousel_msg_line.png) center center
+    no-repeat;
   background-size: cover;
   display: inline-block;
+  margin: 25px 0;
 }
 
 .game-carousel-msg-content {
-  color:#ecd2ad
+  font-family: var(--font-sc-bold);
+  color: #ecd2ad;
+  font-size: 22px;
 }

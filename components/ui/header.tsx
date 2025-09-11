@@ -54,15 +54,15 @@ export default function Header({
   scrollToPage: Function;
   buttonImgs: any;
 }) {
-  const [contactList, setContactList] = useState([]);
+  const [contactList, setContactList] = useState<any[]>([]);
   const [contactVisible, setContactVisible] = useState(false);
   const modalRef = useRef(null);
   const router = useRouter();
 
   useEffect(() => {
-    request
-      .get("/douxian/web/qr-code")
-      .then((res) => setContactList(res || []));
+    request.get("/douxian/web/qr-code").then((res) => {
+      setContactList((res as any) || []);
+    });
   }, []);
 
   // 点击弹窗外部关闭
@@ -92,7 +92,10 @@ export default function Header({
       {options.map((item, index) => (
         <a
           className={classNames("nav-bar-btn", {
-            "nav-bar-btn-active":index + 1 === options.length ? contactVisible : currentPage === index,
+            "nav-bar-btn-active":
+              index + 1 === options.length
+                ? contactVisible
+                : currentPage === index,
           })}
           key={item.name}
           onClick={(e) => {
@@ -106,9 +109,21 @@ export default function Header({
           }}
         >
           <Image
-            src={(index + 1 === options.length ? contactVisible : currentPage === index )? item.activeUrl : item.url}
+            src={ 
+              (
+                // index + 1 === options.length
+                //   ? contactVisible
+                //   : currentPage === index
+                ( contactVisible ?options.length -1 : currentPage) === index
+              )
+                ? item.activeUrl
+                : item.url
+            }
             alt=""
           />
+          {index + 1 === options.length && contactVisible && (
+            <div className="nav-bar-contact-arrow" />
+          )}
           {/* {item.name} */}
         </a>
       ))}

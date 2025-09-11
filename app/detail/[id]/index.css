@@ -1,48 +1,69 @@
 .detail-container {
   background: url(../../../public/images/new_bg.png) center center no-repeat;
   background-size: cover;
-  display: flex;
-  justify-content: center;
-  align-items: start;
-  padding: 4.69vw 0 10.42vw; /* 90px→4.6875vw，200px→10.4167vw */
   margin: 0 auto;
-  gap: 1.77vw; /* 34px ÷ 1920 × 100 = 1.7708vw */
+  position: relative;
+  height: 1610px;
+}
+
+.new-bg {
+  width: 1920px;
+  height: 627px;
+  overflow: hidden;
+  background: url(../../../public/images/new_bg_header.png) center center
+    no-repeat;
+  background-size: cover;
 }
 
 .detail-title {
   text-align: left;
-  font-size: 2.71vw; /* 52px ÷ 1920 × 100 = 2.7083vw */
-  line-height: 4.43vw; /* 85px ÷ 1920 × 100 = 4.4271vw */
+  font-size: 42px;
+  line-height: 90px;
   color: #ebd2ae;
   display: flex;
-  font-family:var(--font-sc-heavy);
+  font-family: var(--font-sc-heavy);
   align-items: center;
+  position: absolute;
+  top: -90px;
+  left: 50%;
+  width: 1108px;
+  transform: translateX(-50%);
 }
 
 .detail-title-arrow {
-  margin-left: 0.52vw; /* 10px→0.5208vw */
-  width: 2.13vw; /* 41px ÷ 1920 × 100 = 2.1354vw */
-  height: 1.77vw; /* 34px→1.7708vw */
+  margin-left: 10px;
+  width: 38px;
+  height: 32px;
 }
 
 .detail-header {
-  font-size: 2.97vw; /* 57px ÷ 1920 × 100 = 2.9688vw */
-  color: #db1f02;
-  min-height: 6.46vw;
-  font-weight: 100;
-  font-family:var(--font-sy);
+  font-size: 45.3px;
+  color: #d2841c;
+  min-height: 118px;
+  border-bottom: 2px solid #634e26;
+}
+
+.detail-header-title {
+  font-family: var(--font-sc-bold);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* 控制显示的行数 */
+  overflow: hidden; /* 超出部分隐藏 */
 }
 
 .detail-time {
-  font-size: 1.25vw; /* 24px→1.25vw */
-  color: #574f44;
+  font-family: var(--font-alibaba-puhuiti);
+  font-size: 20px;
+  line-height: 48px;
+  color: #564e44;
 }
 
 .detail-content {
-  font-size: 1.25vw; /* 24px→1.25vw */
-  height: 72.81vw; /* 900px ÷ 1920 × 100 = 46.875vw */
-  padding: 0 1.2vw; /* 10px→0.5208vw */
-  margin: 0 1.04vw; /* 20px→1.0417vw */
+  font-family: var(--font-alibaba-puhuiti);
+  font-size: 17.6px;
+  height: 1112px;
+  padding: 20px;
+  margin: 0 20px;
   line-height: 2.5; /* 非px单位保持不变 */
   color: #d3bc9b;
   overflow-y: auto;
@@ -80,9 +101,8 @@
 }
 
 .btn-bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

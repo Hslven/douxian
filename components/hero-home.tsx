@@ -6,19 +6,17 @@ import "./home.css"; // 引入样式文件
 import GameActive from "./game-active";
 import GameInfo from "./game-info";
 import GameCarousel from "./game-carousel";
-import GameEntry from "./game-entry";
 import RegisterModal from "./register-modal";
 import Image from "next/image";
 import one from "../public/images/1.png";
 import two from "../public/images/2.png";
 import three from "../public/images/3.png";
 import four from "../public/images/4.png";
-import five from "../public/images/5.png";
+// import five from "../public/images/5.png";
 import request, { getImgUrl } from "@/utils/request";
 import "./hero-home.css";
 import Modal from "./modal";
 import Header from "./ui/header";
-import GameHeader from "../components/ui/header";
 const PageSection = ({ children, backgroundImg, glideImg }: any) => {
   return (
     <div className="page-section">
@@ -68,19 +66,25 @@ export default function HeroHome() {
         page.style.transform = "translateY(20px)";
       }
     });
-    console.log(currentVisibleIndex, currentPage, scrollPosition,clientHeight, "index");
+    console.log(
+      currentVisibleIndex,
+      currentPage,
+      scrollPosition,
+      clientHeight,
+      "index"
+    );
 
     if (currentVisibleIndex !== -1 && currentVisibleIndex !== currentPage) {
       setCurrentPage(currentVisibleIndex);
     }
 
-    if (scrollPosition < clientHeight / 2) { 
+    if (scrollPosition < clientHeight / 2) {
       setCurrentPage(0);
     }
     prevScrollPositionRef.current = scrollPosition;
   };
   // 滚动到指定索引的.page-section
-  const scrollToPage = (index) => {
+  const scrollToPage = (index: number) => {
     const scrollContainer = scrollContainerRef.current;
     if (!scrollContainer) return;
 
@@ -158,29 +162,23 @@ export default function HeroHome() {
     }
   }, []);
 
-
-    useEffect(() => {
-      const url = new URL(window.location.href)
-      const section = url.searchParams.get('section')
+  useEffect(() => {
+    const url = new URL(window.location.href);
+    const section = url.searchParams.get("section");
     if (section) {
-              setTimeout(() => {
-      scrollToPage(+section)
-
-        }, 100);
+      setTimeout(() => {
+        scrollToPage(+section);
+      }, 100);
     }
   }, []);
 
   return (
     <>
-      <Header buttonImgs={buttonImgs} currentPage={currentPage} scrollToPage={scrollToPage} />
-
-        {/* <GameHeader
-
-
-            buttonImgs={buttonImgs}
-            openTips={() => setTipsOpen(true)}
-            openRegisterModal={() => setRegisterModalOpen(true)}
-        /> */}
+      <Header
+        buttonImgs={buttonImgs}
+        currentPage={currentPage}
+        scrollToPage={scrollToPage}
+      />
       <section
         className="scroll-container"
         ref={scrollContainerRef}
@@ -196,7 +194,6 @@ export default function HeroHome() {
             openTips={() => setTipsOpen(true)}
             openRegisterModal={() => setRegisterModalOpen(true)}
             glideImg={one}
-            showGlide
           />
 
           {/* 第二部分 - 用 2.png */}
@@ -204,12 +201,7 @@ export default function HeroHome() {
             backgroundImg={homeDetails.homeBackgroundUrls?.[1]}
             glideImg={two}
           >
-            <GameActive
-              openTips={() => setTipsOpen(true)}
-              homeDetails={homeDetails}
-              buttonImgs={buttonImgs}
-              openRegisterModal={() => setRegisterModalOpen(true)}
-            />
+            <GameActive homeDetails={homeDetails} />
           </PageSection>
 
           {/* 第三部分 - 用 3.png */}

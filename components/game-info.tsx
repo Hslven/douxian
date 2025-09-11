@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import "./game-info.css";
 import Rate from "./rate";
-import more from "../public/images/more.png";
 import Image from "next/image";
 import request, { getImgUrl } from "@/utils/request";
 import { useVideoModal } from "./video-modal";
 import video_play from "../public/images/video_play.png";
-import game_carousel_next from "../public/images/game_carousel_next.png";
-import game_carousel_prev from "../public/images/game_carousel_prev.png";
 
 export default function GameInfo() {
   const [roleList, setRoleList] = useState<any[]>([]);
@@ -62,7 +59,7 @@ export default function GameInfo() {
             />
             <img
               className="game-info-role-badge"
-              src={getImgUrl(roleList[activeIndex]?.selectedBadges)}
+              src={getImgUrl(roleList[activeIndex]?.backgroundBadge)}
             />
           </div>
           <div className="game-info-role-number">
@@ -77,7 +74,13 @@ export default function GameInfo() {
           <div className="game-info-video-group">
             <div
               className="game-info-video"
-              onClick={() => openVideo("http://vjs.zencdn.net/v/oceans.mp4")}
+              onClick={() =>
+                openVideo(
+                  getImgUrl(
+                    roleList[activeIndex]?.careerMaterial?.[0]?.videoUrl
+                  )
+                )
+              }
             >
               <img
                 className="game-info-video-img"
@@ -89,7 +92,13 @@ export default function GameInfo() {
             </div>
             <div
               className="game-info-video"
-              onClick={() => openVideo("http://vjs.zencdn.net/v/oceans.mp4")}
+              onClick={() =>
+                openVideo(
+                  getImgUrl(
+                    roleList[activeIndex]?.careerMaterial?.[1]?.videoUrl
+                  )
+                )
+              }
             >
               <img
                 className="game-info-video-img"
@@ -100,45 +109,43 @@ export default function GameInfo() {
               <Image className="game-info-video-play" src={video_play} alt="" />
             </div>
           </div>
-
         </div>
 
-          <div className="game-info-tabs">
+        <div className="game-info-tabs">
+          <div
+            className="game-info-tab-prev"
+            onClick={() => setActiveIndex(activeIndex ? activeIndex - 1 : 0)}
+          ></div>
+          {roleList.map((item, index) => (
             <div
-              className="game-info-tab-prev"
-              onClick={() => setActiveIndex(activeIndex ? activeIndex - 1 : 0)}
-            ></div>
-            {roleList.map((item, index) => (
-              <div
-                className={`game-info-tab ${
-                  index === activeIndex ? "game-info-tab-active" : ""
-                }`}
-                key={item.careerId}
-                onClick={() => setActiveIndex(index)}
-              >
-                <img
+              className={`game-info-tab ${
+                index === activeIndex ? "game-info-tab-active" : ""
+              }`}
+              key={item.careerId}
+              onClick={() => setActiveIndex(index)}
+            >
+              <img
                 className="game-info-tab-img"
-               
-                  src={getImgUrl(
-                    index === activeIndex
-                      ? item?.selectedBadges
-                      : item?.unselectedBadges
-                  )}
-                />
-                {item.careerName}
-              </div>
-            ))}
-            <div
-              className="game-info-tab-next"
-              onClick={() =>
-                setActiveIndex(
-                  activeIndex + 1 === roleList.length
-                    ? activeIndex
-                    : activeIndex + 1
-                )
-              }
-            ></div>
-          </div>
+                src={getImgUrl(
+                  index === activeIndex
+                    ? item?.selectedBadges
+                    : item?.unselectedBadges
+                )}
+              />
+              {item.careerName}
+            </div>
+          ))}
+          <div
+            className="game-info-tab-next"
+            onClick={() =>
+              setActiveIndex(
+                activeIndex + 1 === roleList.length
+                  ? activeIndex
+                  : activeIndex + 1
+              )
+            }
+          ></div>
+        </div>
       </div>
     </div>
   );

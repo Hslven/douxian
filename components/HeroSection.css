@@ -11,6 +11,7 @@
   margin-left: -36.3vw;
   width: 72.6vw;
   height: 18vw;
+  cursor: pointer;
 }
 
 .hero-section-slogan-bg {
@@ -36,8 +37,6 @@
   bottom: 70px;
   left: 50%;
   margin-left: -361px;
-  /* width: 72.6vw; */
-  /* height: 18vw; */
   height: 164px;
   align-items: center;
   gap: 10px

@@ -4,17 +4,16 @@
   display: flex;
   justify-content: center;
   align-items: start;
-  padding: 4.69vw 0 10.42vw; /* 90px→4.6875vw，200px→10.4167vw */
   margin: 0 auto;
-  gap: 1.77vw; /* 34px ÷ 1920 × 100 = 1.7708vw */
+  height: 1610px;
 }
 
 .new-bg {
   width: 1920px;
   height: 627px;
   overflow: hidden;
-    background: url(../../public/images/new_bg_header.png) center center no-repeat;
-    background-size: cover; 
+  background: url(../../public/images/new_bg_header.png) center center no-repeat;
+  background-size: cover;
 }
 
 .news-header {
@@ -23,7 +22,7 @@
   font-size: 44px;
   line-height: 131px;
   color: #837a6c;
-  font-family:var(--font-sc-heavy);
+  font-family: var(--font-sc-heavy);
   border-bottom: 2px solid #634e26;
 }
 
@@ -32,39 +31,37 @@
   position: relative;
 }
 
-.news-tab-active{
-    color: #ffc85d
+.news-tab-active {
+  color: #ffc85d;
 }
 
 .news-tab-active-line {
-
   position: absolute;
   bottom: -2px;
   left: 0;
-opacity: 0;
+  opacity: 0;
   width: 91px;
   height: 14px;
   background: url(../../public/images/new_active.png) center center no-repeat;
   background-size: cover;
-
 }
 
 .news-tab-active .news-tab-active-line {
-   opacity: 1;
+  opacity: 1;
 }
 
 .new-item {
-  font-size: 1.25vw; /* 24px ÷ 1920 × 100 = 1.25vw */
+  font-family: var(--font-alibaba-puhuiti);
+  font-size: 22.2px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  line-height: 3; /* 非px单位保持不变 */
-  margin: 0 2.08vw; /* 40px ÷ 1920 × 100 = 2.0833vw */
-  /* padding: 10px 0; */
+  line-height: 62px;
+  margin: 0 30px;
   cursor: pointer;
   color: #dbc1a0;
-  border-top: 1px dotted #604c25; /* 忽略1px不转换 */
-  gap: 0.52vw; /* 10px ÷ 1920 × 100 = 0.5208vw */
+  border-top: 1px dotted #604c25;
+  gap: 10px;
 }
 
 .new-list > .new-item:first-child {
@@ -73,7 +70,7 @@ opacity: 0;
 
 .new-item-type {
   color: #936c1c;
-  margin-right: 0.26vw; /* 5px ÷ 1920 × 100 = 0.2604vw */
+  margin-right: 10px;
 }
 
 .new-item-content {
@@ -84,7 +81,7 @@ opacity: 0;
 }
 
 .new-list {
-  height: 79.01vw;
+  height: 1043px;
   overflow-y: auto;
 }
 
@@ -112,9 +109,8 @@ opacity: 0;
 }
 
 .btn-bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

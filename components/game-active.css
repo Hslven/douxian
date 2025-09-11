@@ -21,12 +21,24 @@
   height: 455px;
   margin: 0 auto;
   margin-top: 45px;
-
+  cursor: pointer;
+  position: relative;
 }
 
 .game-active-img {
   width: 100%;
   height: 100%;
+}
+.game-active-play {
+  background: url(../public/images/video_play.png) center center no-repeat;
+  background-size: cover;
+  width: 134px;
+  height: 134px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -64px;
+  margin-left: -64px;
 }
 
 /* 小圆点样式 */
@@ -51,39 +63,12 @@
   background-color: #ff9e33;
 }
 
-
-.game-active-tabs {
-  width: 43.75vw;
-  height: 3.13vw;
-  line-height: 3.13vw;
-  border-top: 1px solid #c69253;
-  display: flex;
-  font-size: 1.61vw;
-  font-family: var(--font-source-han-serif);
-  font-weight: 700;
-  margin: 0 auto;
-}
-
-.game-active-tab {
-  flex: 1;
-  background: #a77634;
-  color: #eeddc1;
-  cursor: pointer;
-}
-.game-active-tab-active {
-  background: #823c16;
-}
-
-
 .game-info-news {
   background: url(../public/images/game_news_bg.png) center center no-repeat;
   background-size: cover;
-  /* margin: 20px 30px 0;
-  padding: 38px 24px; +  */
   padding: 58px 54px;
   width: 710px;
   height: 565px;
-  font-family: var(--font-source-han-serif);
   overflow: hidden;
 }
 
@@ -103,7 +88,6 @@
   gap: 40px;
 }
 
-
 .game-info-news-tab {
   color: #847b6d;
   cursor: pointer;
@@ -117,13 +101,12 @@
   position: absolute;
   bottom: -12px;
   left: 0;
-opacity: 0;
+  opacity: 0;
   width: 58px;
   height: 9px;
   background: url(../public/images/game_news_active.png) center center no-repeat;
   background-size: cover;
 }
-
 
 .game-info-news-tab-active .game-info-news-tab-active-line {
   opacity: 1;
@@ -138,13 +121,10 @@ opacity: 0;
   background-size: cover;
 }
 
-
 .game-info-news-top-title {
-  font-family: var(--font-sc-semi-bold);
+  font-family: var(--font-sc-bold);
   font-size: 29.4px;
   padding-top: 10px;
-  /* line-height: 76px; */
-  /* padding-bottom: 30px; */
   height: 106px;
   border-bottom: 1px solid #3c321d;
   color: #d2841c;
