@@ -67,7 +67,7 @@ export default function NewsPage() {
       <Header
         buttonImgs={buttonImgs}
         showLogo
-        currentPage={1}
+        currentPage={-1}
         scrollToPage={scrollToPage}
       />
       <div className="new-bg"></div>

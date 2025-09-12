@@ -15,7 +15,6 @@ export default function HeroSection({
 }: any) {
   const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
-  const [btnType, setBtnType] = useState(0);
 
   const { openVideo } = useVideoModal();
   // 确保只在客户端渲染
@@ -40,12 +39,12 @@ export default function HeroSection({
             />
           </div>
         )}
-        {btnType === 1 ? (
+        {!buttonImgs.homeButtonImg ? (
           <div className="hero-section-btn-group1">
             <div className="hero-section-btn1" onClick={openTips}>
               <img
                 className="btn-bg"
-                src={getImgUrl(buttonImgs.topGameDownLoadImg)}
+                src={getImgUrl(buttonImgs.gameDownLoadImg)}
               />
             </div>
             <div
@@ -55,7 +54,7 @@ export default function HeroSection({
             >
               <img
                 className="btn-bg"
-                src={getImgUrl(buttonImgs.topAccountRegisterImg)}
+                src={getImgUrl(buttonImgs.accountRegisterImg)}
               />
             </div>
           </div>
