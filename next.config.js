@@ -1,7 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  distDir: 'build', // 👈 自定义输
-  // 出目录名
   experimental: {
     turbo: false,
   },
