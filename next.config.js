@@ -7,10 +7,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   async rewrites() {
-    const targetApiUrl =
-      process.env.NEXT_PUBLIC_ENV === 'development'
-        ? 'http://douxian.zhuzhu.pro:2285'
-        : 'http://douxian.zhuzhu.pro:2285';
+    const targetApiUrl = 'http://www.douxian2.cn:2285'
 
     return [
       {
