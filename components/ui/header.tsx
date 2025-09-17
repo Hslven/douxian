@@ -109,13 +109,8 @@ export default function Header({
           }}
         >
           <Image
-            src={ 
-              (
-                // index + 1 === options.length
-                //   ? contactVisible
-                //   : currentPage === index
-                ( contactVisible ?options.length -1 : currentPage) === index
-              )
+            src={
+              (contactVisible ? options.length - 1 : currentPage) === index
                 ? item.activeUrl
                 : item.url
             }
@@ -124,27 +119,30 @@ export default function Header({
           {index + 1 === options.length && contactVisible && (
             <div className="nav-bar-contact-arrow" />
           )}
-          {/* {item.name} */}
         </a>
       ))}
       {contactVisible && (
         <div className="nav-bar-contact" ref={modalRef}>
           {contactList.map((item) => (
             <div key={item.qrCodeId} className="nav-bar-contact-box">
-              <div className="nav-bar-contact-code">
+              <div
+                className="nav-bar-contact-code"
+                onClick={() => {
+                  if (item.qrCodeUrl) {
+                    window.open(item.qrCodeUr);
+                  }
+                }}
+              >
                 <img
                   className="nav-bar-contact-code-img"
                   src={getImgUrl(item.qrCodeImage)}
                 />
-                {/* <Image className="nav-bar-contact-code-border" src={nav_bar_code_border} alt="" /> */}
               </div>
               <div className="nav-bar-contact-codename">{item.qrCodeName}</div>
             </div>
           ))}
-          {/* <Image className="nav-bar-contact-code-bg" src={contact_bg} alt="" /> */}
         </div>
       )}
-      {/* <Image className="nav-bar-bg" src={nav_bg} alt="" /> */}
     </div>
   );
 }

@@ -37,15 +37,6 @@ export default function GameInfo() {
   };
   return (
     <div className="game-info">
-      {/* <div
-        className="game-info-role"
-        style={{
-          backgroundImage: `url(${getImgUrl(
-            roleList[activeIndex]?.careerRoleBackgroundImage
-          )})`,
-          backgroundSize: "cover",
-        }}
-      > */}
       <img
         className="game-info-role-img"
         src={getImgUrl(roleList[activeIndex]?.careerRoleImage)}
@@ -55,7 +46,7 @@ export default function GameInfo() {
           <div className="game-info-role-card-header">
             <img
               className="game-info-role-name"
-              src={getImgUrl(roleList[activeIndex]?.careerRoleBackgroundImage)}
+              src={getImgUrl(roleList[activeIndex]?.careerNameImage)}
             />
             <img
               className="game-info-role-badge"
@@ -72,42 +63,23 @@ export default function GameInfo() {
             {roleList[activeIndex]?.remark}
           </div>
           <div className="game-info-video-group">
-            <div
-              className="game-info-video"
-              onClick={() =>
-                openVideo(
-                  getImgUrl(
-                    roleList[activeIndex]?.careerMaterial?.[0]?.videoUrl
-                  )
-                )
-              }
-            >
-              <img
-                className="game-info-video-img"
-                src={getImgUrl(
-                  roleList[activeIndex]?.careerMaterial?.[0]?.imageUrl
-                )}
-              />
-              <Image className="game-info-video-play" src={video_play} alt="" />
-            </div>
-            <div
-              className="game-info-video"
-              onClick={() =>
-                openVideo(
-                  getImgUrl(
-                    roleList[activeIndex]?.careerMaterial?.[1]?.videoUrl
-                  )
-                )
-              }
-            >
-              <img
-                className="game-info-video-img"
-                src={getImgUrl(
-                  roleList[activeIndex]?.careerMaterial?.[1]?.imageUrl
-                )}
-              />
-              <Image className="game-info-video-play" src={video_play} alt="" />
-            </div>
+            {(roleList[activeIndex]?.careerMaterial || []).slice(0, 2).map((item) => (
+              <div
+                key={item.videoUrl}
+                className="game-info-video"
+                onClick={() => openVideo(getImgUrl(item.videoUrl))}
+              >
+                <img
+                  className="game-info-video-img"
+                  src={getImgUrl(item.imageUrl)}
+                />
+                <Image
+                  className="game-info-video-play"
+                  src={video_play}
+                  alt=""
+                />
+              </div>
+            ))}
           </div>
         </div>
 

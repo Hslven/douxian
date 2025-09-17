@@ -76,6 +76,7 @@
 }
 
 .game-info-video-group {
+  height: 179px;
   display: flex;
   justify-content: space-between;
 }

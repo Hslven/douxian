@@ -32,7 +32,7 @@ export default function GameActive({ homeDetails }: any) {
   const getNewsDetail = (noticeType: string) => {
     request
       .get("/douxian/web/notice", {
-        params: { pageNo: 1, pageSize: 6, noticeType },
+        params: { pageNo: 1, pageSize: 5, noticeType },
       })
       .then((res: any) => {
         setNewsDetail(res.list);
@@ -157,6 +157,7 @@ export default function GameActive({ homeDetails }: any) {
           })}
         </div>
       </div>
+      <div className="game-active-toy" />
     </div>
   );
 }

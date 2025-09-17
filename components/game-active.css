@@ -18,9 +18,9 @@
 .game-active-img-warp {
   border: 4px solid #000;
   width: 879px;
-  height: 455px;
+  height: 469px;
   margin: 0 auto;
-  margin-top: 45px;
+  margin-top: 30px;
   cursor: pointer;
   position: relative;
 }
@@ -47,7 +47,7 @@
   gap: 10px;
   justify-content: center;
   align-items: center;
-  height: 60px;
+  height: 67px;
 }
 
 .game-active-dot {
@@ -170,4 +170,14 @@
   -webkit-line-clamp: 1; /* 控制显示的行数 */
   overflow: hidden; /* 超出部分隐藏 */
   text-align: left;
+}
+
+.game-active-toy {
+  background: url(../public/images/active_toy.png) center center no-repeat;
+  background-size: cover;
+  width: 198px;
+  height: 230px;
+  position: fixed;
+  right: 36px;
+  bottom: 15px;
 }

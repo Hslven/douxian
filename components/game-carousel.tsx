@@ -9,7 +9,7 @@ export default function GameCarousel({ homeDetails }: any) {
 
   useEffect(() => {
     if (homeDetails.gameShots?.length) {
-      setImages(homeDetails.gameShots.map((item: string) => getImgUrl(item)));
+      setImages(homeDetails.gameShots.map((item: any) => getImgUrl(item.imageUrl)));
     }
   }, [homeDetails.gameShots]);
 
