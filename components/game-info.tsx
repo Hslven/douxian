@@ -59,7 +59,7 @@ export default function GameInfo() {
             />
             <img
               className="game-info-role-badge"
-              src={getImgUrl(roleList[activeIndex]?.backgroundBadge)}
+              src={getImgUrl(roleList[activeIndex]?.careerBadgeImage)}
             />
           </div>
           <div className="game-info-role-number">
