@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import "./HeroSection.css";
 import { getImgUrl } from "@/utils/request";
-import  { useVideoModal } from "./video-modal";
+import { useVideoModal } from "./video-modal";
 import { usePathname } from "next/navigation";
 export default function HeroSection({
   openRegisterModal,
@@ -41,7 +41,16 @@ export default function HeroSection({
         )}
         {!buttonImgs.homeButtonImg ? (
           <div className="hero-section-btn-group1">
-            <div className="hero-section-btn1" onClick={openTips}>
+            <div
+              className="hero-section-btn1"
+              onClick={() => {
+                if (buttonImgs.gameDownLoadUrl) {
+                  window.open(buttonImgs.gameDownLoadUrl);
+                } else {
+                  openTips();
+                }
+              }}
+            >
               <img
                 className="btn-bg"
                 src={getImgUrl(buttonImgs.gameDownLoadImg)}
@@ -50,7 +59,13 @@ export default function HeroSection({
             <div
               className="hero-section-btn1"
               // onClick={openRegisterModal}
-              onClick={openTips}
+              onClick={() => {
+                if (buttonImgs.accountRegisterUrl) {
+                  window.open(buttonImgs.accountRegisterUrl);
+                } else {
+                  openTips();
+                }
+              }}
             >
               <img
                 className="btn-bg"
@@ -60,7 +75,16 @@ export default function HeroSection({
           </div>
         ) : (
           <div className="hero-section-btn-group2">
-            <div className="hero-section-down-btn" onClick={openTips}>
+            <div
+              className="hero-section-down-btn"
+              onClick={() => {
+                if (buttonImgs.homeButtonUrl) {
+                  window.open(buttonImgs.homeButtonUrl);
+                } else {
+                  openTips();
+                }
+              }}
+            >
               <img
                 className="btn-bg"
                 src={getImgUrl(buttonImgs.homeButtonImg)}
@@ -70,7 +94,13 @@ export default function HeroSection({
               <div
                 className="hero-section-btn2"
                 // onClick={openRegisterModal}
-                onClick={openTips}
+                onClick={() => {
+                  if (buttonImgs.gameDownLoadUrl) {
+                    window.open(buttonImgs.gameDownLoadUrl);
+                  } else {
+                    openTips();
+                  }
+                }}
               >
                 <img
                   className="btn-bg"
@@ -81,7 +111,13 @@ export default function HeroSection({
               <div
                 className="hero-section-btn2"
                 // onClick={openRegisterModal}
-                onClick={openTips}
+                onClick={() => {
+                  if (buttonImgs.accountRegisterUrl) {
+                    window.open(buttonImgs.accountRegisterUrl);
+                  } else {
+                    openTips();
+                  }
+                }}
               >
                 <img
                   className="btn-bg"

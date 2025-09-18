@@ -82,6 +82,7 @@
   height: 608px;
   z-index: 3;
   opacity: 1;
+  cursor: pointer;
 }
 
 .carousel-prev {
@@ -145,4 +146,17 @@
   font-family: var(--font-sc-bold);
   color: #ecd2ad;
   font-size: 22px;
+}
+
+.carousel-slide-video-play {
+    background: url(../public/images/video_play.png) center center
+    no-repeat;
+  background-size: cover;
+    width: 134px;
+  height: 134px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -64px;
+  margin-left: -64px;
 }
