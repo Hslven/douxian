@@ -20,6 +20,7 @@ export default function GameInfo() {
     无极: "剑仙 / 奕剑",
     九黎: "暗影 / 弑魂",
   };
+
   useEffect(() => {
     request
       .get("/douxian/web/career")
@@ -30,11 +31,13 @@ export default function GameInfo() {
     //     setNewsDetail(res.list);
     //   });
   }, []);
+
   // 获取当前角色的转职方向
   const getCurrentCareerDirection = () => {
     const currentRole = roleList[activeIndex]?.careerName;
     return careerDirections[currentRole] || "";
   };
+
   return (
     <div className="game-info">
       <img
