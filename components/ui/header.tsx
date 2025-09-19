@@ -129,7 +129,8 @@ export default function Header({
                 className="nav-bar-contact-code"
                 onClick={() => {
                   if (item.qrCodeUrl) {
-                    window.open(item.qrCodeUr);
+                   
+                    window.open(item.qrCodeUrl);
                   }
                 }}
               >
