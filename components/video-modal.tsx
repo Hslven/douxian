@@ -69,56 +69,62 @@ const VideoModal = ({ url, visible, onClose }) => {
 export default VideoModal;
 
 export const useVideoModal = () => {
-  // 创建一个唯一的容器元素引用
   const containerRef = useRef(null);
-  const [isMounted, setIsMounted] = useState(false);
-  const [videoUrl, setVideoUrl] = useState('');
+  const rootRef = useRef(null); // 存储root实例，避免重复创建
+  const [videoUrl, setVideoUrl] = useState(null); // 使用null而非空字符串，避免src错误
   const [visible, setVisible] = useState(false);
 
-  // 创建并挂载容器到body
+  // 初始化容器和root实例（仅执行一次）
   useEffect(() => {
-    // 创建容器元素
+    // 创建容器并添加到body
     containerRef.current = document.createElement('div');
     containerRef.current.id = 'video-modal-container';
     document.body.appendChild(containerRef.current);
-    setIsMounted(true);
 
-    // 清理函数：移除容器
+    // 创建root实例并保存引用
+    rootRef.current = createRoot(containerRef.current);
+
+    // 组件卸载时的清理逻辑
     return () => {
-      if (containerRef.current && containerRef.current.parentNode) {
+      // 延迟卸载root，避免渲染冲突
+      if (rootRef.current) {
+        setTimeout(() => {
+          rootRef.current.unmount();
+          rootRef.current = null;
+        }, 0);
+      }
+      // 移除容器元素
+      if (containerRef.current?.parentNode) {
         document.body.removeChild(containerRef.current);
+        containerRef.current = null;
       }
     };
   }, []);
 
-  // 渲染视频弹窗到容器
+  // 仅在视频URL或可见性变化时更新渲染
   useEffect(() => {
-    if (!isMounted || !containerRef.current) return;
+    if (!rootRef.current) return;
 
-    const root = createRoot(containerRef.current);
-    
-    root.render(
+    // 使用同一个root实例更新内容，避免重复创建
+    rootRef.current.render(
       <VideoModal
         url={videoUrl}
         visible={visible}
         onClose={() => setVisible(false)}
       />
     );
+  }, [videoUrl, visible]);
 
-    // 清理函数：卸载组件
-    return () => {
-      root.unmount();
-    };
-  }, [isMounted, videoUrl, visible]);
-
-  // 打开视频弹窗的方法
+  // 仅保留openVideo函数，负责设置视频URL并显示弹窗
   const openVideo = (url) => {
-    if (url) {
-      setVideoUrl(url);
+    // 验证URL有效性
+    if (typeof url === 'string' && url.trim()) {
+      setVideoUrl(url.trim());
       setVisible(true);
+    } else {
+      console.warn('无效的视频URL:', url);
     }
   };
 
   return { openVideo };
 };
-    

@@ -1,33 +1,27 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import glide from "@/public/images/glide.png";
 import Image from "next/image";
-import GameHeader from "../components/ui/header";
 import "./HeroSection.css";
 import { getImgUrl } from "@/utils/request";
-import VideoModal, {useVideoModal} from "./video-modal";
+import { useVideoModal } from "./video-modal";
 import { usePathname } from "next/navigation";
-// import { useVideoModal } from "@/utils/useVideo";
 export default function HeroSection({
   openRegisterModal,
-  showGlide,
   homeDetails,
   buttonImgs,
   homeBackgroundUrl,
   openTips,
   glideImg,
 }: any) {
-  const [isModalVisible, setIsModalVisible] = useState(false);
   const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
-  const [btnType, setBtnType] = useState(1);
 
-  const {openVideo} = useVideoModal()
+  const { openVideo } = useVideoModal();
   // 确保只在客户端渲染
   useEffect(() => {
     setIsClient(true);
   }, []);
-  const videoUrl = "http://vjs.zencdn.net/v/oceans.mp4";
+  // const videoUrl = "http://vjs.zencdn.net/v/oceans.mp4";
   return (
     <section className="hero-section">
       <div className="game-hero">
@@ -36,8 +30,7 @@ export default function HeroSection({
         {isClient && pathname === "/" && (
           <div
             className="hero-section-slogan"
-            // onClick={() => setIsModalVisible(true)}
-            onClick={()=> openVideo(videoUrl)}
+            onClick={() => openVideo(getImgUrl(homeDetails.homeVideoUrl))}
           >
             <img
               className="hero-section-slogan-bg"
@@ -46,65 +39,96 @@ export default function HeroSection({
             />
           </div>
         )}
-        {btnType === 1 ? (
+        {!buttonImgs.homeButtonImg ? (
           <div className="hero-section-btn-group1">
-            <div className="hero-section-btn1" onClick={openTips}>
+            <div
+              className="hero-section-btn1"
+              onClick={() => {
+                if (buttonImgs.gameDownLoadUrl) {
+                  window.open(buttonImgs.gameDownLoadUrl);
+                } else {
+                  openTips();
+                }
+              }}
+            >
               <img
                 className="btn-bg"
-                src={getImgUrl(buttonImgs.topGameDownLoadImg)}
+                src={getImgUrl(buttonImgs.gameDownLoadImg)}
               />
             </div>
             <div
               className="hero-section-btn1"
               // onClick={openRegisterModal}
-              onClick={openTips}
+              onClick={() => {
+                if (buttonImgs.accountRegisterUrl) {
+                  window.open(buttonImgs.accountRegisterUrl);
+                } else {
+                  openTips();
+                }
+              }}
             >
               <img
                 className="btn-bg"
-                src={getImgUrl(buttonImgs.topAccountRegisterImg)}
+                src={getImgUrl(buttonImgs.accountRegisterImg)}
               />
             </div>
           </div>
         ) : (
           <div className="hero-section-btn-group2">
-            <div className="hero-section-down-btn" onClick={openTips}>
+            <div
+              className="hero-section-down-btn"
+              onClick={() => {
+                if (buttonImgs.homeButtonUrl) {
+                  window.open(buttonImgs.homeButtonUrl);
+                } else {
+                  openTips();
+                }
+              }}
+            >
               <img
                 className="btn-bg"
-                src={getImgUrl(buttonImgs.topGameDownLoadImg)}
+                src={getImgUrl(buttonImgs.homeButtonImg)}
               />
             </div>
-            <div>
+            <div className="hero-section-btn2-box">
               <div
                 className="hero-section-btn2"
                 // onClick={openRegisterModal}
-                onClick={openTips}
+                onClick={() => {
+                  if (buttonImgs.gameDownLoadUrl) {
+                    window.open(buttonImgs.gameDownLoadUrl);
+                  } else {
+                    openTips();
+                  }
+                }}
               >
                 <img
                   className="btn-bg"
-                  src={getImgUrl(buttonImgs.topAccountRegisterImg)}
+                  src={getImgUrl(buttonImgs.gameDownLoadImg)}
                 />
               </div>
 
               <div
                 className="hero-section-btn2"
                 // onClick={openRegisterModal}
-                onClick={openTips}
+                onClick={() => {
+                  if (buttonImgs.accountRegisterUrl) {
+                    window.open(buttonImgs.accountRegisterUrl);
+                  } else {
+                    openTips();
+                  }
+                }}
               >
                 <img
                   className="btn-bg"
-                  src={getImgUrl(buttonImgs.topAccountRegisterImg)}
+                  src={getImgUrl(buttonImgs.accountRegisterImg)}
                 />
               </div>
             </div>
           </div>
         )}
-        {showGlide && <Image className="game-glide" src={glideImg} alt="" />}
+        <Image className="game-glide" src={glideImg} alt="" />
       </div>
-      <VideoModal
-        url={videoUrl}
-        visible={isModalVisible}
-        onClose={() => setIsModalVisible(false)}
-      />
     </section>
   );
 }

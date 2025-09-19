@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./game-carousel.css";
 import { getImgUrl } from "@/utils/request";
+import { useVideoModal } from "./video-modal";
 
 export default function GameCarousel({ homeDetails }: any) {
-  const [images, setImages] = useState<string[]>([]);
+  const [images, setImages] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const intervalRef = useRef<any>(null);
-
+  const { openVideo } = useVideoModal();
   useEffect(() => {
-    if (homeDetails.homeCarouselUrls?.length) {
+    if (homeDetails.gameShots?.length) {
       setImages(
-        homeDetails.homeCarouselUrls.map((item: string) => getImgUrl(item))
+        homeDetails.gameShots.map((item: any) => ({
+          ...item,
+          videoUrl: getImgUrl(item.videoUrl),
+          imageUrl: getImgUrl(item.imageUrl),
+        }))
       );
     }
-  }, [homeDetails.homeCarouselUrls]);
+  }, [homeDetails.gameShots]);
 
   // 自动轮播
   useEffect(() => {
@@ -52,8 +57,25 @@ export default function GameCarousel({ homeDetails }: any) {
       <div className="carousel-container">
         <div className="carousel-slide-box">
           {images.map((slide, index) => (
-            <div key={slide} className={`carousel-slide ${getPosition(index)}`}>
-              <img src={slide} className="slide-image" alt={`Slide ${index}`} />
+            <div
+              key={slide.imageUrl}
+              className={`carousel-slide ${getPosition(index)}`}
+              onClick={() => {
+                if (slide.videoUrl) {
+                  openVideo(slide.videoUrl);
+                } else if (slide.jumpUrl) {
+                  window.open(slide.jumpUrl);
+                }
+              }}
+            >
+              <img
+                src={slide.imageUrl}
+                className="slide-image"
+                alt={`Slide ${index}`}
+              />
+              {!!slide.videoUrl && index === currentIndex && (
+                <div className="carousel-slide-video-play" />
+              )}
             </div>
           ))}
         </div>
@@ -69,8 +91,10 @@ export default function GameCarousel({ homeDetails }: any) {
         </div>
       </div>
       <div className="game-carousel-msg">
-        <div className="game-carousel-msg-title">洪荒旦古 一念神魔</div>
-
+        <div className="game-carousel-msg-title">
+          洪荒旦古&nbsp;&nbsp;&nbsp;一念神魔
+        </div>
+        <div className="game-carousel-msg-line"></div>
         <div className="game-carousel-msg-content">
           洪荒中有无数的远古生灵，
           <br />
