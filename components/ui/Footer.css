@@ -43,6 +43,7 @@
   font-size: 13.3px;
   line-height: 20px;
   text-align: left;
+  font-family: var(--font-alibaba-puhuiti);
 }
 
 .footer-text-line {

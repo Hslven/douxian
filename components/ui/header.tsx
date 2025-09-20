@@ -123,25 +123,28 @@ export default function Header({
       ))}
       {contactVisible && (
         <div className="nav-bar-contact" ref={modalRef}>
-          {contactList.map((item) => (
-            <div key={item.qrCodeId} className="nav-bar-contact-box">
-              <div
-                className="nav-bar-contact-code"
-                onClick={() => {
-                  if (item.qrCodeUrl) {
-                   
-                    window.open(item.qrCodeUrl);
-                  }
-                }}
-              >
-                <img
-                  className="nav-bar-contact-code-img"
-                  src={getImgUrl(item.qrCodeImage)}
-                />
+          <div className="nav-bar-contact-content">
+            {contactList.map((item) => (
+              <div key={item.qrCodeId} className="nav-bar-contact-box">
+                <div
+                  className="nav-bar-contact-code"
+                  onClick={() => {
+                    if (item.qrCodeUrl) {
+                      window.open(item.qrCodeUrl);
+                    }
+                  }}
+                >
+                  <img
+                    className="nav-bar-contact-code-img"
+                    src={getImgUrl(item.qrCodeImage)}
+                  />
+                </div>
+                <div className="nav-bar-contact-codename">
+                  {item.qrCodeName}
+                </div>
               </div>
-              <div className="nav-bar-contact-codename">{item.qrCodeName}</div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
     </div>
