@@ -78,8 +78,8 @@ export default function HeroSection({
             <div
               className="hero-section-down-btn"
               onClick={() => {
-                if (buttonImgs.homeButtonUrl) {
-                  window.open(buttonImgs.homeButtonUrl);
+                if (buttonImgs.gameDownLoadUrl) {
+                  window.open(buttonImgs.gameDownLoadUrl);
                 } else {
                   openTips();
                 }
@@ -87,7 +87,7 @@ export default function HeroSection({
             >
               <img
                 className="btn-bg"
-                src={getImgUrl(buttonImgs.homeButtonImg)}
+                src={getImgUrl(buttonImgs.gameDownLoadImg)}
               />
             </div>
             <div className="hero-section-btn2-box">
@@ -95,8 +95,8 @@ export default function HeroSection({
                 className="hero-section-btn2"
                 // onClick={openRegisterModal}
                 onClick={() => {
-                  if (buttonImgs.gameDownLoadUrl) {
-                    window.open(buttonImgs.gameDownLoadUrl);
+                  if (buttonImgs.homeButtonUrl) {
+                    window.open(buttonImgs.homeButtonUrl);
                   } else {
                     openTips();
                   }
@@ -104,7 +104,7 @@ export default function HeroSection({
               >
                 <img
                   className="btn-bg"
-                  src={getImgUrl(buttonImgs.gameDownLoadImg)}
+                  src={getImgUrl(buttonImgs.homeButtonImg)}
                 />
               </div>
 

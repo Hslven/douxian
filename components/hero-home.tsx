@@ -66,13 +66,6 @@ export default function HeroHome() {
         page.style.transform = "translateY(20px)";
       }
     });
-    console.log(
-      currentVisibleIndex,
-      currentPage,
-      scrollPosition,
-      clientHeight,
-      "index"
-    );
 
     if (currentVisibleIndex !== -1 && currentVisibleIndex !== currentPage) {
       setCurrentPage(currentVisibleIndex);
