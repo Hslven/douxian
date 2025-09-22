@@ -7,11 +7,12 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   async rewrites() {
-    const targetApiUrl = 'http://douxian.zhuzhu.pro:2285'
+    const targetApiUrl = "http://www.douxian2.cn:2285";
+    // const targetApiUrl = 'http://douxian.zhuzhu.pro:2285'
 
     return [
       {
-        source: '/api/proxy/:path*',
+        source: "/api/proxy/:path*",
         destination: `${targetApiUrl}/:path*`,
       },
     ];
