@@ -56,19 +56,19 @@ export default function GameInfo() {
               src={getImgUrl(roleList[activeIndex]?.careerBadgeImage)}
             />
           </div>
-          <div className="game-info-role-number">
+          <div className="game-info-role-number game-info-role-number1">
             操作难度： <Rate value={roleList[activeIndex]?.careerDifficulty} />
           </div>
-          <div className="game-info-role-number">
+          <div className="game-info-role-number game-info-role-number2">
             转职方向：{getCurrentCareerDirection()}
           </div>
           <div className="game-info-role-descript">
             {roleList[activeIndex]?.remark}
           </div>
           <div className="game-info-video-group">
-            {(roleList[activeIndex]?.careerMaterial || []).slice(0, 2).map((item) => (
+            {(roleList[activeIndex]?.careerMaterial || []).slice(0, 2).map((item, index) => (
               <div
-                key={item.videoUrl}
+                key={item.videoUrl + index}
                 className="game-info-video"
                 onClick={() => openVideo(getImgUrl(item.videoUrl))}
               >

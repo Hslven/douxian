@@ -26,19 +26,6 @@ export default function HeroSection({
     <section className="hero-section">
       <div className="game-hero">
         <img className="section-bg" src={getImgUrl(homeBackgroundUrl)} alt="" />
-        {/* 只在路由为"/"时显示，并且确保在客户端渲染 */}
-        {isClient && pathname === "/" && (
-          <div
-            className="hero-section-slogan"
-            onClick={() => openVideo(getImgUrl(homeDetails.homeVideoUrl))}
-          >
-            <img
-              className="hero-section-slogan-bg"
-              src={getImgUrl(homeDetails.homeSloganUrl)}
-              alt=""
-            />
-          </div>
-        )}
         {!buttonImgs.homeButtonImg ? (
           <div className="hero-section-btn-group1">
             <div
@@ -125,6 +112,19 @@ export default function HeroSection({
                 />
               </div>
             </div>
+          </div>
+        )}
+                {/* 只在路由为"/"时显示，并且确保在客户端渲染 */}
+        {isClient && pathname === "/" && (
+          <div
+            className="hero-section-slogan"
+            onClick={() => openVideo(getImgUrl(homeDetails.homeVideoUrl))}
+          >
+            <img
+              className="hero-section-slogan-bg"
+              src={getImgUrl(homeDetails.homeSloganUrl)}
+              alt=""
+            />
           </div>
         )}
         <Image className="game-glide" src={glideImg} alt="" />

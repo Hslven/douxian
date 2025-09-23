@@ -5,7 +5,7 @@
   align-items: center;
   min-width: 1920px;
   position: relative;
-  gap: 30px;
+  gap: 55px;
   justify-content: center;
 }
 
@@ -124,35 +124,40 @@
 
 .game-carousel-msg {
   width: 621px;
+  height: 660px;
   text-align: center;
 }
 .game-carousel-msg-title {
   font-family: var(--font-sc-heavy);
   font-size: 52px;
+  letter-spacing: 7px;
   color: #e9ba78;
 }
 
 .game-carousel-msg-line {
-  width: 391px;
+  width: 491px;
   height: 15px;
   background: url(../public/images/game_carousel_msg_line.png) center center
     no-repeat;
   background-size: cover;
   display: inline-block;
-  margin: 25px 0;
+  margin-top: 25px;
+  margin-bottom: 18px;
 }
 
 .game-carousel-msg-content {
   font-family: var(--font-sc-bold);
   color: #ecd2ad;
   font-size: 22px;
+
+  line-height: 35.24px;
+  letter-spacing: 3.7px;
 }
 
 .carousel-slide-video-play {
-    background: url(../public/images/video_play.png) center center
-    no-repeat;
+  background: url(../public/images/video_play.png) center center no-repeat;
   background-size: cover;
-    width: 134px;
+  width: 134px;
   height: 134px;
   position: absolute;
   top: 50%;

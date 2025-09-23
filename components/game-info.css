@@ -17,7 +17,7 @@
   object-fit: cover;
   color: transparent;
   position: absolute;
-  left: 0;
+  left: 50px;
   bottom: 0px;
 }
 
@@ -36,6 +36,7 @@
 
 .game-info-role-card {
   width: 600px;
+  height: 610px;
   position: relative;
   margin-left: 46px;
   z-index: 1;
@@ -44,38 +45,53 @@
 }
 
 .game-info-role-card-header {
+  width: 575px;
+  height: 200px;
   display: flex;
   justify-content: space-between;
 }
 
 .game-info-role-name {
-  width: 277px;
-  height: 153px;
+  width: 285px;
+  height: 163px;
+  margin-top: 10px;
+  margin-left: 6px;
 }
 
 .game-info-role-badge {
   width: 175px;
   height: 238px;
+  margin-top: -13px;
 }
 
 .game-info-role-number {
   display: flex;
   align-items: center;
   font-size: 24.5px;
-  margin: 10px 0;
+  /* margin: 10px 0; */
+  padding-left: 5px;
+}
+
+.game-info-role-number1 {
+  margin-top: 10px;
 }
 
 .game-info-role-descript {
-  height: 107px;
+  height: 115px;
   font-size: 18.5px;
   text-align: left;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 3; /* 控制显示的行数 */
   overflow: hidden; /* 超出部分隐藏 */
+  line-height: 32px;
+  padding-top: 15px;
+  box-sizing: content-box;
 }
 
 .game-info-video-group {
+  width: 603px;
+  margin-left: 2px;
   height: 179px;
   display: flex;
   justify-content: space-between;
@@ -109,7 +125,7 @@
   display: flex;
   align-items: center;
   width: 848px;
-  margin-top: 53px;
+  margin-top: 35px;
   height: 141px;
   gap: 60px;
   justify-content: space-between;
