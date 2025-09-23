@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development next dev --turbopack --port 2286",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start --port 2286",
     "lint": "next lint",
@@ -27,6 +27,7 @@
     "@tailwindcss/postcss": "^4.0.3",
     "@types/aos": "^3.0.7",
     "@types/classnames": "^2.3.0",
+    "cross-env": "^10.0.0",
     "postcss": "^8.5.1",
     "postcss-px-to-viewport": "^1.1.1",
     "tailwindcss": "^4.0.3"
