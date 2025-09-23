@@ -104,7 +104,7 @@ export default function GameCarousel({ homeDetails }: any) {
           <br />
           成为“圣”。远古生灵中最厉害
           <br />
-          的一个叫做鸿钧，鸿钧凭借神器天书“封神榜“
+          的一个叫做鸿钧，鸿钧凭借神器天书“封神榜”
           <br />
           成为了最早的“圣”级高手之后收了六个弟子:
           <br />
@@ -116,7 +116,7 @@ export default function GameCarousel({ homeDetails }: any) {
           <br />
           接引道人和准提道人回到了西方世界，鸿钧将天道神器
           <br />
-          封神榜”交给了元始天尊保管，
+          “封神榜”交给了元始天尊保管，
           <br />
           自己不知所终... <br />
           太上老君清净无为，四处游历。

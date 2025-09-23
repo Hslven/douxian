@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./game-active.css";
 import request, { getImgUrl } from "@/utils/request";
 import { useVideoModal } from "./video-modal";
+import classNames from "classnames";
 
 const noticeTypeMap = {
   LATEST: "最新",
@@ -73,11 +74,16 @@ export default function GameActive({ homeDetails }: any) {
             }
           }}
         >
-          <img
-            className="game-active-img"
-            src={activeList[activeIndex]?.imageUrl}
-            alt=""
-          />
+          {activeList.map((item, index) => (
+            <img
+              key={item.imageUrl + index}
+              className={classNames("game-active-img", {
+                "game-active-img-active": activeIndex === index,
+              })}
+              src={item?.imageUrl}
+              alt=""
+            />
+          ))}
           {!!activeList[activeIndex]?.videoUrl && (
             <div className="game-active-play" />
           )}
