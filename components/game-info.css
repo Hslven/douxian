@@ -20,7 +20,7 @@
   /* left: -50px;
   bottom: 0px; */
   width: 1920px;
-  height: 1080px;
+  height: 100%;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
