@@ -12,13 +12,18 @@
 }
 
 .game-info-role-img {
-  height: 100vh;
+  /* height: 100vh; */
   max-width: none;
   object-fit: cover;
   color: transparent;
   position: absolute;
-  left: -50px;
-  bottom: 0px;
+  /* left: -50px;
+  bottom: 0px; */
+  width: 1920px;
+  height: 1080px;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .game-info-role-info {
