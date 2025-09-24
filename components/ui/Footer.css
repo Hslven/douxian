@@ -40,7 +40,8 @@
 }
 
 .footer-text {
-  font-size: 13.3px;
+  font-size: 12.8px;
+  letter-spacing: 2px;
   line-height: 20px;
   text-align: left;
   font-family: var(--font-alibaba-puhuiti);

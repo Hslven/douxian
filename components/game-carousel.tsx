@@ -92,7 +92,7 @@ export default function GameCarousel({ homeDetails }: any) {
       </div>
       <div className="game-carousel-msg">
         <div className="game-carousel-msg-title">
-          洪荒旦古&nbsp;&nbsp;一念神魔
+          洪荒亘古&nbsp;&nbsp;一念神魔
         </div>
         <div className="game-carousel-msg-line"></div>
         <div className="game-carousel-msg-content">
