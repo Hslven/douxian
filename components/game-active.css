@@ -134,11 +134,12 @@
   height: 106px;
   border-bottom: 1px solid #3c321d;
   color: #d2841c;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2; /* 控制显示的行数 */
-  overflow: hidden; /* 超出部分隐藏 */
+  display: flex;
+  justify-content: center;  /* Horizontally centers the text */
+  align-items: center;      /* Vertically centers the text */
   cursor: pointer;
+  text-align: center;       /* Ensures the text is centered if it wraps */
+  overflow: hidden;         /* Hide overflow */
 }
 
 .game-info-news-item {
