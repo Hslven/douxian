@@ -134,12 +134,17 @@
   height: 106px;
   border-bottom: 1px solid #3c321d;
   color: #d2841c;
-  display: flex;
-  justify-content: center;  /* Horizontally centers the text */
-  align-items: center;      /* Vertically centers the text */
+  display: -webkit-box;          /* 使用 webkit-box 来处理多行文本 */
+  -webkit-box-orient: vertical;  /* 设置为垂直方向 */
+  -webkit-line-clamp: 2;         /* 限制为两行 */
+  overflow: hidden;              /* 超出部分隐藏 */
+  text-overflow: ellipsis;       /* 超出部分显示省略号 */
+  justify-content: center;       /* 水平居中 */
+  align-items: center;           /* 垂直居中 */
   cursor: pointer;
-  text-align: center;       /* Ensures the text is centered if it wraps */
-  overflow: hidden;         /* Hide overflow */
+  text-align: center;            /* 让文本在每一行内居中 */
+  display: flex;                 /* 使用 flexbox 来确保垂直居中 */
+  flex-direction: column;        /* 垂直排列 */
 }
 
 .game-info-news-item {
