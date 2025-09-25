@@ -9,10 +9,6 @@
 .new-bg {
   width: 1920px;
   height: 627px;
-  overflow: hidden;
-  background: url(../../../public/images/new_bg_header.png) center center
-    no-repeat;
-  background-size: cover;
 }
 
 .detail-title {
@@ -67,6 +63,11 @@
   line-height: 2.5; /* 非px单位保持不变 */
   color: #d3bc9b;
   overflow-y: auto;
+}
+
+.detail-content img {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* WebKit 浏览器滚动条样式（精细控制） */

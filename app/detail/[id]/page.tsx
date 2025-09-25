@@ -51,7 +51,7 @@ export default function Detail({
         currentPage={-1}
         scrollToPage={scrollToPage}
       />
-      <div className="new-bg"></div>
+      <img className="new-bg" src={getImgUrl(buttonImgs.noticeHomeUrl)} />
       {/* 添加ref到detail-container-wrap元素 */}
       <div className="detail-container-wrap" ref={detailContainerRef}>
         <div className="detail-container">

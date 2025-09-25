@@ -120,3 +120,9 @@
   --font-sc-heavy: 'SourceHanSerifCN-Heavy', serif;
   --font-alibaba-puhuiti: 'AlibabaPuHuiTi-3-55-Regular', serif;
 }
+img:not([src]),
+/* 处理src为空的图片 */
+img[src=""],img:invalid {
+  /* 隐藏图片 */
+  opacity: 0;
+}

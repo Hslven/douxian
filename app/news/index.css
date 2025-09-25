@@ -11,9 +11,6 @@
 .new-bg {
   width: 1920px;
   height: 627px;
-  overflow: hidden;
-  background: url(../../public/images/new_bg_header.png) center center no-repeat;
-  background-size: cover;
 }
 
 .news-header {

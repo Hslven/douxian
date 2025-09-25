@@ -70,7 +70,7 @@
 }
 
 .game-info-news {
-  background: url(../public/images/game_news_bg.png) center center no-repeat;
+  /* background: url(../public/images/game_news_bg.png) center center no-repeat; */
   background-size: cover;
   padding: 54px;
   width: 710px;
@@ -184,8 +184,6 @@
 }
 
 .game-active-toy {
-  background: url(../public/images/active_toy.png) center center no-repeat;
-  background-size: cover;
   width: 198px;
   height: 230px;
   position: fixed;

@@ -70,7 +70,7 @@ export default function NewsPage() {
         currentPage={-1}
         scrollToPage={scrollToPage}
       />
-      <div className="new-bg"></div>
+      <img className="new-bg" src={getImgUrl(buttonImgs.noticeHomeUrl)} />
       {/* 添加ref到news-container-wrap元素 */}
       <div className="news-container-wrap" ref={newsContainerRef}>
         <div className="news-container">
