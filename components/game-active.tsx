@@ -19,6 +19,7 @@ export default function GameActive({ homeDetails }: any) {
   const intervalRef = useRef<any>(null);
   const { openVideo } = useVideoModal();
   useEffect(() => {
+    console.log(homeDetails.homeNewsUrl, 'homeDetails');
     if (homeDetails.homeCarouselUrls?.length) {
       setActiveList(
         homeDetails.homeCarouselUrls.map((item) => ({
@@ -100,6 +101,8 @@ export default function GameActive({ homeDetails }: any) {
           ))}
         </div>
       </div>
+            {/* <div className="game-info-news" style={{background:`url(${getImgUrl(homeDetails.homeNewsBorderUrl)}) center center no-repeat`}}> */}
+
       <div className="game-info-news">
         <div className="game-info-news-header">
           <div className="game-info-news-header-title">
@@ -163,8 +166,8 @@ export default function GameActive({ homeDetails }: any) {
           })}
         </div>
       </div>
-      {/* <img className="game-active-toy" src={getImgUrl(homeDetails.homeNewsUrl)} /> */}
-            <div className="game-active-toy" />
+      <img className="game-active-toy" src={getImgUrl(homeDetails.homeNewsUrl)} />
+            {/* <div className="game-active-toy" /> */}
 
     </div>
   );

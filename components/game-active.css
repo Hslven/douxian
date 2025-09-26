@@ -70,7 +70,9 @@
 }
 
 .game-info-news {
-  background: url(../public/images/game_active_bg.png) center center no-repeat;
+  background: url(../public/images/game_active_bg-right.png) center center no-repeat;
+  background-size: 100% 100%;
+
   background-size: cover;
   padding: 54px;
   width: 710px;
