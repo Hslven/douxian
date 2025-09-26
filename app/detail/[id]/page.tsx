@@ -17,11 +17,16 @@ export default function Detail({
   const [detail, setDetail] = useState<any>({});
   const [homeDetails, setHomeDetails] = useState<any>({});
   const [buttonImgs, setButtonImgs] = useState<any>({});
+    const [buttonImgsTop, setButtonImgsTop] = useState<any>({});
+    const [buttonImgsBottom, setButtonImgsBottom] = useState<any>({});
+
   // 创建ref引用detail-container-wrap元素
   const detailContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // request.get("/douxian/web/home").then((res) => setHomeDetails(res));
     request.get("/douxian/web/button").then((res) => setButtonImgs(res));
+
+    
   }, []);
   useEffect(() => {
     if (id) {

@@ -100,7 +100,7 @@ export default function GameActive({ homeDetails }: any) {
           ))}
         </div>
       </div>
-      <div className="game-info-news" style={{background:`url(${getImgUrl(homeDetails.homeNewsBorderUrl)}) center center no-repeat`}}>
+      <div className="game-info-news">
         <div className="game-info-news-header">
           <div className="game-info-news-header-title">
             {Object.keys(noticeTypeMap).map((type) => (
@@ -163,7 +163,9 @@ export default function GameActive({ homeDetails }: any) {
           })}
         </div>
       </div>
-      <img className="game-active-toy" src={getImgUrl(homeDetails.homeNewsUrl)} />
+      {/* <img className="game-active-toy" src={getImgUrl(homeDetails.homeNewsUrl)} /> */}
+            <div className="game-active-toy" />
+
     </div>
   );
 }

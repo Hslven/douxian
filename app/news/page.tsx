@@ -24,12 +24,29 @@ export default function NewsPage() {
   const [homeDetails, setHomeDetails] = useState<any>({});
   const [buttonImgs, setButtonImgs] = useState<any>({});
   const [activeNewsType, setActiveNewsType] = useState("LATEST");
-
+    const [buttonImgsTop, setButtonImgsTop] = useState<any>({});
+    const [buttonImgsBottom, setButtonImgsBottom] = useState<any>({});
   // 创建ref引用news-container元素
   const newsContainerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // request.get("/douxian/web/home").then((res) => setHomeDetails(res));
     request.get("/douxian/web/button").then((res) => setButtonImgs(res));
+      request.get("/douxian/web/notice/config")
+    .then((res) => {
+      // Assuming the response structure has these fields
+      const { noticeContentTopUrl, noticeContentBottomUrl } = res.data; // Adjust depending on response structure
+      
+      // Setting the URLs in the states
+      setButtonImgsTop(noticeContentTopUrl);
+      setButtonImgsBottom(noticeContentBottomUrl);
+
+      // Logging to verify the data
+      console.log('Top Image URL:', noticeContentTopUrl);
+      console.log('Bottom Image URL:', noticeContentBottomUrl);
+    })
+    .catch((error) => {
+      console.error('Error fetching notice config:', error);
+    });
   }, []);
   const feachData = (
     noticeType: string,
@@ -70,10 +87,13 @@ export default function NewsPage() {
         currentPage={-1}
         scrollToPage={scrollToPage}
       />
-      <img className="new-bg" src={getImgUrl(buttonImgs.noticeHomeUrl)} />
+      <img className="new-bg" src={getImgUrl(buttonImgsTop)} />
       {/* 添加ref到news-container-wrap元素 */}
       <div className="news-container-wrap" ref={newsContainerRef}>
-        <div className="news-container">
+        <div className="news-container"   style={{
+    background: `url(${buttonImgsBottom}) center center no-repeat`, // Dynamically set the background
+    backgroundSize: 'cover', // Optionally ensure the background image covers the container
+  }}>
           <NewsBox
             header={
               <div className="news-header">
