@@ -1,0 +1,90 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.3s ease;
+}
+
+.tips-modal-content {
+  background: url(../public/images/tips_modal.png) center center
+    no-repeat;
+  background-size: cover;
+  position: relative;
+  animation: scaleIn 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  width: 455px; /* 原宽度 48.87vw × 0.6 等比缩小 */
+  height: 258px; /* 36.25vw × 0.8 = 29vw */
+  padding: 1.6vw 5vw; /* 上下: 2vw×0.8=1.6vw, 左右: 6.25vw×0.8=5vw */
+  align-items: center;
+  padding-top: 98.5px;
+  gap: 30px;
+  /* c */
+}
+
+.tips-modal-close-button {
+  background: url(../public/images/modal_close.png) center center no-repeat;
+  background-size: cover;
+  position: absolute;
+  right: 0px;
+  top: 17px;
+  cursor: pointer;
+  width: 24px; /* 原宽度 3.04vw × 0.6 等比缩小 */
+  height: 24px; /* 原高度 3.04vw × 0.6 等比缩小 */
+}
+
+.tips-modal-close-button:hover {
+  /* color: #333; */
+  opacity: 0.8;
+}
+
+.tips-modal-msg {
+  font-family: var(--font-sc-bold);
+  font-size: 20.67px;
+  color: #370f00;
+}
+
+.tips-modal-btn {
+  background: url(../public/images/tips_modal_btn.png) center center no-repeat;
+  background-size: cover;
+  width: 149px;
+  height: 44px;
+  cursor: pointer;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

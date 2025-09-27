@@ -2,9 +2,12 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import "./HeroSection.css";
-import { getImgUrl } from "@/utils/request";
+import request, { getImgUrl } from "@/utils/request";
 import { useVideoModal } from "./video-modal";
 import { usePathname } from "next/navigation";
+import AppointmentModal from "./appointment-modal";
+import TipsModal from "./tips-modal";
+
 export default function HeroSection({
   openRegisterModal,
   homeDetails,
@@ -15,6 +18,9 @@ export default function HeroSection({
 }: any) {
   const pathname = usePathname();
   const [isClient, setIsClient] = useState(false);
+  const [tipsVisible, setTipsVisible] = useState(false);
+  const [tips, setTips] = useState("预约成功");
+  const [appointmentVisible, setAppointmentVisible] = useState(false);
 
   const { openVideo } = useVideoModal();
   // 确保只在客户端渲染
@@ -50,7 +56,7 @@ export default function HeroSection({
                 if (buttonImgs.accountRegisterUrl) {
                   window.open(buttonImgs.accountRegisterUrl);
                 } else {
-                  openTips();
+                  setAppointmentVisible(true);
                 }
               }}
             >
@@ -102,7 +108,7 @@ export default function HeroSection({
                   if (buttonImgs.accountRegisterUrl) {
                     window.open(buttonImgs.accountRegisterUrl);
                   } else {
-                    openTips();
+                    setAppointmentVisible(true);
                   }
                 }}
               >
@@ -114,7 +120,7 @@ export default function HeroSection({
             </div>
           </div>
         )}
-                {/* 只在路由为"/"时显示，并且确保在客户端渲染 */}
+        {/* 只在路由为"/"时显示，并且确保在客户端渲染 */}
         {isClient && pathname === "/" && (
           <div
             className="hero-section-slogan"
@@ -129,6 +135,28 @@ export default function HeroSection({
         )}
         <Image className="game-glide" src={glideImg} alt="" />
       </div>
+      <AppointmentModal
+        visible={appointmentVisible}
+        onClose={() => setAppointmentVisible(false)}
+        onSubmit={async (phone: string) => {
+          if (!phone) return;
+          if (/^1[3-9]\d{9}$/.test(phone)) {
+            const res = await request.post("/douxian/web/subscribe", {
+              subscribePhone: phone,
+            });
+            setTips("预约成功");
+            setAppointmentVisible(false);
+          } else {
+            setTips("手机格式错误");
+          }
+          setTipsVisible(true);
+        }}
+      />
+      <TipsModal
+        tips={tips}
+        visible={tipsVisible}
+        onClose={() => setTipsVisible(false)}
+      />
     </section>
   );
 }

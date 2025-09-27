@@ -1,0 +1,113 @@
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10001;
+}
+
+.modal-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  animation: fadeIn 0.3s ease;
+}
+
+.appointment-modal-content {
+  background: url(../public/images/appointment_modal.png) center center
+  /* background: url(../public/images/appointment_modal.png) center center */
+    no-repeat;
+  background-size: cover;
+  position: relative;
+  animation: scaleIn 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  width: 771px; /* 原宽度 48.87vw × 0.6 等比缩小 */
+  height: 492px; /* 36.25vw × 0.8 = 29vw */
+  padding: 1.6vw 5vw; /* 上下: 2vw×0.8=1.6vw, 左右: 6.25vw×0.8=5vw */
+  align-items: center;
+  padding-top: 145px;
+  gap: 30px;
+  /* padding-right: 105px; */
+  /* c */
+}
+
+.appointment-modal-close-button {
+  background: url(../public/images/modal_close_34.png) center center no-repeat;
+  background-size: cover;
+  position: absolute;
+right: 1px;
+    top: 26px;
+  cursor: pointer;
+  width: 34px; /* 原宽度 3.04vw × 0.6 等比缩小 */
+  height: 34px; /* 原高度 3.04vw × 0.6 等比缩小 */
+}
+
+.appointment-modal-label {
+    font-size: 22.67px;
+    color: #3d0f00;
+    font-family: var(--font-alibaba-puhuiti);
+}
+
+.appointment-modal-input {
+    width: 358px;
+    height: 45px;
+    font-family: var(--font-alibaba-puhuiti);
+    border: 1px solid #b9aca6;
+    background: #e6e1de;
+    font-size: 20.67px;
+    color: #3d0f00;
+    outline: none;
+    box-shadow: none
+}
+
+.appointment-modal-close-button:hover {
+  /* color: #333; */
+  opacity: 0.8;
+}
+
+.appointment-modal-msg {
+  font-family: var(--font-alibaba-puhuiti);
+  font-size: 17.6px;
+  color: #3d0f00;
+    margin-top: 5px;
+    line-height: 24px;
+    margin-left: 15px;
+}
+
+.appointment-modal-btn {
+  background: url(../public/images/appointment_modal_btn.png) center center no-repeat;
+  background-size: cover;
+  width: 283px;
+  height: 85px;
+  cursor: pointer;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
