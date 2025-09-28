@@ -11,7 +11,9 @@
 
 .game-active-box {
   background: url(../public/images/game_active_bg.png) center center no-repeat;
+  
   background-size: cover;
+  background-size: 100% 100%;
   width: 931px;
   height: 565px;
 }
@@ -71,9 +73,9 @@
 
 .game-info-news {
   background: url(../public/images/game_active_bg-right.png) center center no-repeat;
-  background-size: 100% 100%;
-
+  
   background-size: cover;
+  background-size: 100% 100%;
   padding: 54px;
   width: 710px;
   height: 565px;
@@ -186,9 +188,15 @@
 }
 
 .game-active-toy {
-  width: 198px;
-  height: 230px;
+  /* width: 198px!important; */
+  /* height: 230px!important; */
   position: fixed;
   right: 36px;
   bottom: 15px;
+}
+@media (max-width: 768px) {
+  .game-active-toy {
+    width: 198px;
+    height: 230px;
+  }
 }

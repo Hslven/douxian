@@ -178,7 +178,7 @@ export default function GameActive({ homeDetails }: any) {
           })}
         </div>
       </div>
-      <img className="game-active-toy" src={getImgUrl(homeDetails.homeNewsUrl)} />
+      <img className="game-active-toy" style={{width:' 198px'}} src={getImgUrl(homeDetails.homeNewsUrl)} />
       {/* <div className="game-active-toy" /> */}
 
     </div>
