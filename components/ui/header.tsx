@@ -61,10 +61,25 @@ export default function Header({
 
   useEffect(() => {
     request.get("/douxian/web/qr-code").then((res) => {
-      setContactList((res as any) || []);
+            const sortedList = sortContacts((res || []));
+      setContactList(sortedList);
     });
   }, []);
+  const sortContacts = (contacts) => {
 
+    const order = {
+      "官方Q群": 1,
+      "抖音": 2,
+      "百度贴吧": 3,
+      "bilibili": 4,
+    };
+
+    return contacts.sort((a, b) => {
+      const orderA = order[a.qrCodeName] || 5; // 默认值为5，表示不在指定顺序中的项
+      const orderB = order[b.qrCodeName] || 5;
+      return orderA - orderB;
+    });
+  };
   // 点击弹窗外部关闭
   useEffect(() => {
     const handleClickOutside = (event) => {

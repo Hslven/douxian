@@ -66,7 +66,8 @@ export default function GameActive({ homeDetails }: any) {
     <div className="game-active">
       <div className="game-active-box" style={
         homeDetails.homeNewsBorderSideUrl
-          ? { background: `url(${getImgUrl(homeDetails.homeNewsBorderSideUrl)}) center center no-repeat` }
+  
+          ? { background: `url(${getImgUrl(homeDetails.homeNewsBorderSideUrl)}) center center no-repeat`,backgroundSize: '100% 100%'}
           : undefined
       }>
 
@@ -112,7 +113,7 @@ export default function GameActive({ homeDetails }: any) {
         className="game-info-news"
         style={
           homeDetails.homeNewsBorderUrl
-            ? { background: `url(${getImgUrl(homeDetails.homeNewsBorderUrl)}) center center no-repeat` }
+            ? { background: `url(${getImgUrl(homeDetails.homeNewsBorderUrl)}) center center no-repeat`,backgroundSize: '100% 100%' }
             : undefined
         }
       >

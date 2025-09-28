@@ -74,7 +74,8 @@ export default function HeroSection({
                 if (buttonImgs.gameDownLoadUrl) {
                   window.open(buttonImgs.gameDownLoadUrl);
                 } else {
-                  openTips();
+                  // openTips();
+                    setAppointmentVisible(true);
                 }
               }}
             >
@@ -108,7 +109,10 @@ export default function HeroSection({
                   if (buttonImgs.accountRegisterUrl) {
                     window.open(buttonImgs.accountRegisterUrl);
                   } else {
-                    setAppointmentVisible(true);
+                    // setAppointmentVisible(true);
+                    // 
+                  openTips();
+
                   }
                 }}
               >
