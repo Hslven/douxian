@@ -64,7 +64,13 @@ export default function GameActive({ homeDetails }: any) {
 
   return (
     <div className="game-active">
-      <div className="game-active-box">
+      <div className="game-active-box" style={
+        homeDetails.homeNewsBorderSideUrl
+          ? { background: `url(${getImgUrl(homeDetails.homeNewsBorderSideUrl)}) center center no-repeat` }
+          : undefined
+      }>
+
+        {/* homeNewsBorderSideUrl */}
         <div
           className="game-active-img-warp"
           onClick={() => {
@@ -93,17 +99,24 @@ export default function GameActive({ homeDetails }: any) {
           {activeList.map((_, index) => (
             <button
               key={index}
-              className={`game-active-dot ${
-                activeIndex === index ? "game-active-dot-active" : ""
-              }`}
+              className={`game-active-dot ${activeIndex === index ? "game-active-dot-active" : ""
+                }`}
               onClick={() => setActiveIndex(index)}
             />
           ))}
         </div>
       </div>
-            {/* <div className="game-info-news" style={{background:`url(${getImgUrl(homeDetails.homeNewsBorderUrl)}) center center no-repeat`}}> */}
+      {/* <div className="game-info-news" style={{background:`url(${getImgUrl(homeDetails.homeNewsBorderUrl)}) center center no-repeat`}}> */}
 
-      <div className="game-info-news">
+      <div
+        className="game-info-news"
+        style={
+          homeDetails.homeNewsBorderUrl
+            ? { background: `url(${getImgUrl(homeDetails.homeNewsBorderUrl)}) center center no-repeat` }
+            : undefined
+        }
+      >
+        {/* homeNewsBorderUrl */}
         <div className="game-info-news-header">
           <div className="game-info-news-header-title">
             {Object.keys(noticeTypeMap).map((type) => (
@@ -112,9 +125,8 @@ export default function GameActive({ homeDetails }: any) {
                   setActiveNewsType(type);
                   getNewsDetail(type);
                 }}
-                className={`game-info-news-tab ${
-                  activeNewsType === type ? "game-info-news-tab-active" : ""
-                }`}
+                className={`game-info-news-tab ${activeNewsType === type ? "game-info-news-tab-active" : ""
+                  }`}
                 key={type}
               >
                 {noticeTypeMap[type]}
@@ -155,7 +167,7 @@ export default function GameActive({ homeDetails }: any) {
                   </span>
                   <span
                     className="game-info-news-title"
-                    // style={{ color: item.noticeTitleColor }}
+                  // style={{ color: item.noticeTitleColor }}
                   >
                     {item.noticeTitle}
                   </span>
@@ -167,7 +179,7 @@ export default function GameActive({ homeDetails }: any) {
         </div>
       </div>
       <img className="game-active-toy" src={getImgUrl(homeDetails.homeNewsUrl)} />
-            {/* <div className="game-active-toy" /> */}
+      {/* <div className="game-active-toy" /> */}
 
     </div>
   );

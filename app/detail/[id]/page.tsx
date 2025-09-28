@@ -25,7 +25,23 @@ export default function Detail({
   useEffect(() => {
     // request.get("/douxian/web/home").then((res) => setHomeDetails(res));
     request.get("/douxian/web/button").then((res) => setButtonImgs(res));
+    request.get("/douxian/web/notice/config")
+      .then((res) => {
+        console.log(res, 'res');
+        // Assuming the response structure has these fields
+        const { noticeContentTopUrl, noticeContentBottomUrl } = res; // Adjust depending on response structure
 
+        // Setting the URLs in the states
+        setButtonImgsTop(noticeContentTopUrl);
+        setButtonImgsBottom(noticeContentBottomUrl);
+
+        // Logging to verify the data
+        console.log('Top Image URL:', noticeContentTopUrl);
+        console.log('Bottom Image URL:', noticeContentBottomUrl);
+      })
+      .catch((error) => {
+        console.error('Error fetching notice config:', error);
+      });
     
   }, []);
   useEffect(() => {
@@ -56,10 +72,15 @@ export default function Detail({
         currentPage={-1}
         scrollToPage={scrollToPage}
       />
-      <img className="new-bg" src={getImgUrl(buttonImgs.noticeHomeUrl)} />
+      <img className="new-bg" src={getImgUrl(buttonImgsTop)} />
       {/* 添加ref到detail-container-wrap元素 */}
       <div className="detail-container-wrap" ref={detailContainerRef}>
-        <div className="detail-container">
+        <div className="detail-container"
+        style={{
+          background: `url(${getImgUrl(buttonImgsBottom)}) center center no-repeat`, // Dynamically set the background
+          backgroundSize: 'cover', // Optionally ensure the background image covers the container
+        }}
+        >
           <div className="detail-title">
             新闻资讯 <Image className="detail-title-arrow" src={arrow} alt="" />
           </div>
