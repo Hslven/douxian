@@ -74,8 +74,8 @@ export default function HeroSection({
                 if (buttonImgs.gameDownLoadUrl) {
                   window.open(buttonImgs.gameDownLoadUrl);
                 } else {
-                  // openTips();
-                    setAppointmentVisible(true);
+                  openTips();
+                    // setAppointmentVisible(true);
                 }
               }}
             >
