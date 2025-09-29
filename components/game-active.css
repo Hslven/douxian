@@ -187,8 +187,8 @@
 }
 
 .game-active-toy {
-  /* width: 198px!important; */
-  /* height: 230px!important; */
+  width: 198px!important;
+  height: 230px!important;
   position: fixed;
   right: 36px;
   bottom: 15px;

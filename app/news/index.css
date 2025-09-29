@@ -1,6 +1,6 @@
 .news-container {
   background: url(../../public/images/new_bg.png) center center no-repeat;
-  background-size: cover;
+  background-size: 100%!important;
   display: flex;
   justify-content: center;
   align-items: start;

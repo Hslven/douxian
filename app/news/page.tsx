@@ -93,7 +93,7 @@ export default function NewsPage() {
       <div className="news-container-wrap" ref={newsContainerRef}>
         <div className="news-container" style={{
           background: `url(${getImgUrl(buttonImgsBottom)}) center center no-repeat`, // Dynamically set the background
-          backgroundSize: 'cover', // Optionally ensure the background image covers the container
+              backgroundSize:' 100%'
         }}>
           <NewsBox
             header={
