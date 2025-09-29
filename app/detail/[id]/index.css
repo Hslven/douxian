@@ -1,6 +1,6 @@
 .detail-container {
   background: url(../../../public/images/new_bg.png) center center no-repeat;
-  background-size: cover;
+  background-size: 100%!important;
   margin: 0 auto;
   position: relative;
   height: 1610px;
