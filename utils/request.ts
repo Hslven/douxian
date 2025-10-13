@@ -85,7 +85,7 @@ export default request;
 
 export const getImgUrl = (url: string) => {
   if (!url || typeof url !== 'string') return undefined;
-  const prefix = 'http://dxadmin.douxian2.cn';
+  const prefix = 'https://dxadmin.douxian2.cn';
   // const prefix = "http://douxian.zhuzhu.pro";
   return url.startsWith(prefix) ? url : `${prefix}${url}`;
 };
