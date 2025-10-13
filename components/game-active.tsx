@@ -19,7 +19,6 @@ export default function GameActive({ homeDetails }: any) {
   const intervalRef = useRef<any>(null);
   const { openVideo } = useVideoModal();
   useEffect(() => {
-    console.log(homeDetails.homeNewsUrl, 'homeDetails');
     if (homeDetails.homeCarouselUrls?.length) {
       setActiveList(
         homeDetails.homeCarouselUrls.map((item) => ({
