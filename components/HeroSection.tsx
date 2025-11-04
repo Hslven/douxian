@@ -65,6 +65,7 @@ export default function HeroSection({
                 src={getImgUrl(buttonImgs.accountRegisterImg)}
               />
             </div>
+
           </div>
         ) : (
           <div className="hero-section-btn-group2">
@@ -75,7 +76,7 @@ export default function HeroSection({
                   window.open(buttonImgs.gameDownLoadUrl);
                 } else {
                   openTips();
-                    // setAppointmentVisible(true);
+                  // setAppointmentVisible(true);
                 }
               }}
             >
@@ -85,7 +86,12 @@ export default function HeroSection({
               />
             </div>
             <div className="hero-section-btn2-box">
-              <div
+              <button onClick={() => {
+
+              }}>
+                测试跳转占用
+              </button>
+              {/* <div
                 className="hero-section-btn2"
                 // onClick={openRegisterModal}
                 onClick={() => {
@@ -100,7 +106,7 @@ export default function HeroSection({
                   className="btn-bg"
                   src={getImgUrl(buttonImgs.homeButtonImg)}
                 />
-              </div>
+              </div> */}
 
               <div
                 className="hero-section-btn2"
@@ -111,7 +117,7 @@ export default function HeroSection({
                   } else {
                     // setAppointmentVisible(true);
                     // 
-                  openTips();
+                    openTips();
 
                   }
                 }}
