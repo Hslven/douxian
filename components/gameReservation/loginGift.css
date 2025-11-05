@@ -1,0 +1,55 @@
+.sidebar-game-wrapper {
+  display: flex;
+  width: 100%;
+  min-height: 600px;
+  color: #fff;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+  width: 220px;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+.sidebar-item {
+  padding: 12px 8px;
+  margin-bottom: 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.sidebar-item-active {
+  background-color: #007bff;
+  transform: translateX(4px);
+}
+
+/* 主内容区样式 */
+.main-content {
+  flex: 1;
+  padding: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.images-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.content-image {
+  max-width: 280px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.content-image:hover {
+  transform: scale(1.05);
+}

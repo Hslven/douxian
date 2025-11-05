@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import HeroSection from "./HeroSection";
 import Footer from "@/components/ui/footer";
 import "./home.css"; // 引入样式文件
-import GameActive from "./game-active";
+import LoginGift from "../components/gameReservation/loginGift";
 import GameInfo from "./game-info";
 import GameCarousel from "./game-carousel";
 import RegisterModal from "./register-modal";
@@ -179,7 +179,7 @@ export default function HeroHome() {
             >
                 <div className="scroll-content">
                     {/* 第一部分 - 用 1.png */}
-
+                    {/* 
                     <HeroSection
                         homeDetails={homeDetails}
                         homeBackgroundUrl={homeDetails.homeBackgroundUrls?.[0]}
@@ -187,14 +187,14 @@ export default function HeroHome() {
                         openTips={() => setTipsOpen(true)}
                         openRegisterModal={() => setRegisterModalOpen(true)}
                         glideImg={one}
-                    />
+                    /> */}
+                    <LoginGift homeDetails={homeDetails} />
 
                     {/* 第二部分 - 用 2.png */}
                     <PageSection
                         backgroundImg={homeDetails.homeBackgroundUrls?.[1]}
                         glideImg={two}
                     >
-                        <GameActive homeDetails={homeDetails} />
                     </PageSection>
 
                     {/* 第三部分 - 用 3.png */}

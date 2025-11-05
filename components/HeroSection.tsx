@@ -86,12 +86,7 @@ export default function HeroSection({
               />
             </div>
             <div className="hero-section-btn2-box">
-              <button onClick={() => {
-
-              }}>
-                测试跳转占用
-              </button>
-              {/* <div
+              <div
                 className="hero-section-btn2"
                 // onClick={openRegisterModal}
                 onClick={() => {
@@ -106,7 +101,7 @@ export default function HeroSection({
                   className="btn-bg"
                   src={getImgUrl(buttonImgs.homeButtonImg)}
                 />
-              </div> */}
+              </div>
 
               <div
                 className="hero-section-btn2"
