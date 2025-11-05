@@ -1,55 +1,87 @@
-.sidebar-game-wrapper {
-  display: flex;
-  width: 100%;
-  min-height: 600px;
-  color: #fff;
-}
-
-/* 侧边栏样式 */
+/* 侧边栏整体容器 */
 .sidebar {
-  width: 220px;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 24px 16px;
-  box-sizing: border-box;
-}
-
-.sidebar-item {
-  padding: 12px 8px;
-  margin-bottom: 12px;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.sidebar-item-active {
-  background-color: #007bff;
-  transform: translateX(4px);
-}
-
-/* 主内容区样式 */
-.main-content {
-  flex: 1;
-  padding: 32px;
+  /* 垂直排列 */
   display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-.images-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-}
-
-.content-image {
-  max-width: 280px;
+  flex-direction: column;
+  /* 内边距控制整体缩进 */
+  padding: 20px 15px;
+  /* 项之间的间距 */
+  gap: 12px;
+  /* 可选：添加背景色区分区域 */
+  background-color: rgba(0, 0, 0, 0.1);
+  /* 可选：添加边框弧度 */
   border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-  transition: transform 0.3s ease;
 }
 
-.content-image:hover {
-  transform: scale(1.05);
+/* 侧边栏单项容器 */
+.sidebar-item {
+  /* 点击光标 */
+  cursor: pointer;
+  /* 过渡动画 */
+  transition: transform 0.2s ease;
+}
+
+/* 鼠标悬停效果 */
+.sidebar-item:hover {
+  transform: scale(1.02);
+}
+
+/* 侧边栏图片容器（核心显示样式） */
+.sidebar-image {
+  /* 宽度占满父容器 */
+  width: 100%;
+  /* 固定高度（根据实际图片比例调整） */
+  height: 60px;
+  /* 图片完全填充容器 */
+  background-size: 100% 100%;
+  /* 图片居中显示 */
+  background-position: center;
+  /* 禁止重复平铺 */
+  background-repeat: no-repeat;
+  /* 可选：添加轻微阴影 */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* 可选：添加边框弧度 */
+  border-radius: 4px;
+}
+
+/* 侧边栏默认状态图片 */
+.sidebar-bg-1 {
+  background-image: url("../../public/image/btnnav1.png");
+}
+.sidebar-bg-2 {
+  background-image: url("../../public/image/btnnav2.png");
+}
+.sidebar-bg-3 {
+  background-image: url("../../public/image/btnnav3.png");
+}
+.sidebar-bg-4 {
+  background-image: url("../../public/image/btnnav4.png");
+}
+.sidebar-bg-5 {
+  background-image: url("../../public/image/btnnav5.png");
+}
+
+/* 侧边栏选中状态图片 */
+.sidebar-bg-curr-1 {
+  background-image: url("../../public/image/btnnavcurr1.png");
+}
+.sidebar-bg-curr-2 {
+  background-image: url("../../public/image/btnnavcurr2.png");
+}
+.sidebar-bg-curr-3 {
+  background-image: url("../../public/image/btnnavcurr3.png");
+}
+.sidebar-bg-curr-4 {
+  background-image: url("../../public/image/btnnavcurr4.png");
+}
+.sidebar-bg-curr-5 {
+  background-image: url("../../public/image/btnnavcurr5.png");
+}
+
+/* 选中项额外样式（可选，增强视觉反馈） */
+.sidebar-item-active .sidebar-image {
+  /* 选中时添加高亮边框 */
+  border: 2px solid rgba(255, 215, 0, 0.8);
+  /* 增强阴影 */
+  box-shadow: 0 3px 8px rgba(255, 215, 0, 0.3);
 }

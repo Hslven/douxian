@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import HeroSection from "./HeroSection";
 import Footer from "@/components/ui/footer";
 import "./home.css"; // 引入样式文件
-import LoginGift from "../components/gameReservation/loginGift";
+import LoginGift from "./gameReservation/loginGift";
 import GameInfo from "./game-info";
 import GameCarousel from "./game-carousel";
 import RegisterModal from "./register-modal";
