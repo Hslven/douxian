@@ -1,6 +1,5 @@
-/* 基础样式 - 继承自网页提取结果 */
+/* 基础样式 */
 :root {
-  --root-font-size: 33.3334px;
   --primary-color: #2E7D32; /* 青绿色主色调 */
   --accent-color: #B71C1C; /* 暗红色强调色 */
   --bg-color: rgba(245, 242, 230, 0.9); /* 宣纸底色 */
@@ -8,29 +7,66 @@
   --border-radius: 8px;
 }
 
-/* 容器样式 */
-.sidebar-game-container {
-  position: relative; /* 改为relative定位 */
-  width: 6.44rem;
-  margin-left: 20px; /* 左侧距离20px */
-  top: 50vh; /* 垂直居中基础 */
-  transform: translateY(-50%); /* 垂直居中修正 */
-  z-index: 1022200; /* 确保在最上层 */
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
-/* 新增侧边元素 */
+/* 主背景容器 */
+.section_cn {
+  background: url(//wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/bg1.jpg) no-repeat center center;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  position: relative;
+}
+
+/* 标题区域 - 带动画 */
+.p1tit1 {
+  background: url(//wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/p1tit1.png) no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 866px;
+  height: 79px;
+  margin: 60px auto 0;
+  opacity: 0; /* 初始透明 */
+  transform: translateY(30px); /* 初始下移 */
+  transition: opacity 0.8s ease, transform 0.8s ease; /* 过渡动画 */
+}
+
+/* 动画触发后样式 */
+.p1tit1-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 侧边栏容器 */
+.sidebar-game-container {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1022200;
+  width: auto;
+}
+
+/* 侧边相邻元素 */
 .sidebar-adjacent-element {
-  position: absolute; /* absolute定位 */
-  left: 100%; /* 位于容器右侧 */
-  top: 0;
-  left: 15px;
-  width: 5.44rem; /* 与侧边栏等宽 */
-  height: 100%; /* 与侧边栏等高 */
+  position: absolute;
+  left: 12px;
+  top: -30px;
+  width: 200.31px;
+  height: 330.66px;
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
   background: url(//wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/navbg1.png) no-repeat;
-  background-size: 100% auto;
-  padding: 0.5rem;
+  background-size: contain;
+  background-position: center;
+  padding: 16px;
   box-sizing: border-box;
+  pointer-events: none;
 }
 
 /* 侧边栏整体容器 */
@@ -39,7 +75,6 @@
   flex-direction: column;
   padding: 20px 15px;
   gap: 12px;
-  background-color: rgba(0, 0, 0, 0.1);
   border-radius: var(--border-radius);
 }
 
@@ -51,18 +86,18 @@
 
 /* 鼠标悬停效果 */
 .sidebar-item:hover {
-  transform: scale(1.02);
+  transform: scale(1.05);
 }
 
-/* 侧边栏图片容器（核心显示样式） */
+/* 侧边栏图片容器 */
 .sidebar-image {
-  width: 5.44rem; /* 原2.72rem放大2倍 */
-  height: 1.04rem; /* 原0.52rem放大2倍 */
-  background-size: 100% 100%;
+  width: 174px;
+  height: 33px;
+  background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
+  transition: all 0.2s ease;
 }
 
 /* 侧边栏默认状态图片 */
@@ -102,5 +137,26 @@
 /* 选中项额外样式 */
 .sidebar-item-active .sidebar-image {
   border: 2px solid rgba(255, 215, 0, 0.8);
-  box-shadow: 0 3px 8px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .sidebar-game-container {
+    left: 10px;
+  }
+  
+  .sidebar-image {
+    width: 128px;
+    height: 26px;
+  }
+  
+  .sidebar-adjacent-element {
+    width: 128px;
+    height: auto;
+  }
+  
+  .p1tit1 {
+    width: 90%;
+  }
 }
