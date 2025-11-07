@@ -9,12 +9,7 @@
 }
 
 .page-section-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover;
+  /* 移除固定定位相关设置，由组件内JS控制 */
 }
 
 .btn-bg {
@@ -22,5 +17,22 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    
+}
+
+.scroll-container {
+  height: 100vh;
+  overflow: hidden; /* 避免双重滚动条 */
+  position: relative;
+  padding: 0;
+  margin: 0;
+  background-color: "#000";
+}
+
+.scroll-content {
+  will-change: transform; /* 优化滚动性能 */
+}
+
+.page-section {
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }

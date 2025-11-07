@@ -1,4 +1,4 @@
-/* 基础样式 */
+/* 基础样式 - 合并重复定义，避免冲突 */
 :root {
   --primary-color: #2E7D32; /* 青绿色主色调 */
   --accent-color: #B71C1C; /* 暗红色强调色 */
@@ -15,35 +15,41 @@ html, body, #root {
   overflow: hidden;
 }
 
-/* 主背景容器 */
+/* 主背景容器 - 合并重复样式，保留所有必要属性 */
 .section_cn {
   background: url(//wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/bg1.jpg) no-repeat center center;
+  background-color: var(--bg-color); /* 图片加载失败时显示宣纸色 */
   width: 100vw;
   height: 100vh;
   background-size: cover;
   position: relative;
+  overflow: hidden; /* 防止子元素溢出显黑色 */
+  display: flex;
+  align-items: center; /* 垂直居中（原有属性保留） */
+  justify-content: center; /* 水平居中（原有属性保留） */
 }
 
-/* 标题区域 - 带动画 */
+/* 标题区域 - 保持原有不抖动样式 */
 .p1tit1 {
   background: url(//wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/p1tit1.png) no-repeat;
   background-size: contain;
   background-position: center;
   width: 866px;
   height: 79px;
-  margin: 60px auto 0;
-  opacity: 0; /* 初始透明 */
-  transform: translateY(30px); /* 初始下移 */
-  transition: opacity 0.8s ease, transform 0.8s ease; /* 过渡动画 */
+  position: absolute;
+  left: 50%;
+  top: 10%; /* 原有顶部10%位置保留 */
+  transform: translate(-50%, -100px);
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
-/* 动画触发后样式 */
 .p1tit1-animate {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate(-50%, 0);
 }
 
-/* 侧边栏容器 */
+/* 侧边栏容器 - 限制高度，避免溢出 */
 .sidebar-game-container {
   position: fixed;
   left: 20px;
@@ -51,45 +57,44 @@ html, body, #root {
   transform: translateY(-50%);
   z-index: 1022200;
   width: auto;
+  max-height: 90vh; /* 限制最大高度为视口90%，不溢出 */
+  overflow: hidden; /* 隐藏溢出部分 */
 }
 
-/* 侧边相邻元素 */
+/* 侧边相邻元素 - 修复路径+加fallback背景，调整尺寸避免溢出 */
 .sidebar-adjacent-element {
   position: absolute;
   left: 12px;
   top: -30px;
-  width: 200.31px;
-  height: 330.66px;
+  width: 174px; /* 与侧边栏图片宽度一致，避免过大 */
+  height: auto; /* 自适应高度，不固定大尺寸 */
+  max-height: 300px; /* 限制最大高度 */
   border-radius: 0 var(--border-radius) var(--border-radius) 0;
-  background: url(//wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/navbg1.png) no-repeat;
-  background-size: contain;
-  background-position: center;
+  background: url("/image/navbg1.png") no-repeat center/contain;
+  background-color: transparent; /* 避免图片加载失败显黑色 */
   padding: 16px;
   box-sizing: border-box;
   pointer-events: none;
 }
 
-/* 侧边栏整体容器 */
 .sidebar {
   display: flex;
   flex-direction: column;
   padding: 20px 15px;
   gap: 12px;
   border-radius: var(--border-radius);
+  background-color: transparent; /* 清除可能的黑色背景 */
 }
 
-/* 侧边栏单项容器 */
 .sidebar-item {
   cursor: pointer;
   transition: transform 0.2s ease;
 }
 
-/* 鼠标悬停效果 */
 .sidebar-item:hover {
   transform: scale(1.05);
 }
 
-/* 侧边栏图片容器 */
 .sidebar-image {
   width: 174px;
   height: 33px;
@@ -98,65 +103,72 @@ html, body, #root {
   background-repeat: no-repeat;
   border-radius: 4px;
   transition: all 0.2s ease;
+  background-color: transparent; /* 避免图片加载失败显黑色 */
 }
 
-/* 侧边栏默认状态图片 */
-.sidebar-bg-1 {
-  background-image: url("../../public/image/btnnav2.png");
-}
-.sidebar-bg-2 {
-  background-image: url("../../public/image/btnnav3.png");
-}
-.sidebar-bg-3 {
-  background-image: url("../../public/image/btnnav4.png");
-}
-.sidebar-bg-4 {
-  background-image: url("../../public/image/btnnav5.png");
-}
-.sidebar-bg-5 {
-  background-image: url("../../public/image/btnnav6.png");
-}
+/* 修复sidebar图片路径：React中public下的图片直接用/image/开头 */
+.sidebar-bg-1 { background-image: url("/image/btnnav2.png"); }
+.sidebar-bg-2 { background-image: url("/image/btnnav3.png"); }
+.sidebar-bg-3 { background-image: url("/image/btnnav4.png"); }
+.sidebar-bg-4 { background-image: url("/image/btnnav5.png"); }
+.sidebar-bg-5 { background-image: url("/image/btnnav6.png"); }
 
-/* 侧边栏选中状态图片 */
-.sidebar-bg-curr-1 {
-  background-image: url("../../public/image/btnnavcurr2.png");
-}
-.sidebar-bg-curr-2 {
-  background-image: url("../../public/image/btnnavcurr3.png");
-}
-.sidebar-bg-curr-3 {
-  background-image: url("../../public/image/btnnavcurr4.png");
-}
-.sidebar-bg-curr-4 {
-  background-image: url("../../public/image/btnnavcurr5.png");
-}
-.sidebar-bg-curr-5 {
-  background-image: url("../../public/image/btnnavcurr6.png");
-}
+.sidebar-bg-curr-1 { background-image: url("/image/btnnavcurr2.png"); }
+.sidebar-bg-curr-2 { background-image: url("/image/btnnavcurr3.png"); }
+.sidebar-bg-curr-3 { background-image: url("/image/btnnavcurr4.png"); }
+.sidebar-bg-curr-4 { background-image: url("/image/btnnavcurr5.png"); }
+.sidebar-bg-curr-5 { background-image: url("/image/btnnavcurr6.png"); }
 
-/* 选中项额外样式 */
 .sidebar-item-active .sidebar-image {
   border: 2px solid rgba(255, 215, 0, 0.8);
   box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
 }
 
-/* 响应式调整 */
+/* 右侧图片容器 - 基于你原有样式完善，实现从右往左划入 */
+.right-image {
+  position: absolute;
+  right: -500px; /* 初始在右侧视口外（加大偏移量，划入更自然） */
+  top: 50%;
+  transform: translateY(-50%);
+  /* 图片地址按你提供的设置 */
+  background-image: url(https://wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/p1img1.png);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent; /* 避免黑色背景 */
+  /* 调整尺寸：按图片实际比例设置，避免变形 */
+  width: 1500px;
+  height: 550px;
+  opacity: 0; /* 初始透明，与标题动画节奏一致 */
+  /* 动画过渡：时长与标题保持0.8s，更协调 */
+  transition: right 0.8s ease, opacity 0.8s ease;
+  z-index: 2; /* 层级在主背景之上，不遮挡侧边栏 */
+}
+
+/* 右侧图片滑入动画 - 最终位置调整为右侧5%，适配不同屏幕 */
+.right-image-animate {
+  right: 5%; /* 替代固定20px，响应式更友好 */
+  opacity: 1; /* 动画触发后显示 */
+}
+
+/* 响应式调整 - 整合所有响应式样式，避免重复 */
 @media (max-width: 768px) {
-  .sidebar-game-container {
-    left: 10px;
+  .sidebar-game-container { left: 10px; }
+  
+  .sidebar-image { width: 128px; height: 26px; }
+  
+  .sidebar-adjacent-element { width: 128px; top: -20px; }
+  
+  .p1tit1 { width: 90%; }
+  
+  /* 右侧图片响应式调整 */
+  .right-image {
+    width: 250px;
+    height: auto; /* 自适应高度，避免变形 */
+    right: -300px; /* 小屏幕初始偏移量减小 */
   }
   
-  .sidebar-image {
-    width: 128px;
-    height: 26px;
-  }
-  
-  .sidebar-adjacent-element {
-    width: 128px;
-    height: auto;
-  }
-  
-  .p1tit1 {
-    width: 90%;
+  .right-image-animate {
+    right: 2%; /* 小屏幕更靠近右侧 */
   }
 }

@@ -1,0 +1,113 @@
+/* 侧边栏容器 */
+.sidebar-game-container {
+  position: fixed;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1022200;
+  width: auto;
+}
+
+/* 侧边相邻元素 */
+.sidebar-adjacent-element {
+  position: absolute;
+  left: 12px;
+  top: -30px;
+  width: 200.31px;
+  height: 330.66px;
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  background: url(//wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/navbg1.png) no-repeat;
+  background-size: contain;
+  background-position: center;
+  padding: 16px;
+  box-sizing: border-box;
+  pointer-events: none;
+}
+
+/* 侧边栏整体容器 */
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 15px;
+  gap: 12px;
+  border-radius: var(--border-radius);
+}
+
+/* 侧边栏单项容器 */
+.sidebar-item {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+/* 鼠标悬停效果 */
+.sidebar-item:hover {
+  transform: scale(1.05);
+}
+
+/* 侧边栏图片容器 */
+.sidebar-image {
+  width: 174px;
+  height: 33px;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+/* 侧边栏默认状态图片 */
+.sidebar-bg-1 {
+  background-image: url("../../public/image/btnnav2.png");
+}
+.sidebar-bg-2 {
+  background-image: url("../../public/image/btnnav3.png");
+}
+.sidebar-bg-3 {
+  background-image: url("../../public/image/btnnav4.png");
+}
+.sidebar-bg-4 {
+  background-image: url("../../public/image/btnnav5.png");
+}
+.sidebar-bg-5 {
+  background-image: url("../../public/image/btnnav6.png");
+}
+
+/* 侧边栏选中状态图片 */
+.sidebar-bg-curr-1 {
+  background-image: url("../../public/image/btnnavcurr2.png");
+}
+.sidebar-bg-curr-2 {
+  background-image: url("../../public/image/btnnavcurr3.png");
+}
+.sidebar-bg-curr-3 {
+  background-image: url("../../public/image/btnnavcurr4.png");
+}
+.sidebar-bg-curr-4 {
+  background-image: url("../../public/image/btnnavcurr5.png");
+}
+.sidebar-bg-curr-5 {
+  background-image: url("../../public/image/btnnavcurr6.png");
+}
+
+/* 选中项额外样式 */
+.sidebar-item-active .sidebar-image {
+  border: 2px solid rgba(255, 215, 0, 0.8);
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .sidebar-game-container {
+    left: 10px;
+  }
+  
+  .sidebar-image {
+    width: 128px;
+    height: 26px;
+  }
+  
+  .sidebar-adjacent-element {
+    width: 128px;
+    height: auto;
+  }
+}

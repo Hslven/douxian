@@ -6,6 +6,21 @@
   left: 50%;
   transform: translateX(-50%);
   z-index: 10;
+  /* 上下浮动动画：时长2s，无限循环，平滑启停 */
+  animation: floatUpDown 2s ease-in-out infinite;
+}
+
+/* 定义上下浮动关键帧 */
+@keyframes floatUpDown {
+  0% {
+    transform: translateX(-50%) translateY(0); /* 初始位置（底部） */
+  }
+  50% {
+    transform: translateX(-50%) translateY(-15px); /* 向上浮动15px */
+  }
+  100% {
+    transform: translateX(-50%) translateY(0); /* 回到初始位置 */
+  }
 }
 
 .page-section-bg {
