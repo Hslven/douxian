@@ -1,0 +1,279 @@
+/* components/Ranking/rankGame.css */
+:root {
+  --primary-color: #2E7D32;
+  --accent-color: #B71C1C;
+  --bg-color: rgba(245, 242, 230, 0.9);
+  --text-color: #3e1f10;
+  --border-radius: 8px;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* 主容器：契合首页背景图 */
+.section-rank {
+  background: url(//wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/bg5.jpg) no-repeat 50% 50%;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 标题元素：战力榜标题 */
+.p1tit1-rank {
+  background: url(https://wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/p5tit1.png) no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 1132px!important;
+  height: 97px!important;
+  position: absolute;
+  top: 140px;
+  left: 50%!important;
+  transform: translateX(-50%) translateY(-50px)!important;
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  z-index: 2;
+}
+
+.p1tit1-animate-rank {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* 说明文字：定位在标题下方 */
+.p5txt1 {
+  font-size: 0.19rem;
+  color: #c3e2ff;
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 800px;
+  z-index: 2;
+}
+
+.p5txt1 span {
+  color: #ecd76a;
+  font-weight: bold;
+}
+
+/* 表格容器：使用指定背景图，高度更高，可滚动 */
+.table-container-rank {
+  position: absolute;
+  top: 320px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1085px;
+  height: 600px; /* 增加高度 */
+  max-height: 55vh; /* 设置最大高度 */
+  overflow-y: auto; /* 允许垂直滚动 */
+  background: url('https://wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/p5wk1.png') no-repeat center center;
+  background-size: 100% 100%;
+  padding: 40px 60px;
+  box-sizing: border-box;
+  z-index: 2;
+}
+
+/* 表格样式 */
+.ranking-table-rank {
+  width: 100%;
+  border-collapse: collapse;
+  color: #c3e2ff;
+  font-size: 14px;
+}
+
+/* 表头 */
+.ranking-table-rank thead {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(5px);
+  position: sticky;
+  top: 0;
+}
+
+.ranking-table-rank th {
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+}
+
+/* 表格列宽 */
+.col-rank { width: 80px; }
+.col-qb { width: 100px; }
+.col-rolename { width: 180px; }
+.col-power { width: 150px; }
+.col-sect { width: 120px; }
+.col-server { width: 150px; }
+
+/* 表格行 */
+.rank-row {
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rank-row:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.02);
+}
+
+.rank-row.top-1 {
+  background: linear-gradient(90deg, rgba(255, 215, 0, 0.15), transparent);
+  box-shadow: inset 4px 0 0 #ffd700;
+}
+
+.rank-row.top-2 {
+  background: linear-gradient(90deg, rgba(192, 192, 192, 0.15), transparent);
+  box-shadow: inset 4px 0 0 #c0c0c0;
+}
+
+.rank-row.top-3 {
+  background: linear-gradient(90deg, rgba(205, 127, 50, 0.15), transparent);
+  box-shadow: inset 4px 0 0 #cd7f32;
+}
+
+.ranking-table-rank td {
+  padding: 14px 10px;
+  text-align: center;
+}
+
+/* 排名徽章 */
+.rank-badge {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rank-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.rank-number {
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Q币奖励 */
+.qb-amount {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #333;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.qb-icon {
+  font-size: 12px;
+}
+
+.qb-none {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+}
+
+/* 角色名 */
+.role-name {
+  font-weight: 500;
+  font-size: 14px;
+  color: #ffd700;
+}
+
+/* 战力值 */
+.power-value {
+  font-size: 13px;
+  color: #ff8c33;
+  font-weight: 600;
+}
+
+/* 门派 */
+.sect-name {
+  font-size: 13px;
+  color: #c3e2ff;
+}
+
+/* 服务器 */
+.server-name {
+  font-size: 13px;
+  color: #ecd76a;
+}
+
+/* 滚动条美化 */
+.table-container-rank::-webkit-scrollbar {
+  width: 8px;
+}
+
+.table-container-rank::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.table-container-rank::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #ff6b00, #ffd700);
+  border-radius: 4px;
+}
+
+.table-container-rank::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ff8c33, #ffed4e);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .p1tit1-rank {
+    width: 95%!important;
+    top: 20px;
+    height: 80px!important;
+  }
+  
+  .p5txt1 {
+    top: 120px;
+    font-size: 0.16rem;
+    width: 95%;
+  }
+  
+  .table-container-rank {
+    top: 220px;
+    width: 95%;
+    height: auto;
+    min-height: 300px;
+    max-height: 65vh; /* 移动端更大比例 */
+    padding: 20px 15px;
+  }
+  
+  .ranking-table-rank {
+    font-size: 12px;
+  }
+  
+  .col-rank { width: 60px; }
+  .col-qb { width: 80px; }
+  .col-rolename { width: 120px; }
+  .col-power { width: 100px; }
+  .col-sect { width: 80px; }
+  .col-server { width: 100px; }
+  
+  .ranking-table-rank th,
+  .ranking-table-rank td {
+    padding: 8px 5px;
+  }
+}

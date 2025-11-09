@@ -1,0 +1,214 @@
+  :root {
+    --primary-color: #2E7D32;
+    --accent-color: #B71C1C;
+    --bg-color: rgba(245, 242, 230, 0.9);
+    --text-color: #3e1f10;
+    --border-radius: 8px;
+  }
+
+  html, body, #root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+
+  *, *::before, *::after {
+    box-sizing: inherit;
+  }
+
+  /* 主容器：当前组件核心容器 */
+  .section_cn-three {
+    background: url(https://wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/bg3.jpg) no-repeat center center;
+    background-color: var(--bg-color);
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* 头部图片：当前组件唯一标题元素 */
+  .p1tit1-three {
+    background: url(https://wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/p3tit1.png) no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 1132px!important;
+    height: 97px!important;
+    position: absolute;
+    top: 140px;
+    left: 50%!important;
+    transform: translateX(-50%) translateY(-50px)!important;
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    z-index: 2;
+  }
+
+  .p1tit1-animate-three {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  /* 新增文字样式：定位在标题下方，居中显示 */
+  .p3txt1 {
+      font-size: 0.19rem;
+      color: #c3e2ff;
+      text-align: center;
+      line-height: 1.5; /* 适当加大行高，避免文字拥挤 */
+      margin: 0; /* 清除默认margin，用定位控制位置 */
+      position: absolute; /* 基于主容器定位 */
+      top: 200px; /* 在标题下方（标题top:140px + 标题高度~100px + 间距20px） */
+      left: 50%; /* 水平居中 */
+      transform: translateX(-50%); /* 水平居中修正 */
+      width: 90%; /* 限制最大宽度，避免换行异常 */
+      max-width: 800px; /* 最大宽度，适配大屏幕 */
+      z-index: 2; /* 确保在背景上方 */
+  }
+
+  .p3txt1 span {
+      color: #ecd76a;
+      font-weight: bold; /* 突出显示Q币提示 */
+  }
+  /* Q币奖励卡片容器：固定尺寸+水平居中 */
+  .qb-container {
+    position: absolute;
+    top: 320px; /* 标题下方垂直间距，可按需微调 */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1085px;
+    height: 446px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 2;
+  }
+
+  /* 单个Q币卡片：指定尺寸+背景图 */
+  .qb-card {
+    width: 100%;
+    height: 423px;
+    box-sizing: border-box;
+    /* 背景图设置：100% 比例填充 */
+    background: url(https://wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/p3wk1.png) no-repeat center center;
+    background-size: 100% 100%; /* 关键修改：宽度和高度均为100% */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    margin-right: 20px;
+  }
+
+  .qb-card-title {
+    
+    font-size: 26px;
+    color: #c3e2ff;
+    margin-bottom: 10px;
+  }
+
+  .qb-icon {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    margin-bottom: 10px;
+  }
+
+  .qb-amount {
+    font-size: 0.18rem;
+    color: #ecd76a;
+    margin-bottom: 15px;
+  }
+  .qb-title{
+        font-size: 45px;
+      color: rgb(205, 186, 117);
+      text-align: center;
+      line-height: 1;
+      font-weight: bold;
+      font-family: 思源宋体;
+      margin-bottom: 10px;
+  }
+  .qb-number{
+        font-size: 25px;
+      color: rgb(205, 186, 117);
+      text-align: center;
+      line-height: 1;
+      font-weight: bold;
+      font-family: 思源宋体;
+      margin-bottom: 10px;
+  }
+  .qb-btn {
+    background: linear-gradient(#FFD700, #FFA500);
+    color: #3e1f10;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 15px;
+    font-size: 0.17rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  /* 立即邀请按钮：绝对定位+水平居中 */
+  .invite-btn {
+    position: absolute;
+    top: 780px; /* Q币容器下方垂直间距，可按需微调 */
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(#9C27B0, #E040FB);
+    color: #fff;
+    
+    background: url(https://wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/p3yqbtn1.png) no-repeat center center;
+
+    font-size: 0.22rem;
+    text-align: center;
+    padding: 12px 30px;
+    width: 100%;
+    height: 200px;
+    border-radius: 20px;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  /* 响应式调整：小屏幕下适配 */
+  @media (max-width: 768px) {
+    .p3txt1 {
+      top: 120px;
+    }
+    .qb-container {
+      top: 220px;
+      width: 95%;
+      height: auto;
+      flex-direction: column; /* 小屏幕下垂直排列 */
+      align-items: center;
+    }
+    .qb-card {
+      width: 100%;
+      max-width: 247px;
+      margin-bottom: 20px;
+    }
+    .invite-btn {
+      top: calc(100% - 100px);
+      font-size: 24px;
+      padding: 10px 20px;
+    }
+  }
+
+  /* 响应式调整：小屏幕适配 */
+  @media (max-width: 768px) {
+      .p3txt1 {
+          font-size: 0.16rem; /* 小屏幕缩小字体 */
+          top: 120px; /* 标题在小屏幕top:20px，对应调整文字位置 */
+          width: 95%;
+      }
+  }
+  /* 响应式调整：仅保留标题的小屏幕适配 */
+  @media (max-width: 768px) {
+    .p1tit1-three {
+      width: 95%!important;
+      top: 20px;
+      height: 80px!important;
+    }
+  }

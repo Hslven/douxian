@@ -1,0 +1,236 @@
+:root {
+  --primary-color: #2E7D32;
+  --accent-color: #B71C1C;
+  --bg-color: rgba(245, 242, 230, 0.9);
+  --text-color: #3e1f10;
+  --border-radius: 8px;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* ============================================== */
+/* 主容器：相对定位基准，保持不变                  */
+/* ============================================== */
+.section_cn-two {
+  background: url(https://wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/bg2.jpg) no-repeat center center;
+  background-color: var(--bg-color);
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ============================================== */
+/* 头部图片：修复水平居中，动画不影响居中          */
+/* ============================================== */
+.p1tit1-two {
+  background: url(https://wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/p2tit1.png) no-repeat;
+  background-size: contain;
+  background-position: center;
+  width: 1132px!important; /* 保持你的固定宽度 */
+  height: 97px!important; /* 保持你的固定高度 */
+  position: absolute;
+  top: 140px; /* 保留顶部距离 */
+  left: 50%!important; /* 关键：改为50%，让元素左边缘对齐父容器中点 */
+  transform: translateX(-50%) translateY(-50px)!important; /* translateX(-50%) 抵消left:50%的偏移，实现居中 */
+  opacity: 0;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  z-index: 2;
+}
+
+.p1tit1-animate-two {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0); /* 保持水平居中，仅取消垂直偏移 */
+}
+
+/* ============================================== */
+/* 轮播容器：纯定位居中，删除干扰项                */
+/* ============================================== */
+.game-carousel-container-two {
+  position: absolute;
+  top: 50%; /* 垂直居中第一步 */
+  left: 50%; /* 水平居中第一步 */
+  transform: translate(-50%, -50%) scale(0.8); /* 纯居中+缩放动画，无多余margin */
+  width: 1080px;
+  height: 580px;
+  overflow: hidden;
+  opacity: 0;
+  transition: transform 0.8s ease 0.3s, opacity 0.8s ease 0.3s;
+}
+
+.game-carousel-container-animate-two {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1); /* 保持居中，仅恢复缩放 */
+}
+
+.game-carousel-wrapper-two {
+  display: flex;
+  height: 100%;
+  transition: transform 0.5s ease-in-out;
+  margin: 0;
+  padding: 0;
+}
+
+.game-carousel-item-two {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: url(//wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/banner-bg.png) no-repeat center/contain;
+  background-size: contain;
+  padding: 20px;
+  height: 610px;
+  /* width: 891px; */
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.game-carousel-item-animate-two {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.game-carousel-item-img-two {
+  max-width: 100%;
+  max-height: 80%;
+  object-fit: contain;
+  margin-bottom: 20px;
+}
+
+/* ============================================== */
+/* 轮播箭头：保持原有样式，不影响居中              */
+/* ============================================== */
+.game-carousel-arrow-two {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 81.9px;
+  height: 54.9px;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  z-index: 4;
+  opacity: 0;
+  padding: 0;
+  outline: none;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  transition: opacity 0.8s ease 0.6s;
+}
+
+.game-carousel-container-animate-two .game-carousel-arrow-two {
+  opacity: 1;
+}
+
+.game-carousel-arrow-left-two {
+  left: -40px;
+  background-image: url(//wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/p2arr1.png);
+  animation: 
+    gameArrowSlideInLeft 1s ease-out forwards 0.6s,
+    gameArrowFloat 2.5s ease-in-out infinite 1.6s;
+}
+
+.game-carousel-arrow-right-two {
+  right: -40px;
+  background-image: url(//wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/p2arr2.png);
+  animation: 
+    gameArrowSlideInRight 1s ease-out forwards 0.8s,
+    gameArrowFloat 2.5s ease-in-out infinite 1.8s;
+}
+
+/* ============================================== */
+/* 动画定义：保持不变                              */
+/* ============================================== */
+@keyframes gameArrowSlideInLeft {
+  0% { transform: translateY(-50%) translateX(-50px); }
+  100% { transform: translateY(-50%) translateX(0); }
+}
+
+@keyframes gameArrowSlideInRight {
+  0% { transform: translateY(-50%) translateX(50px); }
+  100% { transform: translateY(-50%) translateX(0); }
+}
+
+@keyframes gameArrowFloat {
+  0% { transform: translateY(-50%); }
+  50% { transform: translateY(-50%) translateY(-8px); }
+  100% { transform: translateY(-50%); }
+}
+
+/* ============================================== */
+/* 响应式调整：确保小屏幕也居中                    */
+/* ============================================== */
+@media (max-width: 768px) {
+  .p1tit1-two {
+    width: 95%!important;
+    top: 20px;
+    height: 80px!important;
+  }
+
+  .game-carousel-container-two {
+    width: 90vw;
+    height: 300px;
+  }
+
+  .game-carousel-arrow-two {
+    width: 40px;
+    height: 40px;
+  }
+
+  .game-carousel-arrow-left-two {
+    left: -20px;
+  }
+
+  .game-carousel-arrow-right-two {
+    right: -20px;
+  }
+
+  .game-carousel-item-img-two {
+    max-height: 75%;
+  }
+}
+
+/* 优惠标签样式：保持不变                          */
+.game-carousel-item-discount-two {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-color: rgba(255, 0, 0, 0.8);
+  color: white;
+  font-size: 18px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  z-index: 5;
+  transform: scale(0);
+  animation: gameDiscountScaleIn 0.5s ease-out forwards;
+}
+
+@keyframes gameDiscountScaleIn {
+  0% { opacity: 0; transform: scale(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* 移除干扰箭头居中的margin，如需调整箭头位置单独设置 */
+.game-carousel-arrow-two:nth-child(1) {
+  margin-left: 60px;
+}
+.game-carousel-arrow-two:nth-child(3) {
+  margin-right: 60px;
+}

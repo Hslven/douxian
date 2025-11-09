@@ -1,6 +1,11 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
 import LoginGift from "./gameReservation/loginGift";
+import LoginGiftLevel from "./gameReservation/loginGiftLevel";
+import LoginGiftLevelInvite from "./gameReservation/loginGiftLevelInvite";
+import RankGame from "./gameReservation/rankGame";
+
+
 import GameInfo from "./game-info";
 import GameCarousel from "./game-carousel";
 import RegisterModal from "./register-modal";
@@ -13,7 +18,8 @@ import request, { getImgUrl } from "@/utils/request";
 import "./home.css";
 import "./hero-home.css";
 import Modal from "./modal";
-import Header from "./ui/header";
+
+import TopPage from "./ui/topPage";
 import SidebarGameContainer from "./ui/SidebarGameContainer/SidebarGameContainer";
 
 const PageSection = ({
@@ -213,6 +219,7 @@ export default function HeroHome() {
 
     return (
         <>
+            <TopPage />
 
             {/* 侧边栏：点击时直接触发scrollToPage，并通过activeIndex同步状态 */}
             <SidebarGameContainer
@@ -242,23 +249,25 @@ export default function HeroHome() {
                         glideImg={one}
                         isActive={currentPage === 1}
                     >
-                        <LoginGift homeDetails={homeDetails} />
+                        <LoginGift />
                     </PageSection>
 
                     {/* 第二页 */}
                     <PageSection
-                        backgroundImg={homeDetails.homeBackgroundUrls?.[1]}
+                        // backgroundImg={homeDetails.homeBackgroundUrls?.[1]}
                         glideImg={two}
                         isActive={currentPage === 2}
-                    />
+                    >
+                        <LoginGiftLevel />
 
+                    </PageSection>
                     {/* 第三页 */}
                     <PageSection
                         backgroundImg={homeDetails.homeBackgroundUrls?.[2]}
                         glideImg={three}
                         isActive={currentPage === 3}
                     >
-                        <GameInfo />
+                        <LoginGiftLevelInvite />
                     </PageSection>
 
                     {/* 第四页 */}
@@ -267,7 +276,14 @@ export default function HeroHome() {
                         glideImg={four}
                         isActive={currentPage === 4}
                     >
-                        <GameCarousel homeDetails={homeDetails} />
+                        <RankGame />
+                    </PageSection>
+                    <PageSection
+                        backgroundImg={homeDetails.homeBackgroundUrls?.[3]}
+                        glideImg={four}
+                        isActive={currentPage === 5}
+                    >
+                        <RankGame />
                     </PageSection>
                 </div>
 

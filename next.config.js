@@ -7,8 +7,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   async rewrites() {
-    const targetApiUrl = 'http://dxadmin.douxian2.cn/douxian';
-    // const targetApiUrl = 'http://douxian.zhuzhu.pro:2285'
+    // const targetApiUrl = 'http://dxadmin.douxian2.cn/douxian';
+    const targetApiUrl = 'http://douxian.zhuzhu.pro:2285/douxian'
 
     return [
       {

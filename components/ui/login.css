@@ -1,0 +1,409 @@
+/* components/Header/login.css */
+/* ===== 登录弹窗覆盖层 ===== */
+
+.login-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 显示状态 - 淡入+模糊效果 */
+.login-modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+}
+
+/* 弹窗主体 - 缩放+位移动画 */
+.login-modal {
+  position: relative;
+  width: 400px;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(50px) scale(0.8);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+/* 弹窗显示动画 */
+.login-modal-overlay.show .login-modal {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* 弹窗头部 - 滑入动画 */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 28px;
+  border-bottom: 1px solid #f0f0f0;
+  animation: slideInDown 0.4s ease-out 0.1s both;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal-header h3 {
+  margin: 0;
+  font-size: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #999;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  line-height: 1;
+}
+
+.close-btn:hover:not(:disabled) {
+  color: #333;
+  background-color: #f5f5f5;
+  transform: rotate(90deg);
+}
+
+.close-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* 弹窗内容区 - 淡入上移动画 */
+.modal-body {
+  padding: 28px;
+  animation: fadeInUp 0.4s ease-out 0.2s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 错误提示 - 滑入动画 */
+.error-message {
+  color: #f53f3f;
+  font-size: 13px;
+  margin: 0 0 16px 0;
+  height: 0;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+}
+
+.error-message.show {
+  height: 16px;
+  opacity: 1;
+}
+
+.error-message::before {
+  content: "⚠️";
+  font-size: 12px;
+  animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0%,
+ 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+/* 表单组 - 依次淡入动画 */
+.form-group {
+  margin-bottom: 16px;
+  opacity: 0;
+  animation: fadeInUp 0.4s ease-out both;
+}
+
+.form-group:nth-child(2) {
+  animation-delay: 0.25s;
+}
+.form-group:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* 验证码输入组 */
+.code-group {
+  display: flex;
+  gap: 12px;
+}
+
+/* 输入框 - 移除了聚焦时的深色背景和白色文字样式 */
+.input-field {
+  flex: 1;
+  height: 44px;
+  padding: 0 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+  color: #333333;
+  width: 100%;
+}
+
+.input-field::placeholder {
+  color: #888;
+}
+
+.input-field:focus {
+  border-color: #ff6b00;
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.15);
+  transform: translateY(-1px);
+}
+
+.input-field:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* 验证码按钮 - 带波纹效果 */
+.code-btn {
+  width: 120px;
+  height: 44px;
+  background-color: #f5f5f5;
+  color: #666;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.code-btn:not(:disabled) {
+  background-color: #ff6b00;
+  color: #fff;
+  border-color: #ff6b00;
+}
+
+.code-btn:not(:disabled):hover {
+  background-color: #ff8c33;
+  border-color: #ff8c33;
+  transform: translateY(-1px);
+}
+
+.code-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* 协议勾选 - 延迟动画 */
+.agree-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeInUp 0.4s ease-out 0.35s both;
+}
+
+.agree-group input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.agree-group input[type="checkbox"]:checked {
+  accent-color: #ff6b00;
+}
+
+.agree-group input[type="checkbox"]:disabled {
+  cursor: not-allowed;
+}
+
+.agree-group label {
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+  user-select: none;
+}
+
+.agree-group label a {
+  color: #ff6b00;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.agree-group label a:hover {
+  text-decoration: underline;
+  color: #ff8c33;
+}
+
+/* 登录按钮 - 渐变+加载动画 */
+.login-btn-submit {
+  width: 100%;
+  height: 44px;
+  background: linear-gradient(135deg, #ff6b00, #ff8c33);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(255, 107, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  animation: fadeInUp 0.4s ease-out 0.4s both;
+}
+
+.login-btn-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #ff8c33, #ffa566);
+  box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
+  transform: translateY(-1px);
+}
+
+.login-btn-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-btn-submit:disabled {
+  background: #e0e0e0;
+  color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.login-btn-submit::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.login-btn-submit:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* 注册提示 - 淡入动画 */
+.register-tip {
+  margin: 16px 0 0 0;
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+  opacity: 0;
+  animation: fadeIn 0.4s ease-out 0.45s both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 加载动画 */
+.loading {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 成功动画 */
+.success-animation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #52c41a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.success-animation.show {
+  animation: successPop 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes successPop {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
