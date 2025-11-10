@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./loginGiftLevelInvite.css";
+import { useLoginModal } from '@/contexts/LoginModalContext';
 
 export default function SidebarGame() {
     const [activeSidebarIndex, setActiveSidebarIndex] = useState(0);
@@ -7,6 +8,7 @@ export default function SidebarGame() {
     const gameCarouselContainerRef = useRef(null);
     const [isAnimated, setIsAnimated] = useState(false);
     const [itemAnimateIndex, setItemAnimateIndex] = useState(0);
+  const { openLogin } = useLoginModal();
 
     const carouselItems = [
         { image: "https://wegame.gtimg.com/tgp_act/release/wegame/dx20250815/images/p2img1.png" },
@@ -33,12 +35,13 @@ export default function SidebarGame() {
 
     // 立即邀请点击处理
     const handleInviteClick = async () => {
+        // openLogin()
         try {
             const currentUrl = window.location.href;
             const uid = localStorage.getItem('user_info_uid');
 
             if (!uid) {
-                alert('请先登录获取UID');
+              openLogin()
                 return;
             }
 

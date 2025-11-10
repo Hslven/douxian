@@ -1,4 +1,5 @@
 import "./css/style.css";
+import { LoginModalProvider } from '@/contexts/LoginModalContext';
 
 // import { Inter } from "next/font/google";
 import localFont from "next/font/local";
@@ -34,7 +35,9 @@ export default function RootLayout({
       >
         <div className="flex min-h-screen flex-col overflow-hidden supports-[overflow:clip]:overflow-clip">
           {/* <Header /> */}
+          <LoginModalProvider>
           {children}
+        </LoginModalProvider>
         </div>
       </body>
     </html>
