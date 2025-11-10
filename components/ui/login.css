@@ -392,7 +392,25 @@
 .success-animation.show {
   animation: successPop 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
+.login-toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
 
+.login-toast.show {
+    opacity: 1;
+}
 @keyframes successPop {
   0% {
     opacity: 0;

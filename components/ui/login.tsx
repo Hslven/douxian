@@ -3,6 +3,31 @@ import React, { useState, useRef, useEffect } from "react";
 import ReactDOM from "react-dom";
 import "./login.css";
 
+// Toast 工具函数（原生实现）
+const Toast = {
+    show: (message, duration = 3000) => {
+        // 移除已存在的 toast
+        const existingToast = document.querySelector('.login-toast');
+        if (existingToast) {
+            existingToast.remove();
+        }
+
+        // 创建 toast 元素
+        const toast = document.createElement('div');
+        toast.className = 'login-toast show';
+        toast.textContent = message;
+
+        // 添加到 body
+        document.body.appendChild(toast);
+
+        // 自动移除
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 300);
+        }, duration);
+    }
+};
+
 // 常量配置
 const CONFIG = {
     COUNTDOWN_TIME: 60,
@@ -18,17 +43,31 @@ const Storage = {
     removeToken: () => localStorage.removeItem("auth_token"),
 
     // 用户信息管理
-    setUserInfo: (userInfo) => localStorage.setItem("user_info", JSON.stringify(userInfo)),
+    setUserInfo: (userInfo) => {
+        // 存储完整用户信息
+        localStorage.setItem("user_info", JSON.stringify(userInfo));
+        // 单独存储 uid
+        if (userInfo && userInfo.uid) {
+            localStorage.setItem("user_info_uid", userInfo.uid);
+        }
+    },
     getUserInfo: () => {
         const userInfo = localStorage.getItem("user_info");
         return userInfo ? JSON.parse(userInfo) : null;
     },
-    removeUserInfo: () => localStorage.removeItem("user_info"),
+    removeUserInfo: () => {
+        localStorage.removeItem("user_info");
+        localStorage.removeItem("user_info_uid");
+    },
+
+    // 获取单独存储的 uid
+    getUserUid: () => localStorage.getItem("user_info_uid"),
 
     // 清除所有认证信息
     clearAuth: () => {
         localStorage.removeItem("auth_token");
         localStorage.removeItem("user_info");
+        localStorage.removeItem("user_info_uid");
     }
 };
 
@@ -201,18 +240,23 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
             const result = await response.json();
 
             if (result.code === 0 && result.data) {
-                // 存储完整用户信息
+                // 存储完整用户信息（包含单独存储 uid）
                 const userData = result.data;
                 Storage.setUserInfo(userData);
                 onLoginSuccess(userData);
+
+                // 显示登录成功 toast
+                Toast.show(`登录成功！欢迎 ${userData.username || phone}`);
                 console.log("👤 用户信息已保存:", userData);
             } else {
                 console.error("获取用户信息失败:", result.msg);
                 onLoginSuccess({ phone, username: phone });
+                Toast.show("登录成功，但获取用户信息失败");
             }
         } catch (err) {
             console.error("获取用户信息错误:", err);
             onLoginSuccess({ phone, username: phone });
+            Toast.show("登录成功，但用户信息获取异常");
         }
     };
 
