@@ -78,10 +78,20 @@ const Header = () => {
                             游戏活动中心
                         </a>
                     </div>
-                    <SurveyModal
+                    {/* <SurveyModal
                         isOpen={showSurvey}
                         onClose={() => setShowSurvey(false)}
                         onSubmit={handleSurveySubmit}
+                    /> */}
+                    <SurveyModal
+                        isOpen={showSurvey}
+                        onClose={() => setShowSurvey(false)}
+                        onSubmit={(data) => console.log("提交数据:", data)}
+                        backgroundImage="https://your-domain.com/bg.jpg"
+                        onCustomCheck={(qIndex, option, question) => {
+                            console.log(`第${qIndex + 1}题选择了:`, option);
+                            // 可在此处添加自定义业务逻辑
+                        }}
                     />
                     {/* 右侧操作区 */}
                     <div className="header-right">

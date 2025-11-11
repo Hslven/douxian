@@ -399,3 +399,235 @@
 .survey-content::-webkit-scrollbar-thumb:hover {
   background: #ff8c33;
 }
+/* 在原有基础上添加 */
+
+.scrollable-modal {
+    max-height: 90vh;
+    overflow-y: auto;
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.all-questions-container {
+    margin: 20px 0;
+}
+
+.question-item {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.3s ease-in-out;
+    border-left: 4px solid #409eff;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.question-number {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: #409eff;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    margin-right: 12px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.question-type-tip {
+    color: #909399;
+    font-size: 14px;
+    margin-left: 8px;
+}
+
+.survey-description {
+    color: #666;
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+.single-action {
+    justify-content: center;
+    margin-top: 30px;
+    padding-bottom: 20px;
+}
+
+.success-modal {
+    text-align: center;
+    padding: 40px 20px;
+    background: white !important;
+}
+
+.success-icon {
+    font-size: 60px;
+    margin-bottom: 20px;
+}
+
+.success-modal h2 {
+    color: #67c23a;
+    margin-bottom: 10px;
+}
+
+.success-modal p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.close-btn {
+    background: #409eff;
+    color: white;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* 背景覆盖层样式 */
+.survey-modal-overlay {
+    background: rgba(0, 0, 0, 0.6) !important;
+}
+/* 自定义勾选框基础样式 */
+.option-item {
+    position: relative;
+    padding-left: 40px;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.3s ease;
+    margin-bottom: 12px;
+    padding: 12px 12px 12px 40px;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+/* 未选中状态 */
+.option-item.custom-unchecked {
+    background: #fafafa;
+    border: 2px solid transparent;
+}
+
+/* 选中状态 */
+.option-item.selected {
+    background: #e6f7ff;
+    border: 2px solid #409eff;
+}
+
+/* 隐藏原生勾选框 */
+.option-item input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* 自定义勾选框 - 未选中 */
+.custom-checkbox {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+/* 自定义勾选框 - 选中 */
+.option-item.selected .custom-checkbox {
+    border-color: #409eff;
+    background: #409eff;
+}
+
+/* 选中时的对勾 */
+.option-item.selected .custom-checkbox::after {
+    content: '';
+    position: absolute;
+    left: 6px;
+    top: 2px;
+    width: 6px;
+    height: 12px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+/* 悬停效果 */
+.option-item:hover {
+    background: #f0f8ff;
+}
+
+/* 禁用状态 */
+.option-item input:disabled ~ .custom-checkbox {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 选项文字 */
+.option-text {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+}
+
+/* 题目样式 */
+.question-item {
+    background: rgba(255, 255, 255, 0.98);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.question-number {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: #409eff;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    margin-right: 12px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* 提交按钮 */
+.submit-btn {
+    background: #409eff;
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: #66b1ff;
+}

@@ -1,69 +1,36 @@
 // components/Survey/SurveyModal.jsx
 import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom"; // ✅ React 18 正确导入
 import "./SurveyModal.css";
-import { mockSurveyData, mockSubmitResponse } from "./mockSurveyData";
 
-// localStorage 管理工具
 const Storage = {
     getToken: () => localStorage.getItem("auth_token"),
 };
 
-/**
- * 问卷调查弹窗组件
- * @param {boolean} isOpen - 是否打开弹窗
- * @param {function} onClose - 关闭弹窗回调
- * @param {function} onSubmit - 提交问卷回调(answers)
- */
-const SurveyModal = ({ isOpen, onClose, onSubmit }) => {
-    // 问卷状态管理
+const SurveyModal = ({ isOpen, onClose, onSubmit, backgroundImage, onCustomCheck }) => {
     const [surveyData, setSurveyData] = useState(null);
-    const [currentQuestion, setCurrentQuestion] = useState(0);
-    const [answers, setAnswers] = useState({});
+    const [answers, setAnswers] = useState({}); // 格式: {0: "选项A", 1: ["选项B","选项C"]}
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    // 组件挂载时获取问卷数据
     useEffect(() => {
-        if (isOpen) {
-            // 开发环境使用 mock 数据
-            if (process.env.NODE_ENV === "development") {
-                setTimeout(() => {
-                    setSurveyData(mockSurveyData.data);
-                    console.log("📋 问卷数据已加载 (mock):", mockSurveyData.data);
-                }, 500);
-            } else {
-                fetchSurveyData();
-            }
-        } else {
-            // 关闭时重置状态
-            setCurrentQuestion(0);
-            setAnswers({});
-            setError("");
-        }
+        if (isOpen) fetchSurveyData();
+        else resetState();
     }, [isOpen]);
 
-    // 自动聚焦当前题目
-    useEffect(() => {
-        if (isOpen && surveyData?.questions?.length > 0) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
-        return () => {
-            document.body.style.overflow = "";
-        };
-    }, [isOpen, surveyData]);
+    const resetState = () => {
+        setAnswers({});
+        setError("");
+        setIsSubmitting(false);
+    };
 
-    // 获取问卷数据
     const fetchSurveyData = async () => {
         setIsLoading(true);
         setError("");
-
         try {
             const token = Storage.getToken();
-            const response = await fetch("/douxian/web/survey/questions", {
+            const response = await fetch("/douxian/web/question", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -72,140 +39,130 @@ const SurveyModal = ({ isOpen, onClose, onSubmit }) => {
             });
 
             const result = await response.json();
+            console.log("🚀 接口返回:", result);
 
             if (result.code === 0 && result.data) {
-                setSurveyData(result.data);
-                console.log("📋 问卷数据已加载:", result.data);
+                const data = result.data;
+                if (!data.questionList || !Array.isArray(data.questionList)) {
+                    throw new Error("questionList 字段缺失或不是数组");
+                }
+                // ✅ 验证每题必需字段
+                data.questionList.forEach((q, i) => {
+                    if (!q.questionLabel) throw new Error(`第${i + 1}题缺少 questionLabel`);
+                    if (!Array.isArray(q.questionOption)) throw new Error(`第${i + 1}题缺少 questionOption`);
+                });
+                setSurveyData(data);
             } else {
-                setError(result.msg || "获取问卷失败");
+                throw new Error(result.msg || "获取问卷失败");
             }
         } catch (err) {
-            setError("网络错误，请检查连接");
-            console.error("获取问卷错误:", err);
+            setError(err.message);
+            console.error("❌ 获取失败:", err);
         } finally {
             setIsLoading(false);
         }
     };
 
-    // 选择答案
-    const handleSelectAnswer = (questionId, optionValue) => {
-        const question = surveyData.questions[currentQuestion];
+    // ✅ 答案选择（按题目索引存储）
+    const handleSelectAnswer = (qIndex, optionText, correctOption) => {
+        const isMultiple = correctOption && (correctOption.includes('|') || correctOption.includes(','));
 
-        if (question.type === "multiple") {
-            // 多选题
+        if (isMultiple) {
             setAnswers(prev => {
-                const currentAnswers = prev[questionId] || [];
-                if (currentAnswers.includes(optionValue)) {
-                    return {
-                        ...prev,
-                        [questionId]: currentAnswers.filter(v => v !== optionValue)
-                    };
-                } else {
-                    return {
-                        ...prev,
-                        [questionId]: [...currentAnswers, optionValue]
-                    };
+                const current = prev[qIndex] || [];
+                if (current.includes(optionText)) {
+                    return { ...prev, [qIndex]: current.filter(v => v !== optionText) };
                 }
+                return { ...prev, [qIndex]: [...current, optionText] };
             });
         } else {
-            // 单选题
-            setAnswers(prev => ({
-                ...prev,
-                [questionId]: optionValue
-            }));
+            setAnswers(prev => ({ ...prev, [qIndex]: optionText }));
         }
+
+        if (onCustomCheck) onCustomCheck(qIndex, optionText, correctOption);
         setError("");
     };
 
-    // 下一题
-    const handleNext = () => {
-        const question = surveyData.questions[currentQuestion];
-        const answer = answers[question.id];
+    // ✅ 计算总分（每题均分）
+    const calculateTotalScore = () => {
+        if (!surveyData?.questionList?.length) return 0;
+        const perScore = 100 / surveyData.questionList.length;
+        let total = 0;
 
-        // 验证是否已答题
-        if (!answer || (Array.isArray(answer) && answer.length === 0)) {
-            setError("请先选择一个选项");
-            return;
-        }
+        surveyData.questionList.forEach((question, index) => {
+            const userAnswer = answers[index];
+            if (!userAnswer || (Array.isArray(userAnswer) && userAnswer.length === 0)) return;
 
-        if (currentQuestion < surveyData.questions.length - 1) {
-            setCurrentQuestion(prev => prev + 1);
-        }
+            const correctAnswers = question.correctOption
+                ? question.correctOption.split(/[|,]/).map(s => s.trim()).filter(Boolean)
+                : [];
+
+            if (Array.isArray(userAnswer)) {
+                if (userAnswer.length === correctAnswers.length &&
+                    userAnswer.every(ans => correctAnswers.includes(ans))) {
+                    total += perScore;
+                }
+            } else {
+                if (correctAnswers.includes(userAnswer)) {
+                    total += perScore;
+                }
+            }
+        });
+        return Math.round(total);
     };
 
-    // 上一题
-    const handlePrev = () => {
-        if (currentQuestion > 0) {
-            setCurrentQuestion(prev => prev - 1);
-        }
-    };
-
-    // 提交问卷
+    // ✅ 提交到真实接口
     const handleSubmit = async () => {
-        const question = surveyData.questions[currentQuestion];
-        const answer = answers[question.id];
+        if (!surveyData?.questionList?.length) return setError("问卷数据异常");
 
-        // 验证是否已答题
-        if (!answer || (Array.isArray(answer) && answer.length === 0)) {
-            setError("请先选择一个选项");
-            return;
-        }
+        const unanswered = surveyData.questionList.filter((_, idx) => {
+            const ans = answers[idx];
+            return !ans || (Array.isArray(ans) && ans.length === 0);
+        });
+
+        if (unanswered.length > 0) return setError(`还有 ${unanswered.length} 道题未作答`);
 
         setIsSubmitting(true);
         setError("");
 
         try {
-            // 开发环境使用 mock 提交
-            if (process.env.NODE_ENV === "development") {
-                setTimeout(() => {
-                    console.log("✅ 问卷提交成功 (mock):", answers);
-                    onSubmit(answers);
-                    handleClose();
-                    alert(mockSubmitResponse.msg);
-                    setIsSubmitting(false);
-                }, 800);
-                return;
-            }
-
             const token = Storage.getToken();
-            const response = await fetch("/douxian/web/survey/submit", {
+            const totalScore = calculateTotalScore();
+            const questionId = surveyData.questionId; // ✅ 从试卷数据获取
+
+            // ✅ 真实提交
+            const response = await fetch("/douxian/web/question", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": token ? `Bearer ${token}` : "",
                 },
                 body: JSON.stringify({
-                    surveyId: surveyData.id,
-                    answers: answers
+                    questionId,        // 问卷ID
+                    totalScore,        // 计算后的总分
+                    answers            // 答案对象
                 }),
             });
 
             const result = await response.json();
+            if (result.code !== 0) throw new Error(result.msg || "提交失败");
 
-            if (result.code === 0) {
-                console.log("✅ 问卷提交成功:", answers);
-                onSubmit(answers);
-                handleClose();
-            } else {
-                setError(result.msg || "提交失败");
-            }
+            console.log("✅ 提交成功:", { questionId, totalScore });
+            onSubmit({ questionId, totalScore, answers });
+
         } catch (err) {
-            setError("网络错误，请检查连接");
-            console.error("提交问卷错误:", err);
+            setError(err.message || "提交失败");
+            console.error("❌ 提交错误:", err);
         } finally {
             setIsSubmitting(false);
         }
     };
 
-    // 关闭弹窗
     const handleClose = () => {
         onClose();
-        setCurrentQuestion(0);
-        setAnswers({});
-        setError("");
+        resetState();
     };
 
-    // ESC键关闭
     useEffect(() => {
         const handleEsc = (e) => {
             if (e.key === "Escape" && isOpen && !isLoading && !isSubmitting) {
@@ -218,132 +175,112 @@ const SurveyModal = ({ isOpen, onClose, onSubmit }) => {
 
     if (!isOpen) return null;
 
-    return ReactDOM.createPortal(
-        <div className="survey-modal-overlay show" onClick={handleClose}>
-            <div className="survey-modal" onClick={(e) => e.stopPropagation()}>
-                {/* 关闭按钮 */}
-                <button className="survey-close-btn" onClick={handleClose} aria-label="关闭">
-                    ×
-                </button>
+    // 加载中
+    if (isLoading) {
+        return createPortal(
+            <div className="survey-modal-overlay show" onClick={handleClose}>
+                <div className="survey-modal" onClick={(e) => e.stopPropagation()}>
+                    <button className="survey-close-btn" onClick={handleClose}>×</button>
+                    <div className="survey-loading">
+                        <div className="loading-spinner"></div>
+                        <p>正在加载问卷...</p>
+                    </div>
+                </div>
+            </div>,
+            document.body
+        );
+    }
 
-                {/* 问卷内容 */}
+    // 错误页
+    if (error || !surveyData || !surveyData.questionList) {
+        return createPortal(
+            <div className="survey-modal-overlay show" onClick={handleClose}>
+                <div className="survey-modal" onClick={(e) => e.stopPropagation()}>
+                    <button className="survey-close-btn" onClick={handleClose}>×</button>
+                    <div className="survey-error">
+                        <p>{error || "问卷数据异常"}</p>
+                        <button className="retry-btn" onClick={fetchSurveyData}>重新加载</button>
+                    </div>
+                </div>
+            </div>,
+            document.body
+        );
+    }
+
+    // 正式渲染问卷
+    return createPortal(
+        <div
+            className="survey-modal-overlay show"
+            onClick={handleClose}
+            style={{
+                backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                overflowY: 'auto'
+            }}
+        >
+            <div className="survey-modal scrollable-modal" onClick={(e) => e.stopPropagation()}>
+                <button className="survey-close-btn" onClick={handleClose}>×</button>
+
                 <div className="survey-content">
-                    {isLoading ? (
-                        <div className="survey-loading">
-                            <div className="loading-spinner"></div>
-                            <p>正在加载问卷...</p>
-                        </div>
-                    ) : surveyData ? (
-                        <>
-                            {/* 问卷标题 */}
-                            <div className="survey-header">
-                                <h2>{surveyData.title || "用户满意度调查"}</h2>
-                                <div className="survey-progress">
-                                    <span className="current">{currentQuestion + 1}</span>
-                                    <span className="separator">/</span>
-                                    <span className="total">{surveyData.questions.length}</span>
+                    <div className="survey-header">
+                        <h2>{surveyData.paperName || "问卷调研"}</h2>
+                    </div>
+
+                    <div className="all-questions-container">
+                        {surveyData.questionList.map((question, qIndex) => (
+                            <div key={qIndex} className="question-item">
+                                <h3 className="question-title">
+                                    <span className="question-number">{qIndex + 1}.</span>
+                                    {question.questionLabel}
+                                </h3>
+
+                                <div className="options-list">
+                                    {question.questionOption.map((optionText) => {
+                                        const isSelected = Array.isArray(answers[qIndex])
+                                            ? answers[qIndex].includes(optionText)
+                                            : answers[qIndex] === optionText;
+
+                                        return (
+                                            <label
+                                                key={optionText}
+                                                className={`option-item ${isSelected ? "selected" : ""}`}
+                                            >
+                                                <input
+                                                    type="checkbox"
+                                                    checked={isSelected}
+                                                    onChange={() => handleSelectAnswer(qIndex, optionText, question.correctOption)}
+                                                    disabled={isSubmitting}
+                                                />
+                                                <span className="option-text">{optionText}</span>
+                                                <span className="custom-checkbox"></span>
+                                            </label>
+                                        );
+                                    })}
                                 </div>
                             </div>
+                        ))}
+                    </div>
 
-                            {/* 进度条 */}
-                            <div className="progress-bar">
-                                <div
-                                    className="progress-fill"
-                                    style={{
-                                        width: `${((currentQuestion + 1) / surveyData.questions.length) * 100}%`
-                                    }}
-                                ></div>
-                            </div>
-
-                            {/* 当前题目 */}
-                            <div className="question-container">
-                                <div className="question-card">
-                                    <h3 className="question-title">
-                                        <span className="question-number">Q{currentQuestion + 1}</span>
-                                        {surveyData.questions[currentQuestion].question}
-                                    </h3>
-
-                                    <div className="options-list">
-                                        {surveyData.questions[currentQuestion].options.map((option) => {
-                                            const questionId = surveyData.questions[currentQuestion].id;
-                                            const isSelected = Array.isArray(answers[questionId])
-                                                ? answers[questionId].includes(option.value)
-                                                : answers[questionId] === option.value;
-
-                                            return (
-                                                <label
-                                                    key={option.value}
-                                                    className={`option-item ${isSelected ? "selected" : ""}`}
-                                                >
-                                                    <input
-                                                        type={surveyData.questions[currentQuestion].type === "multiple" ? "checkbox" : "radio"}
-                                                        name={`question-${questionId}`}
-                                                        value={option.value}
-                                                        checked={isSelected}
-                                                        onChange={() => handleSelectAnswer(questionId, option.value)}
-                                                        disabled={isSubmitting}
-                                                    />
-                                                    <span className="option-text">{option.text}</span>
-                                                    <span className="checkmark"></span>
-                                                </label>
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* 错误提示 */}
-                            {error && (
-                                <div className="error-message show">
-                                    <span>⚠️</span>
-                                    <span>{error}</span>
-                                </div>
-                            )}
-
-                            {/* 操作按钮 */}
-                            <div className="survey-actions">
-                                <button
-                                    className="prev-btn"
-                                    onClick={handlePrev}
-                                    disabled={currentQuestion === 0 || isSubmitting}
-                                >
-                                    上一题
-                                </button>
-
-                                {currentQuestion === surveyData.questions.length - 1 ? (
-                                    <button
-                                        className="submit-btn"
-                                        onClick={handleSubmit}
-                                        disabled={isSubmitting}
-                                    >
-                                        {isSubmitting ? (
-                                            <>
-                                                <span className="loading-spinner"></span>
-                                                提交中...
-                                            </>
-                                        ) : (
-                                            "提交问卷"
-                                        )}
-                                    </button>
-                                ) : (
-                                    <button
-                                        className="next-btn"
-                                        onClick={handleNext}
-                                        disabled={isSubmitting}
-                                    >
-                                        下一题
-                                    </button>
-                                )}
-                            </div>
-                        </>
-                    ) : (
-                        <div className="survey-error">
-                            <p>{error || "加载问卷失败"}</p>
-                            <button className="retry-btn" onClick={fetchSurveyData}>
-                                重新加载
-                            </button>
+                    {error && (
+                        <div className="error-message show">
+                            <span>⚠️</span>
+                            <span>{error}</span>
                         </div>
                     )}
+
+                    <div className="survey-actions single-action">
+                        <button className="submit-btn" onClick={handleSubmit} disabled={isSubmitting}>
+                            {isSubmitting ? (
+                                <>
+                                    <span className="loading-spinner"></span>
+                                    提交中...
+                                </>
+                            ) : (
+                                "提交问卷"
+                            )}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>,
@@ -351,4 +288,5 @@ const SurveyModal = ({ isOpen, onClose, onSubmit }) => {
     );
 };
 
+// ✅ 确保完整导出
 export default SurveyModal;
