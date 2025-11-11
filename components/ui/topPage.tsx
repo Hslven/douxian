@@ -1,146 +1,78 @@
-// components/Header/topPage.jsx
-import React, { useState, useEffect } from "react";
-import LoginModal from './login';
-import './topPage.css';
-import SurveyModal from './SurveyModal';
+"use client";
+import React from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import LoginModal from "./login";
+import SurveyModal from "./SurveyModal";
+import "./topPage.css";
 
-// localStorage 管理工具（与 login.jsx 保持一致）
-const Storage = {
-    getToken: () => localStorage.getItem("auth_token"),
-    getUserInfo: () => {
-        const userInfo = localStorage.getItem("user_info");
-        return userInfo ? JSON.parse(userInfo) : null;
-    },
-};
-
-// Header组件 - 顶部固定导航栏
 const Header = () => {
-    // 登录状态管理 - 存储完整的用户信息
-    const [isLogin, setIsLogin] = useState(false);
-    const [showModal, setShowModal] = useState(false);
-    const [userInfo, setUserInfo] = useState(null);
-    const [nickname, setNickname] = useState("游戏玩家");
+  /* ① 顶层解构：始终拿到最新函数引用 */
+  const { userInfo, login, logout } = useAuth();
+  const [showModal, setShowModal] = React.useState(false);
 
-    // 组件挂载时检查登录状态（检查 auth_token 是否存在）
-    useEffect(() => {
-        const token = Storage.getToken();
-        const savedUserInfo = Storage.getUserInfo();
+  const nickname = userInfo?.username || userInfo?.phone || "游戏玩家";
 
-        if (token && savedUserInfo) {
-            setIsLogin(true);
-            setUserInfo(savedUserInfo);
-            setNickname(savedUserInfo.username || savedUserInfo.phone || "游戏玩家");
-            console.log("✅ 已恢复登录状态:", savedUserInfo);
-        }
-    }, []);
+  /* ② 注销广播 */
+  const handleLogout = () => {
+    if (!window.confirm("确定要注销登录吗？")) return;
+    logout(); // 清缓存 + 置空 Context
+    window.dispatchEvent(new CustomEvent("logout:success"));
+  };
 
-    // 打开登录弹窗
-    const handleLoginClick = () => {
-        setShowModal(true);
-    };
+  /* ③ 登录成功回调：必须顶层写法，直接把 login 传进去 */
+  const handleLoginSuccess = (token, userData) => {
+    login(token, userData); // 立即更新 Context
+    setShowModal(false);
+  };
 
-    // 登录成功回调 - 接收完整的用户信息
-    const handleLoginSuccess = (userData) => {
-        setIsLogin(true);
-        setUserInfo(userData);
-        setNickname(userData.username || userData.phone || "游戏玩家");
-        console.log("✅ 登录成功，用户信息:", userData);
-    };
-    const [showSurvey, setShowSurvey] = useState(false);
+  return (
+    <>
+      <header className="header">
+        <div className="header-content">
+          <div className="header-left">
+            <a href="#" className="logo">游戏活动中心</a>
+          </div>
 
-    const handleSurveySubmit = (answers) => {
-        console.log('问卷答案:', answers);
-        alert('感谢您的参与！问卷已提交成功。');
-    };
-    // 注销登录
-    const handleLogout = () => {
-        if (window.confirm("确定要注销登录吗？")) {
-            setIsLogin(false);
-            setUserInfo(null);
-            setNickname("游戏玩家");
+          <SurveyModal isOpen={false} onClose={() => {}} onSubmit={(d) => console.log(d)} />
 
-            // 清除所有认证信息（包括token和用户信息）
-            localStorage.removeItem("auth_token");
-            localStorage.removeItem("user_info");
+          <div className="header-right">
+            <a
+              href="#"
+              className="official-link"
+              onClick={(e) => {
+                e.preventDefault();
+                window.open("https://example.com", "_blank");
+              }}
+            >
+              前往官网
+            </a>
 
-            console.log("🚪 用户已注销");
-        }
-    };
-
-    return (
-        <>
-            {/* 头部导航 - 固定定位 */}
-            <header className="header">
-                <div className="header-content">
-                    {/* 左侧logo区域 */}
-                    <div className="header-left">
-                        <a href="#" className="logo">
-                            游戏活动中心
-                        </a>
-                    </div>
-                    {/* <SurveyModal
-                        isOpen={showSurvey}
-                        onClose={() => setShowSurvey(false)}
-                        onSubmit={handleSurveySubmit}
-                    /> */}
-                    <SurveyModal
-                        isOpen={showSurvey}
-                        onClose={() => setShowSurvey(false)}
-                        onSubmit={(data) => console.log("提交数据:", data)}
-                        backgroundImage="https://your-domain.com/bg.jpg"
-                        onCustomCheck={(qIndex, option, question) => {
-                            console.log(`第${qIndex + 1}题选择了:`, option);
-                            // 可在此处添加自定义业务逻辑
-                        }}
-                    />
-                    {/* 右侧操作区 */}
-                    <div className="header-right">
-                        {/* 前往官网链接 */}
-                        <a
-                            href="#"
-                            className="official-link"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                window.open("https://example.com", "_blank");
-                            }}
-                        >
-                            前往官网
-                        </a>
-
-                        {/* 登录/用户信息区 */}
-                        <div className="auth-area">
-                            {!isLogin ? (
-                                <button
-                                    className="login-btn-main"
-                                    onClick={handleLoginClick}
-                                    disabled={showModal}
-                                >
-                                    请登录
-                                </button>
-                            ) : (
-                                <div className="user-info">
-                                    <span className="nickname" title={nickname}>
-                                        {nickname}
-                                    </span>
-                                    <button className="logout-btn" onClick={handleLogout}>
-                                        注销
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </div>
+            <div className="auth-area">
+              {!userInfo ? (
+                <button className="login-btn-main" onClick={() => setShowModal(true)}>
+                  请登录
+                </button>
+              ) : (
+                <div className="user-info">
+                  <span className="nickname" title={nickname}>{nickname}</span>
+                  <button className="logout-btn" onClick={handleLogout}>
+                    注销
+                  </button>
                 </div>
-            </header>
+              )}
+            </div>
+          </div>
+        </div>
+      </header>
 
-            {/* 登录弹窗 - 完全独立组件 */}
-            <LoginModal
-                isOpen={showModal}
-                onClose={() => setShowModal(false)}
-                onLoginSuccess={handleLoginSuccess}
-            />
-        </>
-    );
+      {/* ④ 把顶层写好的回调传进去 */}
+      <LoginModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onLoginSuccess={handleLoginSuccess}
+      />
+    </>
+  );
 };
 
-// 导出Header组件
 export default Header;

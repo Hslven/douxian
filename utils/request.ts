@@ -19,11 +19,11 @@ const request = axios.create({
 // 请求拦截器
 request.interceptors.request.use(
   (config) => {
-    // 在发送请求前做些什么，例如添加token
-    // const token = localStorage.getItem('token');
-    // if (token) {
-    //   config.headers.Authorization = `Bearer ${token}`;
-    // }
+    // 从 localStorage 读取 token 并添加到请求头
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => {
@@ -85,7 +85,7 @@ export default request;
 
 export const getImgUrl = (url: string) => {
   if (!url || typeof url !== 'string') return undefined;
-  // const prefix = 'https://dxadmin.douxian2.cn';
-  const prefix = "http://douxian.zhuzhu.pro";
+  // const prefix = 'https://dxadmin.douxian2.cn ';
+  const prefix = "http://douxian.zhuzhu.pro ";
   return url.startsWith(prefix) ? url : `${prefix}${url}`;
 };

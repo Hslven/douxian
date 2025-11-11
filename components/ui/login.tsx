@@ -38,9 +38,9 @@ const CONFIG = {
 // localStorage 管理工具
 const Storage = {
     // Token管理
-    setToken: (token) => localStorage.setItem("auth_token", token),
-    getToken: () => localStorage.getItem("auth_token"),
-    removeToken: () => localStorage.removeItem("auth_token"),
+    setToken: (token) => localStorage.setItem("token", token),
+    getToken: () => localStorage.getItem("token"),
+    removeToken: () => localStorage.removeItem("token"),
 
     // 用户信息管理
     setUserInfo: (userInfo) => {
@@ -137,7 +137,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
             });
 
             const result = await response.json();
-
+            console.log(result,"result")
             if (result.code === 0) {
                 startCountdown(CONFIG.COUNTDOWN_TIME);
                 setError("");
@@ -250,12 +250,12 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                 console.log("👤 用户信息已保存:", userData);
             } else {
                 console.error("获取用户信息失败:", result.msg);
-                onLoginSuccess({ phone, username: phone });
+                // onLoginSuccess({ phone, username: phone });
                 Toast.show("登录成功，但获取用户信息失败");
             }
         } catch (err) {
             console.error("获取用户信息错误:", err);
-            onLoginSuccess({ phone, username: phone });
+            // onLoginSuccess({ phone, username: phone });
             Toast.show("登录成功，但用户信息获取异常");
         }
     };

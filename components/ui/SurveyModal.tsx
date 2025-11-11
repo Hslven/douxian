@@ -4,7 +4,7 @@ import { createPortal } from "react-dom"; // ✅ React 18 正确导入
 import "./SurveyModal.css";
 
 const Storage = {
-    getToken: () => localStorage.getItem("auth_token"),
+    getToken: () => localStorage.getItem("token"),
 };
 
 const SurveyModal = ({ isOpen, onClose, onSubmit, backgroundImage, onCustomCheck }) => {

@@ -5,11 +5,7 @@ import Image from "next/image";
 import { getImgUrl } from "@/utils/request";
 import "./home.css";
 import "./hero-home.css";
-import bac1 from "../public/images/1.jpg";
-import bac2 from "../public/images/2.jpg";
-import bac3 from "../public/images/3.jpg";
-import bac4 from "../public/images/4.jpg";
-import bac5 from "../public/images/5.jpg";
+
 interface DynamicBackgroundPageProps {
     /** 背景图片URL */
     url: string;

@@ -7,17 +7,21 @@ import two from "../public/images/2.png";
 import three from "../public/images/3.png";
 import four from "../public/images/4.png";
 import request from "@/utils/request";
+
+import "./home.css";
+import "./hero-home.css";
+import TopPage from "./ui/topPage";
+import SidebarGameContainer from "./ui/SidebarGameContainer/SidebarGameContainer";
+import BoneBc from "../src/active/one";
+import BtwoBc from "../src/active/two";
+import BthreeBc from "../src/active/three";
+import BfourBc from "../src/active/four";
+import BfiveBc from "../src/active/five";
 import bac1 from "../public/images/1.jpg";
 import bac2 from "../public/images/2.jpg";
 import bac3 from "../public/images/3.jpg";
 import bac4 from "../public/images/4.jpg";
 import bac5 from "../public/images/5.jpg";
-import "./home.css";
-import "./hero-home.css";
-import TopPage from "./ui/topPage";
-import SidebarGameContainer from "./ui/SidebarGameContainer/SidebarGameContainer";
-
-
 // 动态背景页面组件
 interface DynamicBackgroundPageProps {
     url: string;
@@ -284,16 +288,17 @@ export default function HeroHome() {
                 }}
             >
                 <div className="scroll-content" style={{ position: "relative" }}>
-                    {pageConfigs.map((config, index) => (
-                        <DynamicBackgroundPage
-                            key={index}
-                            url={config.url}
-                            index={index + 1}
-                            currentPage={currentPage}
-                            glideImg={config.glideImg}
-                            pageName={config.name}
-                        />
-                    ))}
+                    {/* {pageConfigs.map((config, index) => (
+            
+            
+                    ))} */}
+                    <div className="scroll-content">
+  <BoneBc bgUrl={'/images/1.jpg'} glideUrl={one.src} title="首页展示" isActive={currentPage === 1} />
+  <BtwoBc bgUrl={'/images/2.jpg'} glideUrl={two.src} title="宗门争霸" isActive={currentPage === 2} />
+  <BthreeBc bgUrl={'/images/3.jpg'} glideUrl={three.src} title="御空飞行" isActive={currentPage === 3} />
+  <BfourBc bgUrl={'/images/4.jpg'} glideUrl={four.src} title="PVP竞技场" isActive={currentPage === 4} />
+  {/* <BfiveBc bgUrl={'/images/5.jpg'} glideUrl={five.src} title="坐骑养成" isActive={currentPage === 5} /> */}
+</div>
                 </div>
             </section>
         </>
