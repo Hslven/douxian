@@ -1,14 +1,5 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import LoginGift from "./gameReservation/loginGift";
-import LoginGiftLevel from "./gameReservation/loginGiftLevel";
-import LoginGiftLevelInvite from "./gameReservation/loginGiftLevelInvite";
-import RankGame from "./gameReservation/rankGame";
-import HeroSection from "./HeroSection";
-
-import GameInfo from "./game-info";
-import GameCarousel from "./game-carousel";
-import RegisterModal from "./register-modal";
 import Image from "next/image";
 import one from "../public/images/1.png";
 import two from "../public/images/2.png";
@@ -17,61 +8,96 @@ import four from "../public/images/4.png";
 import request, { getImgUrl } from "@/utils/request";
 import "./home.css";
 import "./hero-home.css";
-import Modal from "./modal";
 
 import TopPage from "./ui/topPage";
-import Header from "./ui/header";
 import SidebarGameContainer from "./ui/SidebarGameContainer/SidebarGameContainer";
 
-const PageSection = ({
-    children,
+// 仅显示背景图的页面组件
+const BackgroundOnlyPage = ({
     backgroundImg,
     glideImg,
-    isActive
+    isActive,
+    pageName
 }: {
-    children: React.ReactNode;
     backgroundImg?: string;
     glideImg?: any;
-    isActive: boolean; // 标记当前是否为激活页（由父组件传入）
+    isActive: boolean;
+    pageName?: string;
 }) => {
     const [bgLoaded, setBgLoaded] = useState(false);
+    const [bgError, setBgError] = useState(false);
 
     return (
         <div
             className="page-section"
             style={{
                 minHeight: "100vh",
-                height: "100vh", // 强制高度确保占满视口
-                // 过渡动画延长，确保侧边栏切换时平滑过渡
+                height: "100vh",
                 transition: "opacity 0.6s ease, transform 0.6s ease",
-                // 由父组件控制可见性，避免滚动事件延迟导致的灰置
                 opacity: isActive ? 1 : 0,
                 transform: isActive ? "translateY(0)" : "translateY(20px)",
                 position: "relative",
-                pointerEvents: isActive ? "auto" : "none", // 非激活页禁止交互
-                zIndex: isActive ? 1 : 0, // 激活页提升层级
+                pointerEvents: isActive ? "auto" : "none",
+                zIndex: isActive ? 1 : 0,
             }}
         >
-            {backgroundImg && (
+            {backgroundImg && !bgError && (
                 <img
                     className="page-section-bg"
                     src={getImgUrl(backgroundImg)}
                     style={{
-                        display: bgLoaded ? "block" : "none",
                         position: "absolute",
                         top: 0,
                         left: 0,
                         width: "100%",
                         height: "100%",
-                        objectFit: "cover" // 确保背景图铺满，避免留白
+                        objectFit: "cover",
+                        opacity: bgLoaded ? 1 : 0,
+                        transition: "opacity 0.3s ease",
                     }}
                     onLoad={() => setBgLoaded(true)}
-                    onError={() => setBgLoaded(true)} // 图片加载失败也强制显示，避免永久灰置
+                    onError={() => {
+                        setBgError(true);
+                        setBgLoaded(true);
+                    }}
                 />
             )}
-            <div style={{ position: "relative", zIndex: 2, height: "100%" }}> {/* 内容层在背景上 */}
-                {children}
-                {glideImg && <Image className="game-glide" src={glideImg} alt="" />}
+            {bgError && (
+                <div
+                    style={{
+                        position: "absolute",
+                        top: 0,
+                        left: 0,
+                        width: "100%",
+                        height: "100%",
+                        backgroundColor: "#000",
+                    }}
+                />
+            )}
+            <div style={{ position: "relative", zIndex: 2, height: "100%" }}>
+                {glideImg && (
+                    <Image
+                        className="game-glide"
+                        src={glideImg}
+                        alt=""
+                        style={{ pointerEvents: "none" }}
+                    />
+                )}
+                {pageName && isActive && (
+                    <div style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        color: "#fff",
+                        fontSize: "48px",
+                        fontWeight: "bold",
+                        textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
+                        zIndex: 10
+                    }}>
+                        {pageName}
+                    </div>
+                )}
             </div>
         </div>
     );
@@ -79,23 +105,18 @@ const PageSection = ({
 
 export default function HeroHome() {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    const [registerModalOpen, setRegisterModalOpen] = useState(false);
     const [homeDetails, setHomeDetails] = useState<any>({});
-    const [buttonImgs, setButtonImgs] = useState<any>({});
-    const [tipsOpen, setTipsOpen] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const [isScrolling, setIsScrolling] = useState(false);
-    // 记录总页数，避免重复计算
-    const totalPagesRef = useRef(5); // 更新为5页，包含HeroSection
+    const totalPagesRef = useRef(5);
 
     useEffect(() => {
         request.get("/douxian/web/home").then((res) => setHomeDetails(res));
-        request.get("/douxian/web/button").then((res) => setButtonImgs(res));
     }, []);
 
-    // 处理滚动时的页面激活状态（仅在非侧边栏触发的滚动时生效）
+    // 处理滚动时的页面激活状态
     const handleScroll = () => {
-        if (isScrolling) return; // 侧边栏触发的滚动中，不更新状态
+        if (isScrolling) return;
 
         const scrollContainer = scrollContainerRef.current;
         if (!scrollContainer) return;
@@ -111,7 +132,6 @@ export default function HeroHome() {
             const pageTopRelative = pageRect.top - containerRect.top + scrollContainer.scrollTop;
             const pageHeight = pageRect.height;
 
-            // 宽松的可见判断，确保滚动时页面提前激活
             if (scrollPosition >= pageTopRelative - clientHeight * 0.3 &&
                 scrollPosition < pageTopRelative + pageHeight - clientHeight * 0.3) {
                 currentVisibleIndex = index + 1;
@@ -125,42 +145,36 @@ export default function HeroHome() {
         }
     };
 
-    // 侧边栏触发的滚动逻辑（重点优化）
+    // 侧边栏触发的滚动逻辑
     const scrollToPage = (index: number) => {
         const scrollContainer = scrollContainerRef.current;
         if (!scrollContainer) return;
 
-        // 校验索引有效性
         if (index < 1 || index > totalPagesRef.current) {
             console.warn(`无效页面索引: ${index}，有效范围 1-${totalPagesRef.current}`);
             return;
         }
 
-        // 1. 立即更新currentPage，确保侧边栏激活状态同步（关键）
         setCurrentPage(index);
-        // 2. 标记滚动中，阻止handleScroll干扰
         setIsScrolling(true);
 
         const pages = scrollContainer.querySelectorAll(".page-section");
         const targetPage = pages[index - 1];
         if (!targetPage) return;
 
-        // 3. 计算精确滚动位置（不受父元素样式影响）
         const targetRect = targetPage.getBoundingClientRect();
         const containerRect = scrollContainer.getBoundingClientRect();
         const targetScrollTop = targetRect.top - containerRect.top + scrollContainer.scrollTop;
 
-        // 4. 执行滚动
         scrollContainer.scrollTo({
             top: targetScrollTop,
             behavior: "smooth"
         });
 
-        // 5. 滚动结束后恢复状态（延长延迟，确保动画完成）
         const timer = setTimeout(() => {
             setIsScrolling(false);
-            handleScroll(); // 强制校验位置，确保状态最终同步
-        }, 800); // 匹配过渡动画时长（0.6s），留冗余
+            handleScroll();
+        }, 800);
 
         return () => clearTimeout(timer);
     };
@@ -174,7 +188,7 @@ export default function HeroHome() {
             const pages = scrollContainer.querySelectorAll(".page-section");
             const scrollContent = scrollContainer.querySelector(".scroll-content");
             if (pages.length && scrollContent) {
-                totalPagesRef.current = pages.length; // 更新总页数
+                totalPagesRef.current = pages.length;
                 pages.forEach(page => {
                     (page as HTMLElement).style.height = `${window.innerHeight}px`;
                     (page as HTMLElement).style.minHeight = `${window.innerHeight}px`;
@@ -193,7 +207,7 @@ export default function HeroHome() {
         setCurrentPage(1);
         const scrollContainer = scrollContainerRef.current;
         if (scrollContainer) {
-            scrollContainer.scrollTop = 0; // 确保从顶部开始
+            scrollContainer.scrollTop = 0;
         }
     }, []);
 
@@ -219,24 +233,22 @@ export default function HeroHome() {
     }, [isScrolling]);
 
     const mockData = [
-        { id: "1", bgClass: "sidebar-bg-1", currBgClass: "sidebar-bg-curr-1", name: "首页展示" }, // 新增首页项
+        { id: "1", bgClass: "sidebar-bg-1", currBgClass: "sidebar-bg-curr-1", name: "首页展示" },
         { id: "2", bgClass: "sidebar-bg-2", currBgClass: "sidebar-bg-curr-2", name: "宗门争霸" },
         { id: "3", bgClass: "sidebar-bg-3", currBgClass: "sidebar-bg-curr-3", name: "御空飞行" },
         { id: "4", bgClass: "sidebar-bg-4", currBgClass: "sidebar-bg-curr-4", name: "PVP竞技场" },
         { id: "5", bgClass: "sidebar-bg-5", currBgClass: "sidebar-bg-curr-5", name: "坐骑养成" },
     ];
-    console.log("当前页:", homeDetails.homeBackgroundUrls);
+
     return (
         <>
             <TopPage />
 
-            {/* 侧边栏：点击时直接触发scrollToPage，并通过activeIndex同步状态 */}
             <SidebarGameContainer
                 onChange={(sidebarIndex) => {
-                    // 侧边栏索引0对应页面1，索引1对应页面2...
                     scrollToPage(sidebarIndex + 1);
                 }}
-                activeIndex={currentPage - 1} // 实时同步当前页索引
+                activeIndex={currentPage - 1}
                 items={mockData}
             />
 
@@ -249,67 +261,50 @@ export default function HeroHome() {
                     position: "relative",
                     padding: 0,
                     margin: 0,
-                    // 背景色与页面协调，避免灰置时露出异常颜色
-                    backgroundColor: "#000" // 根据实际设计调整
+                    backgroundColor: "#000"
                 }}
             >
                 <div className="scroll-content" style={{ position: "relative" }}>
-                    {/* 修复：将HeroSection移入scroll-content，并作为第一页 */}
-                    <PageSection
-                        backgroundImg={'https://wegame.gtimg.com/tgp_act/release/wegame/dxOrder/images/bg1.jpg'}
+                    {/* 第一页：首页展示 */}
+                    <BackgroundOnlyPage
+                        backgroundImg="https://wegame.gtimg.com/tgp_act/release/wegame/dxOrder/images/bg1.jpg"
                         glideImg={one}
                         isActive={currentPage === 1}
-                    >
-                        <HeroSection
-                            homeDetails={homeDetails}
-                            homeBackgroundUrl={'https://wegame.gtimg.com/tgp_act/release/wegame/dxOrder/images/bg1.jpg'}
-                            buttonImgs={buttonImgs}
-                            openTips={() => setTipsOpen(true)}
-                            openRegisterModal={() => setRegisterModalOpen(true)}
-                        />
-                    </PageSection>
+                        pageName="首页展示"
+                    />
 
-                    {/* 第一页：通过isActive控制可见性（与currentPage绑定） */}
-                    <PageSection
+                    {/* 第二页：宗门争霸 */}
+                    <BackgroundOnlyPage
+                        backgroundImg="https://wegame.gtimg.com/tgp_act/release/wegame/dxOrder/images/bg2.jpg"
                         glideImg={two}
                         isActive={currentPage === 2}
-                    >
-                        <LoginGift />
-                    </PageSection>
+                        pageName="宗门争霸"
+                    />
 
-                    {/* 第二页 */}
-                    <PageSection
-                        // backgroundImg={homeDetails.homeBackgroundUrls?.[1]}
+                    {/* 第三页：御空飞行 */}
+                    <BackgroundOnlyPage
+                        backgroundImg="https://wegame.gtimg.com/tgp_act/release/wegame/dxOrder/images/bg3.jpg"
                         glideImg={three}
                         isActive={currentPage === 3}
-                    >
-                        <LoginGiftLevel />
+                        pageName="御空飞行"
+                    />
 
-                    </PageSection>
-                    {/* 第三页 */}
-                    <PageSection
-                        backgroundImg={homeDetails.homeBackgroundUrls?.[2]}
+                    {/* 第四页：PVP竞技场 */}
+                    <BackgroundOnlyPage
+                        backgroundImg="https://wegame.gtimg.com/tgp_act/release/wegame/dxOrder/images/bg4.jpg"
                         glideImg={four}
                         isActive={currentPage === 4}
-                    >
-                        <LoginGiftLevelInvite />
-                    </PageSection>
+                        pageName="PVP竞技场"
+                    />
 
-                    {/* 第四页 */}
-                    <PageSection
-                        backgroundImg={homeDetails.homeBackgroundUrls?.[3]}
+                    {/* 第五页：坐骑养成 */}
+                    <BackgroundOnlyPage
+                        backgroundImg="https://wegame.gtimg.com/tgp_act/release/wegame/dxOrder/images/bg5.jpg"
                         glideImg={four}
                         isActive={currentPage === 5}
-                    >
-                        <RankGame />
-                    </PageSection>
+                        pageName="坐骑养成"
+                    />
                 </div>
-
-                <RegisterModal
-                    visible={registerModalOpen}
-                    onClose={() => setRegisterModalOpen(false)}
-                />
-                <Modal visible={tipsOpen} onClose={() => setTipsOpen(false)} />
             </section>
         </>
     );

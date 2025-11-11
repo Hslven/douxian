@@ -46,7 +46,7 @@ const Header = () => {
         setNickname(userData.username || userData.phone || "游戏玩家");
         console.log("✅ 登录成功，用户信息:", userData);
     };
-    const [showSurvey, setShowSurvey] = useState(true);
+    const [showSurvey, setShowSurvey] = useState(false);
 
     const handleSurveySubmit = (answers) => {
         console.log('问卷答案:', answers);
