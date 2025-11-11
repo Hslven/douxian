@@ -3,7 +3,7 @@ export const metadata = {
     description: "斗仙",
 };
 
-import Hero from "../../components/game-active";
+import Hero from "../../components/newGameActive";
 
 export default function Home() {
     return (

@@ -1,31 +1,42 @@
 "use client";
+
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import one from "../public/images/1.png";
 import two from "../public/images/2.png";
 import three from "../public/images/3.png";
 import four from "../public/images/4.png";
-import request, { getImgUrl } from "@/utils/request";
+import request from "@/utils/request";
+import bac1 from "../public/images/1.jpg";
+import bac2 from "../public/images/2.jpg";
+import bac3 from "../public/images/3.jpg";
+import bac4 from "../public/images/4.jpg";
+import bac5 from "../public/images/5.jpg";
 import "./home.css";
 import "./hero-home.css";
-
 import TopPage from "./ui/topPage";
 import SidebarGameContainer from "./ui/SidebarGameContainer/SidebarGameContainer";
 
-// 仅显示背景图的页面组件
-const BackgroundOnlyPage = ({
-    backgroundImg,
-    glideImg,
-    isActive,
-    pageName
-}: {
-    backgroundImg?: string;
+
+// 动态背景页面组件
+interface DynamicBackgroundPageProps {
+    url: string;
+    index: number;
+    currentPage: number;
     glideImg?: any;
-    isActive: boolean;
     pageName?: string;
+}
+
+const DynamicBackgroundPage: React.FC<DynamicBackgroundPageProps> = ({
+    url,
+    index,
+    currentPage,
+    glideImg,
+    pageName
 }) => {
     const [bgLoaded, setBgLoaded] = useState(false);
     const [bgError, setBgError] = useState(false);
+    const isActive = currentPage === index;
 
     return (
         <div
@@ -41,10 +52,10 @@ const BackgroundOnlyPage = ({
                 zIndex: isActive ? 1 : 0,
             }}
         >
-            {backgroundImg && !bgError && (
+            {url && !bgError && (
                 <img
                     className="page-section-bg"
-                    src={getImgUrl(backgroundImg)}
+                    src={url}
                     style={{
                         position: "absolute",
                         top: 0,
@@ -110,9 +121,27 @@ export default function HeroHome() {
     const [isScrolling, setIsScrolling] = useState(false);
     const totalPagesRef = useRef(5);
 
+    // 页面配置数据
+    const pageConfigs = [
+        { url: "/images/1.jpg", glideImg: one, name: "首页展示" },
+        { url: "/images/2.jpg", glideImg: two, name: "宗门争霸" },
+        { url: "/images/3.jpg", glideImg: three, name: "御空飞行" },
+        { url: "/images/4.jpg", glideImg: four, name: "PVP竞技场" },
+        { url: "/images/5.jpg", glideImg: four, name: "坐骑养成" },
+    ];
+
     useEffect(() => {
         request.get("/douxian/web/home").then((res) => setHomeDetails(res));
     }, []);
+
+    // 侧边栏数据
+    const mockData = [
+        { id: "1", bgClass: "sidebar-bg-1", currBgClass: "sidebar-bg-curr-1", name: "首页展示" },
+        { id: "2", bgClass: "sidebar-bg-2", currBgClass: "sidebar-bg-curr-2", name: "宗门争霸" },
+        { id: "3", bgClass: "sidebar-bg-3", currBgClass: "sidebar-bg-curr-3", name: "御空飞行" },
+        { id: "4", bgClass: "sidebar-bg-4", currBgClass: "sidebar-bg-curr-4", name: "PVP竞技场" },
+        { id: "5", bgClass: "sidebar-bg-5", currBgClass: "sidebar-bg-curr-5", name: "坐骑养成" },
+    ];
 
     // 处理滚动时的页面激活状态
     const handleScroll = () => {
@@ -171,12 +200,10 @@ export default function HeroHome() {
             behavior: "smooth"
         });
 
-        const timer = setTimeout(() => {
+        setTimeout(() => {
             setIsScrolling(false);
             handleScroll();
         }, 800);
-
-        return () => clearTimeout(timer);
     };
 
     // 初始化页面高度
@@ -232,14 +259,6 @@ export default function HeroHome() {
         }
     }, [isScrolling]);
 
-    const mockData = [
-        { id: "1", bgClass: "sidebar-bg-1", currBgClass: "sidebar-bg-curr-1", name: "首页展示" },
-        { id: "2", bgClass: "sidebar-bg-2", currBgClass: "sidebar-bg-curr-2", name: "宗门争霸" },
-        { id: "3", bgClass: "sidebar-bg-3", currBgClass: "sidebar-bg-curr-3", name: "御空飞行" },
-        { id: "4", bgClass: "sidebar-bg-4", currBgClass: "sidebar-bg-curr-4", name: "PVP竞技场" },
-        { id: "5", bgClass: "sidebar-bg-5", currBgClass: "sidebar-bg-curr-5", name: "坐骑养成" },
-    ];
-
     return (
         <>
             <TopPage />
@@ -265,45 +284,16 @@ export default function HeroHome() {
                 }}
             >
                 <div className="scroll-content" style={{ position: "relative" }}>
-                    {/* 第一页：首页展示 */}
-                    <BackgroundOnlyPage
-                        backgroundImg="https://wegame.gtimg.com/tgp_act/release/wegame/dxOrder/images/bg1.jpg"
-                        glideImg={one}
-                        isActive={currentPage === 1}
-                        pageName="首页展示"
-                    />
-
-                    {/* 第二页：宗门争霸 */}
-                    <BackgroundOnlyPage
-                        backgroundImg="https://wegame.gtimg.com/tgp_act/release/wegame/dxOrder/images/bg2.jpg"
-                        glideImg={two}
-                        isActive={currentPage === 2}
-                        pageName="宗门争霸"
-                    />
-
-                    {/* 第三页：御空飞行 */}
-                    <BackgroundOnlyPage
-                        backgroundImg="https://wegame.gtimg.com/tgp_act/release/wegame/dxOrder/images/bg3.jpg"
-                        glideImg={three}
-                        isActive={currentPage === 3}
-                        pageName="御空飞行"
-                    />
-
-                    {/* 第四页：PVP竞技场 */}
-                    <BackgroundOnlyPage
-                        backgroundImg="https://wegame.gtimg.com/tgp_act/release/wegame/dxOrder/images/bg4.jpg"
-                        glideImg={four}
-                        isActive={currentPage === 4}
-                        pageName="PVP竞技场"
-                    />
-
-                    {/* 第五页：坐骑养成 */}
-                    <BackgroundOnlyPage
-                        backgroundImg="https://wegame.gtimg.com/tgp_act/release/wegame/dxOrder/images/bg5.jpg"
-                        glideImg={four}
-                        isActive={currentPage === 5}
-                        pageName="坐骑养成"
-                    />
+                    {pageConfigs.map((config, index) => (
+                        <DynamicBackgroundPage
+                            key={index}
+                            url={config.url}
+                            index={index + 1}
+                            currentPage={currentPage}
+                            glideImg={config.glideImg}
+                            pageName={config.name}
+                        />
+                    ))}
                 </div>
             </section>
         </>
