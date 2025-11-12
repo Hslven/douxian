@@ -29,14 +29,11 @@
 /* 弹窗主体 - 缩放+位移动画 */
 .login-modal {
   position: relative;
-  width: 400px;
-  background-color: #fff;
-  border-radius: 16px;
+  width: 27vw;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   transform: translateY(50px) scale(0.8);
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
 }
 
 /* 弹窗显示动画 */
@@ -51,7 +48,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 24px 28px;
-  border-bottom: 1px solid #f0f0f0;
   animation: slideInDown 0.4s ease-out 0.1s both;
 }
 
@@ -60,6 +56,7 @@
     opacity: 0;
     transform: translateY(-20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -74,31 +71,15 @@
 }
 
 .close-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #999;
+  position: absolute;
   cursor: pointer;
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-  line-height: 1;
+  top: 5px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  z-index: 9;
 }
 
-.close-btn:hover:not(:disabled) {
-  color: #333;
-  background-color: #f5f5f5;
-  transform: rotate(90deg);
-}
-
-.close-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
 
 /* 弹窗内容区 - 淡入上移动画 */
 .modal-body {
@@ -111,6 +92,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -143,10 +125,12 @@
 }
 
 @keyframes pulse {
+
   0%,
- 100% {
+  100% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.2);
   }
@@ -157,11 +141,18 @@
   margin-bottom: 16px;
   opacity: 0;
   animation: fadeInUp 0.4s ease-out both;
+  display: flex;
+  align-items: center;
+  color: #381204;
+  font-size: 24px;
+  gap: 8px;
+  font-weight: bold;
 }
 
 .form-group:nth-child(2) {
   animation-delay: 0.25s;
 }
+
 .form-group:nth-child(3) {
   animation-delay: 0.3s;
 }
@@ -169,7 +160,7 @@
 /* 验证码输入组 */
 .code-group {
   display: flex;
-  gap: 12px;
+  gap: 8px;
 }
 
 /* 输入框 - 移除了聚焦时的深色背景和白色文字样式 */
@@ -239,6 +230,7 @@
 .agree-group {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   margin-bottom: 20px;
   opacity: 0;
@@ -280,8 +272,9 @@
 
 /* 登录按钮 - 渐变+加载动画 */
 .login-btn-submit {
-  width: 100%;
+  width: 150px;
   height: 44px;
+  margin: 0 auto;
   background: linear-gradient(135deg, #ff6b00, #ff8c33);
   color: #fff;
   border: none;
@@ -295,6 +288,7 @@
   overflow: hidden;
   opacity: 0;
   animation: fadeInUp 0.4s ease-out 0.4s both;
+  margin-bottom: 16px;
 }
 
 .login-btn-submit:hover:not(:disabled) {
@@ -337,15 +331,20 @@
   margin: 16px 0 0 0;
   text-align: center;
   font-size: 12px;
-  color: #999;
+  color: #c57270;
   opacity: 0;
   animation: fadeIn 0.4s ease-out 0.45s both;
+}
+
+.register-tip::before {
+  content: '*';
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -392,34 +391,38 @@
 .success-animation.show {
   animation: successPop 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
+
 .login-toast {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.8);
-    color: white;
-    padding: 16px 24px;
-    border-radius: 8px;
-    font-size: 14px;
-    z-index: 9999;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 16px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 9999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
 }
 
 .login-toast.show {
-    opacity: 1;
+  opacity: 1;
 }
+
 @keyframes successPop {
   0% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(0.5);
   }
+
   50% {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1.2);
   }
+
   100% {
     opacity: 0;
     transform: translate(-50%, -50%) scale(1);

@@ -498,16 +498,6 @@ height: 880px;
     margin-bottom: 20px;
 }
 
-.close-btn {
-    background: #409eff;
-    color: white;
-    border: none;
-    padding: 10px 30px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-}
-
 /* 背景覆盖层样式 */
 .survey-modal-overlay {
     background: rgba(0, 0, 0, 0.6) !important;

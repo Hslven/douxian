@@ -33,7 +33,7 @@ const Header = () => {
             <a href="#" className="logo">游戏活动中心</a>
           </div>
 
-          <SurveyModal isOpen={true} onClose={() => {}} onSubmit={(d) => console.log(d)} />
+          <SurveyModal isOpen={false} onClose={() => {}} onSubmit={(d) => console.log(d)} />
 
           <div className="header-right">
             <a
