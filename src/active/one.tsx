@@ -69,39 +69,46 @@ export default function PageGeneric({ bgUrl, glideUrl, title, isActive }: Props)
     return () => window.removeEventListener("logout:success", onLogout);
   }, []);
 
-  /* 5. 预约逻辑 */
-  const handleSubscribe = async () => {
-    const uid = localStorage.getItem("user_info_uid");
-    if (!uid) {
-      openLogin();
-      return;
-    }
+/* 5. 预约逻辑 */
+const handleSubscribe = async () => {
+  const uid = localStorage.getItem("user_info_uid");
+  if (!uid) {
+    openLogin();
+    return;
+  }
 
-    let phone = "";
-    try {
-      const info = JSON.parse(localStorage.getItem("user_info") || "{}");
-      phone = info.phone;
-    } catch { }
+  let phone = "";
+  try {
+    const info = JSON.parse(localStorage.getItem("user_info") || "{}");
+    phone = info.phone;
+  } catch {}
 
-    if (!phone) {
-      alert("请先绑定手机号");
-      return;
-    }
+  if (!phone) {
+    alert("请先绑定手机号");
+    return;
+  }
 
-    try {
-      await request.post("/douxian/web/subscribe", {
-        subscribePhone: phone,
-        inviteUserUid: uid,
-      });
-      /* 成功：换图 + 写本地 */
-      setBtnImg("/images/yyy.png");
-      const info = JSON.parse(localStorage.getItem("user_info") || "{}");
-      info.isReserved = true;
-      localStorage.setItem("user_info", JSON.stringify(info));
-    } catch (e: any) {
-      alert(e?.message || "预约失败，请重试");
-    }
-  };
+  // ✅ 从 URL 中取 uid（如果存在）
+  const params = new URLSearchParams(window.location.search);
+  const urlUid = params.get("uid");
+
+  try {
+    await request.post("/douxian/web/subscribe", {
+      subscribePhone: phone,
+      inviteUserUid: uid,
+      ...(urlUid ? { fromUid: urlUid } : {}), // ✅ 如果 URL 里有 uid，加上去
+    });
+
+    /* 成功：换图 + 写本地 */
+    setBtnImg("/images/yyy.png");
+    const info = JSON.parse(localStorage.getItem("user_info") || "{}");
+    info.isReserved = true;
+    localStorage.setItem("user_info", JSON.stringify(info));
+  } catch (e: any) {
+    alert(e?.message || "预约失败，请重试");
+  }
+};
+
 
   const isReserved = btnImg === "/images/yyy.png";
 

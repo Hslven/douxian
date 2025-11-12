@@ -6,22 +6,21 @@ import SurveyModal from "./SurveyModal";
 import "./topPage.css";
 
 const Header = () => {
-  /* ① 顶层解构：始终拿到最新函数引用 */
   const { userInfo, login, logout } = useAuth();
   const [showModal, setShowModal] = React.useState(false);
+  /* 新增：控制问卷弹窗 */
+  const [showSurvey, setShowSurvey] = React.useState(true);
 
   const nickname = userInfo?.username || userInfo?.phone || "游戏玩家";
 
-  /* ② 注销广播 */
   const handleLogout = () => {
     if (!window.confirm("确定要注销登录吗？")) return;
-    logout(); // 清缓存 + 置空 Context
+    logout();
     window.dispatchEvent(new CustomEvent("logout:success"));
   };
 
-  /* ③ 登录成功回调：必须顶层写法，直接把 login 传进去 */
   const handleLoginSuccess = (token, userData) => {
-    login(token, userData); // 立即更新 Context
+    login(token, userData);
     setShowModal(false);
   };
 
@@ -33,7 +32,15 @@ const Header = () => {
             <a href="#" className="logo">游戏活动中心</a>
           </div>
 
-          <SurveyModal isOpen={true} onClose={() => {}} onSubmit={(d) => console.log(d)} />
+          {/* 改为可控弹窗 */}
+          <SurveyModal
+            isOpen={showSurvey}
+            onClose={() => setShowSurvey(false)}
+            onSubmit={(d) => {
+              console.log(d);
+              setShowSurvey(false); // 提交后也可关闭
+            }}
+          />
 
           <div className="header-right">
             <a
@@ -65,7 +72,6 @@ const Header = () => {
         </div>
       </header>
 
-      {/* ④ 把顶层写好的回调传进去 */}
       <LoginModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
