@@ -6,6 +6,7 @@ import "./SurveyModal.css";
 const Storage = {
   getToken: () => localStorage.getItem("token"),
 };
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
 const SurveyModal = ({
   isOpen,
@@ -198,7 +199,7 @@ const SurveyModal = ({
     >
       {/*  关键：scrollable-modal 保留无题目时的尺寸、圆角、毛玻璃、阴影 */}
       <div className="survey-modal scrollable-modal" onClick={(e) => e.stopPropagation()}>
-        <button className="survey-close-btn" onClick={handleClose}>×</button>
+        <button className="survey-hidden-btn" onClick={handleClose} />
 
         <div className="survey-content">
           {/*  与无题目时完全一致的头部  */}
@@ -211,12 +212,12 @@ const SurveyModal = ({
             {surveyData.questionList.map((q, idx) => (
               <div key={idx} className="question-item">
                 <h3 className="question-title">
-                  <span className="question-number">{idx + 1}.</span>
+                  <span >{idx + 1}.</span>
                   {q.questionLabel}
                 </h3>
 
                 <div className="options-list">
-                  {q.questionOption.map((opt) => {
+                  {q.questionOption.map((opt,idx) => {
                     const selected = Array.isArray(answers[idx])
                       ? answers[idx].includes(opt)
                       : answers[idx] === opt;
@@ -231,7 +232,7 @@ const SurveyModal = ({
                           onChange={() => handleSelectAnswer(idx, opt, q.correctOption)}
                           disabled={isSubmitting}
                         />
-                        <span className="option-text">{opt}</span>
+                        <span className="option-text">{ALPHABET[idx]}. {opt}</span>
                         <span className="custom-checkbox" />
                       </label>
                     );
