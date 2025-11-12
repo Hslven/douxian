@@ -16,7 +16,6 @@
   opacity: 0;
   visibility: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    background: url(../../public//images/question.png) center center no-repeat;
 
 }
 
@@ -28,7 +27,7 @@
 /* 问卷弹窗主体 */
 .survey-modal {
   position: relative;
-  width: 600px;
+  width: 818px;
   max-width: 90vw;
   max-height: 80vh;
   background-color: #fff;
@@ -39,7 +38,15 @@
   opacity: 0;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
+  /* ✅ 背景图片设置 */
+  background: url(../../public/images/question.png) center center no-repeat;
+  background-size: 100% 100%; /* 图片宽高都占满容器 */
+  background-size: contain;
+background-repeat: no-repeat;
+background-position: center;
+height: 880px;
 }
+
 
 .survey-modal-overlay.show .survey-modal {
   transform: translateY(0) scale(1);
@@ -338,13 +345,11 @@
 .submit-btn {
   background: linear-gradient(135deg, #ff6b00, #ff8c33);
   color: #fff;
-  box-shadow: 0 2px 8px rgba(255, 107, 0, 0.3);
 }
 
 .next-btn:hover:not(:disabled),
 .submit-btn:hover:not(:disabled) {
   background: linear-gradient(135deg, #ff8c33, #ffa566);
-  box-shadow: 0 4px 12px rgba(255, 107, 0, 0.4);
   transform: translateY(-1px);
 }
 

@@ -130,7 +130,7 @@ const DynamicBackgroundPage: React.FC<DynamicBackgroundPageProps> = ({
 export default function HeroHome() {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [homeDetails, setHomeDetails] = useState<any>({});
-    const [currentPage, setCurrentPage] = useState(4);
+    const [currentPage, setCurrentPage] = useState(1);
     const [isScrolling, setIsScrolling] = useState(false);
     const totalPagesRef = useRef(5);
 
