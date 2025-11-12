@@ -1,6 +1,4 @@
-
-
-
+// ==================== 修改后的 React 组件 ====================
 "use client";
 import "./four.css";
 import { useState } from "react";
@@ -18,76 +16,36 @@ export default function PageGeneric({ bgUrl, glideUrl, title, isActive }: Props)
 
   return (
     <div
-      className="page-section"
-      style={{
-        minHeight: "100vh",
-        height: "100vh",
-        position: "relative",
-        opacity: isActive ? 1 : 0,
-        transform: isActive ? "translateY(0)" : "translateY(20px)",
-        transition: "opacity 0.6s ease, transform 0.6s ease",
-        pointerEvents: isActive ? "auto" : "none",
-        zIndex: isActive ? 1 : 0,
-      }}
+      className={`page-section ${isActive ? "active" : ""}`}
     >
       {/* 背景图 */}
       {!bgError && (
         <img
           src={bgUrl}
-          className="page-section-bg"
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: bgLoaded ? 1 : 0,
-            transition: "opacity 0.3s ease",
-          }}
+          className={`page-section-bg ${bgLoaded ? "loaded" : ""}`}
           onLoad={() => setBgLoaded(true)}
           onError={() => {
             setBgError(true);
             setBgLoaded(true);
           }}
+          alt=""
         />
       )}
       {bgError && (
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundColor: "#000",
-          }}
-        />
+        <div className="page-section-bg-error" />
       )}
 
       {/* 前景内容 */}
-      <div style={{ position: "relative", zIndex: 2, height: "100%" }}>
+      <div className="page-section-content">
         {glideUrl && (
           <img
             src={glideUrl}
             className="game-glide"
             alt=""
-            style={{ pointerEvents: "none", maxWidth: "100%" }}
           />
         )}
 
-        {title && isActive && (
-          <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              color: "#fff",
-              fontSize: "48px",
-              fontWeight: "bold",
-              textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
-            }}
-          >
-            {title}
-          </div>
-        )}
+
       </div>
     </div>
   );

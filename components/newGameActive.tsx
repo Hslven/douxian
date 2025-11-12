@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
 import Image from "next/image";
 import one from "../public/images/1.png";
 import two from "../public/images/2.png";
@@ -17,11 +17,20 @@ import BtwoBc from "../src/active/two";
 import BthreeBc from "../src/active/three";
 import BfourBc from "../src/active/four";
 import BfiveBc from "../src/active/five";
+import BsixBc from "../src/active/six";
 import bac1 from "../public/images/1.jpg";
 import bac2 from "../public/images/2.jpg";
 import bac3 from "../public/images/3.jpg";
 import bac4 from "../public/images/4.jpg";
 import bac5 from "../public/images/5.jpg";
+
+// 根据日期动态生成第四页背景图URL
+const getDynamicBgUrl = () => {
+    const day = new Date().getDate(); // 1-31
+    const index = day % 8; // 0-7，循环8张图片
+    return index === 0 ? '/images/4.jpg' : `/images/4-${index}.jpg`;
+};
+
 // 动态背景页面组件
 interface DynamicBackgroundPageProps {
     url: string;
@@ -121,7 +130,7 @@ const DynamicBackgroundPage: React.FC<DynamicBackgroundPageProps> = ({
 export default function HeroHome() {
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [homeDetails, setHomeDetails] = useState<any>({});
-    const [currentPage, setCurrentPage] = useState(1);
+    const [currentPage, setCurrentPage] = useState(4);
     const [isScrolling, setIsScrolling] = useState(false);
     const totalPagesRef = useRef(5);
 
@@ -263,6 +272,13 @@ export default function HeroHome() {
         }
     }, [isScrolling]);
 
+    // 动态计算第四页背景图URL
+    const bfourBgUrl = useMemo(() => {
+        const day = new Date().getDate();
+        const index = day % 8; // 0-7
+        return index === 0 ? '/images/4.jpg' : `/images/4-${index}.jpg`;
+    }, []);
+
     return (
         <>
             <TopPage />
@@ -288,17 +304,16 @@ export default function HeroHome() {
                 }}
             >
                 <div className="scroll-content" style={{ position: "relative" }}>
-                    {/* {pageConfigs.map((config, index) => (
-            
-            
-                    ))} */}
                     <div className="scroll-content">
-  <BoneBc bgUrl={'/images/1.jpg'} glideUrl={one.src} title="首页展示" isActive={currentPage === 1} />
-  <BtwoBc bgUrl={'/images/2.jpg'} glideUrl={two.src} title="宗门争霸" isActive={currentPage === 2} />
-  <BthreeBc bgUrl={'/images/3.jpg'} glideUrl={three.src} title="御空飞行" isActive={currentPage === 3} />
-  <BfourBc bgUrl={'/images/4.jpg'} glideUrl={four.src} title="PVP竞技场" isActive={currentPage === 4} />
-  {/* <BfiveBc bgUrl={'/images/5.jpg'} glideUrl={five.src} title="坐骑养成" isActive={currentPage === 5} /> */}
-</div>
+                        <BoneBc bgUrl={'/images/1.jpg'} glideUrl={one.src} title="首页展示" isActive={currentPage === 1} />
+                        <BtwoBc bgUrl={'/images/2.jpg'} glideUrl={two.src} title="宗门争霸" isActive={currentPage === 2} />
+                        <BthreeBc bgUrl={'/images/3.jpg'} glideUrl={three.src} title="御空飞行" isActive={currentPage === 3} />
+                        {/* 动态背景图：根据日期自动切换 4.jpg, 4-1.jpg, ..., 4-7.jpg */}
+                        <BfourBc bgUrl={bfourBgUrl} glideUrl={four.src} title="PVP竞技场" isActive={currentPage === 4} />
+                        <BfiveBc bgUrl={'/images/5.jpg'} title="坐骑养成" isActive={currentPage === 5} />
+                        <BsixBc bgUrl={'/images/6.png'} title="坐骑养成" isActive={currentPage === 6} />
+
+                    </div>
                 </div>
             </section>
         </>

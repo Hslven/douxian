@@ -6,21 +6,12 @@ import "./login.css";
 // Toast 工具函数（原生实现）
 const Toast = {
     show: (message, duration = 3000) => {
-        // 移除已存在的 toast
         const existingToast = document.querySelector('.login-toast');
-        if (existingToast) {
-            existingToast.remove();
-        }
-
-        // 创建 toast 元素
+        if (existingToast) existingToast.remove();
         const toast = document.createElement('div');
         toast.className = 'login-toast show';
         toast.textContent = message;
-
-        // 添加到 body
         document.body.appendChild(toast);
-
-        // 自动移除
         setTimeout(() => {
             toast.classList.remove('show');
             setTimeout(() => toast.remove(), 300);
@@ -37,38 +28,20 @@ const CONFIG = {
 
 // localStorage 管理工具
 const Storage = {
-    // Token管理
     setToken: (token) => localStorage.setItem("token", token),
     getToken: () => localStorage.getItem("token"),
-    removeToken: () => localStorage.removeItem("token"),
-
-    // 用户信息管理
     setUserInfo: (userInfo) => {
-        // 存储完整用户信息
         localStorage.setItem("user_info", JSON.stringify(userInfo));
-        // 单独存储 uid
-        if (userInfo && userInfo.uid) {
-            localStorage.setItem("user_info_uid", userInfo.uid);
-        }
+        if (userInfo?.uid) localStorage.setItem("user_info_uid", userInfo.uid);
     },
     getUserInfo: () => {
-        const userInfo = localStorage.getItem("user_info");
-        return userInfo ? JSON.parse(userInfo) : null;
+        const str = localStorage.getItem("user_info");
+        return str ? JSON.parse(str) : null;
     },
     removeUserInfo: () => {
         localStorage.removeItem("user_info");
         localStorage.removeItem("user_info_uid");
     },
-
-    // 获取单独存储的 uid
-    getUserUid: () => localStorage.getItem("user_info_uid"),
-
-    // 清除所有认证信息
-    clearAuth: () => {
-        localStorage.removeItem("auth_token");
-        localStorage.removeItem("user_info");
-        localStorage.removeItem("user_info_uid");
-    }
 };
 
 /**
@@ -93,37 +66,18 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
         } else {
             document.body.style.overflow = "";
         }
-        return () => {
-            document.body.style.overflow = "";
-        };
+        return () => { document.body.style.overflow = ""; };
     }, [isOpen]);
 
     useEffect(() => {
-        return () => {
-            if (codeTimerRef.current) clearInterval(codeTimerRef.current);
-        };
+        return () => { if (codeTimerRef.current) clearInterval(codeTimerRef.current); };
     }, []);
 
-    const validatePhone = (phoneNumber) => /^1[3-9]\d{9}$/.test(phoneNumber);
+    const validatePhone = (p) => /^1[3-9]\d{9}$/.test(p);
 
     const handleGetCode = async () => {
-        if (!phone) {
-            setError("请输入手机号码");
-            phoneRef.current?.focus();
-            return;
-        }
-
-        if (phone.length !== 11) {
-            setError("手机号必须为11位");
-            phoneRef.current?.focus();
-            return;
-        }
-
-        if (!validatePhone(phone)) {
-            setError("请输入正确的手机号码");
-            phoneRef.current?.focus();
-            return;
-        }
+        if (!phone) { setError("请输入手机号码"); phoneRef.current?.focus(); return; }
+        if (!validatePhone(phone)) { setError("请输入正确的手机号码"); phoneRef.current?.focus(); return; }
 
         setIsLoading(true);
         setError("");
@@ -137,7 +91,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
             });
 
             const result = await response.json();
-            console.log(result,"result")
+            console.log(result, "result")
             if (result.code === 0) {
                 startCountdown(CONFIG.COUNTDOWN_TIME);
                 setError("");
@@ -156,28 +110,10 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
     };
 
     const handleLogin = async () => {
-        if (!phone) {
-            setError("请输入手机号码");
-            phoneRef.current?.focus();
-            return;
-        }
-
-        if (!validatePhone(phone)) {
-            setError("请输入正确的手机号码");
-            phoneRef.current?.focus();
-            return;
-        }
-
-        if (!code) {
-            setError("请输入验证码");
-            codeRef.current?.focus();
-            return;
-        }
-
-        if (!agree) {
-            setError("请勾选用户协议");
-            return;
-        }
+        if (!phone) { setError("请输入手机号码"); phoneRef.current?.focus(); return; }
+        if (!validatePhone(phone)) { setError("请输入正确的手机号码"); phoneRef.current?.focus(); return; }
+        if (!code) { setError("请输入验证码"); codeRef.current?.focus(); return; }
+        if (!agree) { setError("请勾选用户协议"); return; }
 
         setIsLoading(true);
         setError("");
@@ -225,7 +161,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
 
             if (!token) {
                 console.error("❌ 未找到token，无法获取用户信息");
-                onLoginSuccess({ phone, username: phone });
+                onLoginSuccess(token, { phone, username: phone });
                 return;
             }
 
@@ -233,7 +169,7 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`, // 携带token
+                    "Authorization": `Bearer ${token}`,
                 },
             });
 
@@ -243,46 +179,40 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                 // 存储完整用户信息（包含单独存储 uid）
                 const userData = result.data;
                 Storage.setUserInfo(userData);
-                onLoginSuccess(userData);
+                // ✅ 修复：必须传token作为第一个参数
+                onLoginSuccess(token, userData);
 
                 // 显示登录成功 toast
                 Toast.show(`登录成功！欢迎 ${userData.username || phone}`);
                 console.log("👤 用户信息已保存:", userData);
             } else {
                 console.error("获取用户信息失败:", result.msg);
-                // onLoginSuccess({ phone, username: phone });
+                onLoginSuccess(token, { phone, username: phone });
                 Toast.show("登录成功，但获取用户信息失败");
             }
         } catch (err) {
             console.error("获取用户信息错误:", err);
-            // onLoginSuccess({ phone, username: phone });
+            onLoginSuccess(token, { phone, username: phone });
             Toast.show("登录成功，但用户信息获取异常");
         }
     };
 
     const handleClose = () => {
         onClose();
-        setPhone("");
-        setCode("");
-        setAgree(false);
-        setError("");
-        setIsLoading(false);
-        if (codeTimerRef.current) {
-            clearInterval(codeTimerRef.current);
-            setCountdown(0);
-        }
+        setPhone(""); setCode(""); setAgree(false); setError(""); setIsLoading(false);
+        if (codeTimerRef.current) { clearInterval(codeTimerRef.current); codeTimerRef.current = null; setCountdown(0); }
     };
 
     const startCountdown = (time) => {
         setCountdown(time);
         codeTimerRef.current = setInterval(() => {
-            setCountdown((prev) => {
-                if (prev <= 1) {
+            setCountdown((t) => {
+                if (t <= 1) {
                     clearInterval(codeTimerRef.current);
                     codeTimerRef.current = null;
                     return 0;
                 }
-                return prev - 1;
+                return t - 1;
             });
         }, 1000);
     };
@@ -290,12 +220,6 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
     const handleEnterKey = (e, nextRef) => {
         if (e.key === "Enter" && nextRef) {
             nextRef.current?.focus();
-        }
-    };
-
-    const handleOverlayClick = (e) => {
-        if (e.target === e.currentTarget && !isLoading) {
-            handleClose();
         }
     };
 
@@ -310,41 +234,25 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
     }, [isOpen, isLoading]);
 
     return ReactDOM.createPortal(
-        <div
-            className={`login-modal-overlay ${isOpen ? "show" : ""}`}
-            onClick={handleOverlayClick}
-        >
+        <div className={`login-modal-overlay ${isOpen ? "show" : ""}`} onClick={(e) => e.target === e.currentTarget && !isLoading && handleClose()}>
             <div className="login-modal" onClick={(e) => e.stopPropagation()}>
                 <div className="modal-header">
                     <h3>账号登录</h3>
-                    <button
-                        className="close-btn"
-                        onClick={handleClose}
-                        aria-label="关闭"
-                        disabled={isLoading}
-                    >
-                        ×
-                    </button>
+                    <button className="close-btn" onClick={handleClose} aria-label="关闭" disabled={isLoading}>×</button>
                 </div>
-
                 <div className="modal-body">
                     <div className={`error-message ${error ? "show" : ""}`}>
                         <span>⚠️</span>
                         <span>{error}</span>
                     </div>
-
                     <div className="form-group">
                         <input
                             ref={phoneRef}
                             type="tel"
                             placeholder="请输入手机号"
                             value={phone}
-                            onChange={(e) => {
-                                const value = e.target.value.replace(/\D/g, "");
-                                setPhone(value);
-                                setError("");
-                            }}
-                            onKeyPress={(e) => handleEnterKey(e, codeRef)}
+                            onChange={(e) => { const v = e.target.value.replace(/\D/g, ""); setPhone(v); setError(""); }}
+                            onKeyPress={(e) => e.key === "Enter" && codeRef.current?.focus()}
                             maxLength={11}
                             className="input-field"
                             autoComplete="tel"
@@ -352,18 +260,13 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                             required
                         />
                     </div>
-
                     <div className="form-group code-group">
                         <input
                             ref={codeRef}
                             type="text"
                             placeholder="请输入验证码"
                             value={code}
-                            onChange={(e) => {
-                                const value = e.target.value.replace(/\D/g, "");
-                                setCode(value);
-                                setError("");
-                            }}
+                            onChange={(e) => { const v = e.target.value.replace(/\D/g, ""); setCode(v); setError(""); }}
                             onKeyPress={(e) => e.key === "Enter" && handleLogin()}
                             maxLength={6}
                             className="input-field"
@@ -379,41 +282,26 @@ const LoginModal = ({ isOpen, onClose, onLoginSuccess }) => {
                             {countdown > 0 ? `${countdown}秒后重试` : "获取验证码"}
                         </button>
                     </div>
-
                     <div className="agree-group">
                         <input
                             type="checkbox"
                             id="agree-protocol"
                             checked={agree}
-                            onChange={(e) => {
-                                setAgree(e.target.checked);
-                                setError("");
-                            }}
+                            onChange={(e) => { setAgree(e.target.checked); setError(""); }}
                             disabled={isLoading}
                         />
                         <label htmlFor="agree-protocol">
                             我已阅读并同意
-                            <a href="#" onClick={(e) => e.preventDefault()}>
-                                《用户协议》
-                            </a>
+                            <a href="#" onClick={(e) => e.preventDefault()}>《用户协议》</a>
                         </label>
                     </div>
-
                     <button
                         className="login-btn-submit"
                         onClick={handleLogin}
                         disabled={!phone || !code || !agree || isLoading}
                     >
-                        {isLoading ? (
-                            <>
-                                <span className="loading"></span>
-                                登录中...
-                            </>
-                        ) : (
-                            "登录"
-                        )}
+                        {isLoading ? <><span className="loading"></span>登录中...</> : "登录"}
                     </button>
-
                     <p className="register-tip">未注册的手机号将自动注册</p>
                 </div>
             </div>

@@ -1,9 +1,8 @@
 
 
 "use client";
-import "./three.css";
+import "./six.css";
 import { useState } from "react";
-
 interface Props {
   bgUrl: string;          // 背景图
   glideUrl?: string;      // 滑翔图（可选）

@@ -1,8 +1,7 @@
-
-
 "use client";
 import "./five.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
 interface Props {
   bgUrl: string;          // 背景图
   glideUrl?: string;      // 滑翔图（可选）
@@ -13,80 +12,114 @@ interface Props {
 export default function PageGeneric({ bgUrl, glideUrl, title, isActive }: Props) {
   const [bgLoaded, setBgLoaded] = useState(false);
   const [bgError, setBgError] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [copyBtnImg, setCopyBtnImg] = useState("/images/copy.png");
+  const [inviteBtnImg, setInviteBtnImg] = useState("/images/invite.png");
+  const [overBtnImg, setOverBtnImg] = useState("/images/over.png");
+
+  // 生成邀请链接
+  const generateInviteLink = () => {
+    if (typeof window === "undefined") return "";
+    const userInfo = localStorage.getItem("user_info_uid");
+    const uid = userInfo || "";
+    return `${window.location.origin}?uid=${uid}`;
+  };
+
+  // 复制链接
+  const handleCopy = async () => {
+    const link = generateInviteLink();
+    try {
+      await navigator.clipboard.writeText(link);
+      alert("复制成功！");
+      setShowModal(false);
+    } catch (err) {
+      console.error("复制失败:", err);
+      alert("复制失败，请手动复制");
+    }
+  };
+
+  // 邀请按钮点击
+  const handleInviteClick = () => {
+    setShowModal(true);
+  };
+
+  // 结束按钮点击
+  const handleOverClick = () => {
+    console.log("点击了结束按钮");
+    // 这里可以添加结束逻辑
+  };
+
+  // 点击遮罩层关闭弹窗
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      setShowModal(false);
+    }
+  };
 
   return (
-    <div
-      className="page-section"
-      style={{
-        minHeight: "100vh",
-        height: "100vh",
-        position: "relative",
-        opacity: isActive ? 1 : 0,
-        transform: isActive ? "translateY(0)" : "translateY(20px)",
-        transition: "opacity 0.6s ease, transform 0.6s ease",
-        pointerEvents: isActive ? "auto" : "none",
-        zIndex: isActive ? 1 : 0,
-      }}
-    >
+    <div className={`page-section ${isActive ? "active" : ""}`}>
       {/* 背景图 */}
       {!bgError && (
         <img
           src={bgUrl}
-          className="page-section-bg"
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: bgLoaded ? 1 : 0,
-            transition: "opacity 0.3s ease",
-          }}
+          className={`page-section-bg ${bgLoaded ? "loaded" : ""}`}
           onLoad={() => setBgLoaded(true)}
           onError={() => {
             setBgError(true);
             setBgLoaded(true);
           }}
+          alt="背景图"
         />
       )}
       {bgError && (
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundColor: "#000",
-          }}
-        />
+        <div className="page-section-bg-error" />
       )}
 
       {/* 前景内容 */}
-      <div style={{ position: "relative", zIndex: 2, height: "100%" }}>
+      <div className="page-content">
         {glideUrl && (
           <img
             src={glideUrl}
             className="game-glide"
             alt=""
-            style={{ pointerEvents: "none", maxWidth: "100%" }}
           />
         )}
 
-        {title && isActive && (
-          <div
-            style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              color: "#fff",
-              fontSize: "48px",
-              fontWeight: "bold",
-              textShadow: "2px 2px 4px rgba(0,0,0,0.5)",
-            }}
-          >
-            {title}
-          </div>
-        )}
+
+
+        {/* 按钮容器 */}
+        <div className="button-container">
+          <img
+            src={inviteBtnImg}
+            className="btn invite-btn"
+            onClick={handleInviteClick}
+            alt="邀请"
+          />
+
+        </div>
+
+        {/* <img
+          src={overBtnImg}
+          className="btn over-btn"
+          onClick={handleOverClick}
+          alt="结束"
+        /> */}
       </div>
+
+      {/* 复制弹窗 */}
+      {showModal && (
+        <div className="modal-overlay" onClick={handleOverlayClick}>
+          <div className="modal-content">
+            <p className="invite-link-text">{generateInviteLink()}</p>
+            <img
+              src={copyBtnImg}
+              className="btn copy-btn"
+              onClick={handleCopy}
+              alt="复制"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

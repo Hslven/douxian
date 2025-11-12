@@ -1,1 +1,144 @@
+/* 页面区块基础样式 */
+.page-section {
+  min-height: 100vh;
+  height: 100vh;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  pointer-events: none;
+  z-index: 0;
+}
 
+/* 激活状态样式 */
+.page-section.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* 背景图样式 */
+.page-section-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* 背景图加载完成 */
+.page-section-bg.loaded {
+  opacity: 1;
+}
+
+/* 背景图加载失败时的备用背景 */
+.page-section-bg-error {
+  position: absolute;
+  inset: 0;
+  background-color: #000;
+}
+
+/* 前景内容容器 */
+.page-content {
+  z-index: 2;
+  height: 100%;
+}
+
+/* 滑翔图样式 */
+.game-glide {
+  pointer-events: none;
+  max-width: 100%;
+}
+
+/* 标题样式 */
+.page-title {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-size: 48px;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* 按钮容器 - 位于右下角 */
+.button-container {
+  width: 360px;
+  position: fixed;  /* 关键：改为 fixed */
+  bottom: 100px;    /* 距离视口底部100px */
+  right: 150px;     /* 距离视口右侧150px */
+  display: flex;
+  gap: 15px;
+  z-index: 1000;    /* 提高层级确保在最前 */
+  pointer-events: none; /* 防止遮挡页面其他内容 */
+}
+/* 通用按钮样式 */
+.btn {
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  pointer-events: auto;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+/* 邀请按钮 */
+.invite-btn {
+  width: 360px;
+  /* height: 60px; */
+}
+
+/* 结束按钮 */
+.over-btn {
+  width: 60px;
+  height: 60px;
+}
+
+/* 弹窗遮罩层 */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+/* 弹窗内容 */
+.modal-content {
+  /* background-color: #fff; */
+    background: url(../../public//images/tccopy.png) center center no-repeat;
+
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 320px;
+  max-width: 80%;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* 邀请链接文本 */
+.invite-link-text {
+  word-break: break-all;
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 6px;
+}
+
+/* 复制按钮 */
+.copy-btn {
+  width: 50px;
+  height: 50px;
+}

@@ -17,36 +17,59 @@ export default function PageGeneric({ bgUrl, glideUrl, title, isActive }: Props)
   const [btnImg, setBtnImg] = useState("/images/lj.png");
   const { openLogin } = useLoginModal();
 
-  /* 1. 初始化：优先读本地 isReserved，再拉后端配置图 */
-  useEffect(() => {
+  /* 1. 检查并更新预约状态 */
+  const checkReservationStatus = () => {
     const userStr = localStorage.getItem("user_info");
     if (userStr) {
       try {
         const { isReserved } = JSON.parse(userStr);
-        if (isReserved) setBtnImg("/images/yyy.png");
-      } catch {}
+        if (isReserved) {
+          setBtnImg("/images/yyy.png");
+        } else {
+          setBtnImg("/images/lj.png");
+        }
+      } catch {
+        setBtnImg("/images/lj.png");
+      }
+    } else {
+      setBtnImg("/images/lj.png");
     }
+  };
+
+  /* 2. 初始化：检查预约状态 + 拉取后端配置图 */
+  useEffect(() => {
+    checkReservationStatus();
 
     request.get("/douxian/web/button")
       .then((res: any) => {
         if (res?.img) setBtnImg(getImgUrl(res.img));
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
-  /* 2. 监听 Header 注销广播，复位预约状态 */
+  /* 3. 监听登录成功事件：登录后立即检查状态 */
+  useEffect(() => {
+    const onLoginSuccess = () => {
+      checkReservationStatus();
+    };
+
+    window.addEventListener("login:success", onLoginSuccess);
+    return () => window.removeEventListener("login:success", onLoginSuccess);
+  }, []);
+
+  /* 4. 监听注销广播 */
   useEffect(() => {
     const onLogout = () => {
       const info = JSON.parse(localStorage.getItem("user_info") || "{}");
-      delete info.isReserved;               // 清预约标记
+      delete info.isReserved;
       localStorage.setItem("user_info", JSON.stringify(info));
-      setBtnImg("/images/lj.png");          // 换回未预约图
+      setBtnImg("/images/lj.png");
     };
     window.addEventListener("logout:success", onLogout);
     return () => window.removeEventListener("logout:success", onLogout);
   }, []);
 
-  /* 3. 预约逻辑 */
+  /* 5. 预约逻辑 */
   const handleSubscribe = async () => {
     const uid = localStorage.getItem("user_info_uid");
     if (!uid) {
@@ -58,7 +81,7 @@ export default function PageGeneric({ bgUrl, glideUrl, title, isActive }: Props)
     try {
       const info = JSON.parse(localStorage.getItem("user_info") || "{}");
       phone = info.phone;
-    } catch {}
+    } catch { }
 
     if (!phone) {
       alert("请先绑定手机号");
